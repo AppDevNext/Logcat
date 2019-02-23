@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import info.hannes.R;
+import info.hannes.logcat.R;
 
 public class LoadingDialog extends DialogFragment {
 

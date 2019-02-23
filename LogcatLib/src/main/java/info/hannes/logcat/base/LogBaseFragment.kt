@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import info.hannes.R
+import info.hannes.logcat.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ abstract class LogBaseFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        val view = inflater.inflate(info.hannes.R.layout.fragment_log, container, false)
+        val view = inflater.inflate(R.layout.fragment_log, container, false)
 
         val layoutManager = LinearLayoutManager(context)
         logsRecycler = view.findViewById(R.id.log_recycler)
@@ -72,8 +72,8 @@ abstract class LogBaseFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
 
-        inflater!!.inflate(info.hannes.R.menu.menu_log, menu)
-        val searchItem = menu!!.findItem(info.hannes.R.id.menu_search)
+        inflater!!.inflate(R.menu.menu_log, menu)
+        val searchItem = menu!!.findItem(R.id.menu_search)
         val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
 
         if (searchItem != null) {
@@ -87,7 +87,7 @@ abstract class LogBaseFragment : Fragment() {
         if (searchView == null) {
             return
         }
-        val searchAutoComplete = searchView!!.findViewById<SearchView.SearchAutoComplete>(info.hannes.R.id.search_src_text)
+        val searchAutoComplete = searchView!!.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
 
         if (searchView != null && currentFilter != "") {
             searchAutoComplete?.setText(currentFilter)
@@ -141,7 +141,7 @@ abstract class LogBaseFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         var returnValue = true
         val i = item!!.itemId
-        if (i == info.hannes.R.id.menu_share) {
+        if (i == R.id.menu_share) {
             filename?.let { sendLogContent(logListAdapter!!.filterLogs, it) }
         } else {
             returnValue = super.onOptionsItemSelected(item)
@@ -153,7 +153,7 @@ abstract class LogBaseFragment : Fragment() {
 
         val emailAddress: String
         emailAddress = try {
-            val stringClass = info.hannes.R.string::class.java
+            val stringClass = R.string::class.java
             val mailLoggerField = stringClass.getField("mail_logger")
             val emailAddressId = mailLoggerField.get(null) as Int
             getString(emailAddressId)
@@ -172,7 +172,7 @@ abstract class LogBaseFragment : Fragment() {
 
 
         intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
-        val subject = String.format(filename, getString(info.hannes.R.string.app_name))
+        val subject = String.format(filename, getString(R.string.app_name))
         intent.putExtra(Intent.EXTRA_SUBJECT, subject)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.type = MAIL_ATTACHMENT_TYPE
@@ -187,7 +187,7 @@ abstract class LogBaseFragment : Fragment() {
         } catch (e: ActivityNotFoundException) {
             val snackbar = Snackbar.make(
                     this@LogBaseFragment.activity!!.findViewById<View>(android.R.id.content),
-                    info.hannes.R.string.log_send_no_app,
+                    R.string.log_send_no_app,
                     Snackbar.LENGTH_LONG
             )
             snackbar.show()

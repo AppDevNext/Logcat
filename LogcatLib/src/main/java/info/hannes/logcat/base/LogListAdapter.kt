@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import info.hannes.R
+import info.hannes.logcat.R
 import java.util.*
 
 class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
