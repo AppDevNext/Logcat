@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedAttribute">
+
+    <item
+        android:id="@+id/nav_logcat"
+        android:title="Logcat"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/nav_logfile"
+        android:title="Timber Logfile"
+        app:showAsAction="never" />
+
+</menu>

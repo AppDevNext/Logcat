@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="info.hannes.logcat.sample">
+
+    <application
+        android:name="info.hannes.logcat.SampleApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity
+            android:name="info.hannes.logcat.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="info.hannes.logcat.LogcatActivity"
+            android:label="Logcat"
+            android:theme="@style/DetailTheme" />
+        <activity
+            android:name="info.hannes.logcat.LogfileActivity"
+            android:label="Timber"
+            android:theme="@style/DetailTheme" />
+    </application>
+
+</manifest>

@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion propCompileSdkVersion
+
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+
+        minSdkVersion 14
+        targetSdkVersion 28
+
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+    }
+}
+
+dependencies {
+    implementation project(':LogcatLib')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
