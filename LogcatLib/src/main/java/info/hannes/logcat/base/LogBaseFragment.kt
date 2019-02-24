@@ -31,6 +31,7 @@ abstract class LogBaseFragment : Fragment() {
     private val currentFilter = ""
 
     private var filename: String? = null
+    private var searchHint: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -52,6 +53,7 @@ abstract class LogBaseFragment : Fragment() {
         setHasOptionsMenu(true)
 
         filename = arguments?.getString(FILE_NAME)
+        searchHint = arguments?.getString(SEARCH_HINT)
 
         return view
     }
@@ -72,29 +74,24 @@ abstract class LogBaseFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
 
-        inflater!!.inflate(R.menu.menu_log, menu)
-        val searchItem = menu!!.findItem(R.id.menu_search)
-        val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        inflater?.inflate(R.menu.menu_log, menu)
+        val searchItem = menu?.findItem(R.id.menu_search)
+        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
 
         if (searchItem != null) {
             searchView = searchItem.actionView as SearchView
-            // searchView.setQueryHint(getString(android.R.string.search_hint));
+            searchView?.setQueryHint(searchHint)
         }
-        if (searchView != null) {
-            searchView!!.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
-        }
+        searchView?.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
 
-        if (searchView == null) {
-            return
-        }
-        val searchAutoComplete = searchView!!.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
+        val searchAutoComplete = searchView?.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
 
-        if (searchView != null && currentFilter != "") {
+        if (currentFilter != "") {
             searchAutoComplete?.setText(currentFilter)
-            searchView!!.isIconified = false
+            searchView?.isIconified = false
         } else {
             searchAutoComplete?.setText("")
-            searchView!!.isIconified = true
+            searchView?.isIconified = true
         }
 
         val queryTextListener = object : SearchView.OnQueryTextListener {
@@ -219,6 +216,7 @@ abstract class LogBaseFragment : Fragment() {
         private const val DIALOG_WAIT_TAG = "DIALOG_WAIT"
 
         const val FILE_NAME = "filename"
+        const val SEARCH_HINT = "search_hint"
     }
 
 }

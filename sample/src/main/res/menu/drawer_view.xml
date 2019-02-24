@@ -7,13 +7,18 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_logcat"
+            android:id="@+id/nav_drawer_logcat"
             android:title="Logcat"
             app:showAsAction="never" />
 
         <item
-            android:id="@+id/nav_logfile"
+            android:id="@+id/nav_drawer_logfile"
             android:title="Timber logfile"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/nav_drawer_both_logfiles"
+            android:title="Both logfile"
             app:showAsAction="never" />
 
     </group>
@@ -23,12 +28,12 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_other_github"
+            android:id="@+id/nav_drawer_other_github"
             android:icon="@drawable/ic_github"
             android:title="Github" />
 
         <item
-            android:id="@+id/nav_other_donate"
+            android:id="@+id/nav_drawer_other_donate"
             android:icon="@drawable/ic_money"
             android:title="Donate"
             android:visible="false" />

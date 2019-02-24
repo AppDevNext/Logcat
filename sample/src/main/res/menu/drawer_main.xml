@@ -4,13 +4,18 @@
     tools:ignore="UnusedAttribute">
 
     <item
-        android:id="@+id/nav_logcat"
+        android:id="@+id/nav_drawer_logcat"
         android:title="Logcat"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/nav_logfile"
+        android:id="@+id/nav_drawer_logfile"
         android:title="Timber Logfile"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/nav_drawer_both_logfiles"
+        android:title="All logs"
         app:showAsAction="never" />
 
 </menu>
