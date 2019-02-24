@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import info.hannes.logcat.sample.R
+import info.hannes.timber.FileLoggingTree
 
 
-class LogcatActivity : AppCompatActivity() {
+class BothLogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,12 @@ class LogcatActivity : AppCompatActivity() {
             }
 
             // Create a new Fragment to be placed in the activity layout
-            val firstFragment = LogcatFragment.newInstance("logcat.log", "search logcat")
+            val bothLogFragment = BothLogsFragment.newInstance(
+                    FileLoggingTree.getFilername(),
+                    "logfile.log",
+                    "search logfile",
+                    "search logcat"
+            )
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
@@ -31,7 +37,7 @@ class LogcatActivity : AppCompatActivity() {
 
             // Add the fragment to the 'fragment_container' FrameLayout
             supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit()
+                    .add(R.id.fragment_container, bothLogFragment).commit()
         }
 
     }

@@ -24,7 +24,11 @@ class LogfileActivity : AppCompatActivity() {
             }
 
             // Create a new Fragment to be placed in the activity layout
-            val firstFragment = LogfileFragment.newInstance(FileLoggingTree.getFilername(), "logfile.log")
+            val firstFragment = LogfileFragment.newInstance(
+                    FileLoggingTree.getFilername(),
+                    "logfile.log",
+                    "search logfile"
+            )
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments

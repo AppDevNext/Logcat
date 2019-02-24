@@ -49,9 +49,10 @@ class MainActivity : AppCompatActivity() {
     private fun selectNavigationItem(itemId: Int) {
 
         when (itemId) {
-            R.id.nav_logcat -> startActivity(Intent(this, LogcatActivity::class.java))
-            R.id.nav_logfile -> startActivity(Intent(this, LogfileActivity::class.java))
-            R.id.nav_other_github -> {
+            R.id.nav_drawer_logcat -> startActivity(Intent(this, LogcatActivity::class.java))
+            R.id.nav_drawer_logfile -> startActivity(Intent(this, LogfileActivity::class.java))
+            R.id.nav_drawer_both_logfiles -> startActivity(Intent(this, BothLogActivity::class.java))
+            R.id.nav_drawer_other_github -> {
                 val url = "https://github.com/hannesa2/Logcat"
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
@@ -70,11 +71,14 @@ class MainActivity : AppCompatActivity() {
             android.R.id.home -> {
                 mDrawerLayout.openDrawer(GravityCompat.START)
             }
-            R.id.nav_logcat -> {
+            R.id.nav_drawer_logcat -> {
                 startActivity(Intent(this, LogcatActivity::class.java))
             }
-            R.id.nav_logfile -> {
+            R.id.nav_drawer_logfile -> {
                 startActivity(Intent(this, LogfileActivity::class.java))
+            }
+            R.id.nav_drawer_both_logfiles -> {
+                startActivity(Intent(this, BothLogActivity::class.java))
             }
         }
 

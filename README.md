@@ -2,7 +2,10 @@
 
 # LogcatLib - Show Logcat in release buildtype and Timber log when it logs to a file
 
-This library provides an easy way to show Timber logging to file
+This library provides an easy way to show Logcat in `release` ! and Timber history, which was written to file.
+Right Timber `FileLoggingTree.kt` is provided too  
+
+![Screenshot](screenshot.png)
 
 ## Include the library
 
@@ -10,7 +13,7 @@ The easiest way to add Logcat to your project is via Gradle. Just add the follow
 
 ```groovy
 dependencies {
-    implementation 'com.github.hannesa2:Logcat:1.0.1'
+    implementation 'com.github.hannesa2:Logcat:1.1.0'
 }
 ```
 
