@@ -25,4 +25,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     api 'com.google.android.material:material:1.0.0'
     api 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
 }
