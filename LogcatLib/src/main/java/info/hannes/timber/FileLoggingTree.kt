@@ -21,7 +21,7 @@ class FileLoggingTree(externalCacheDir: File?) : Timber.DebugTree() {
         try {
             val logTimeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS", Locale.getDefault()).format(Date())
 
-            val prio = when (priority) {
+            val priorityText = when (priority) {
                 2 -> "V:"
                 3 -> "D:"
                 4 -> "I:"
@@ -32,7 +32,7 @@ class FileLoggingTree(externalCacheDir: File?) : Timber.DebugTree() {
             }
 
             val writer = FileWriter(FILE, true)
-            writer.append(prio)
+            writer.append(priorityText)
                     .append(" ")
                     .append(logTimeStamp)
                     .append(tag)
@@ -60,6 +60,6 @@ class FileLoggingTree(externalCacheDir: File?) : Timber.DebugTree() {
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private lateinit var FILE: File
-        fun getFilername(): String = FILE.absolutePath
+        fun getFileName(): String = FILE.absolutePath
     }
 }

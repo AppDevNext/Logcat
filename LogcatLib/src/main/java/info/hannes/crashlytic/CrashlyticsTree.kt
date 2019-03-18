@@ -7,7 +7,7 @@ import timber.log.Timber
 
 class CrashlyticsTree : Timber.Tree() {
 
-    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+    override fun log(priority: Int, tag: String?, message: String, throwable: Throwable?) {
         if (priority < Log.INFO) {
             return
         }
@@ -17,8 +17,8 @@ class CrashlyticsTree : Timber.Tree() {
         if (priority > Log.INFO) {
             Crashlytics.log(message)
         }
-        if (t != null && priority > Log.INFO) {
-            Crashlytics.logException(t)
+        if (throwable != null && priority > Log.INFO) {
+            Crashlytics.logException(throwable)
         }
     }
 }

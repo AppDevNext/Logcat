@@ -41,7 +41,7 @@ class BothLogsFragment : Fragment() {
         val logcatFragment = LogcatFragment.newInstance(sourcefilename, searchHintLogcat)
 
         val logfileFragment = LogfileFragment.newInstance(
-                FileLoggingTree.getFilername(),
+                FileLoggingTree.getFileName(),
                 filename,
                 searchHintLogfile
         )

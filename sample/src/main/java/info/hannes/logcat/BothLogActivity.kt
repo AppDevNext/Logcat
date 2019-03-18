@@ -25,7 +25,7 @@ class BothLogActivity : AppCompatActivity() {
 
             // Create a new Fragment to be placed in the activity layout
             val bothLogFragment = BothLogsFragment.newInstance(
-                    FileLoggingTree.getFilername(),
+                    FileLoggingTree.getFileName(),
                     "logfile.log",
                     "search logfile",
                     "search logcat"

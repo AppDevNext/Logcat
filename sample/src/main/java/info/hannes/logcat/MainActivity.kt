@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         if (navigationView != null) {

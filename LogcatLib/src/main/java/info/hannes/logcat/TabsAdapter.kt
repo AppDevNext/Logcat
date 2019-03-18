@@ -15,13 +15,13 @@ class TabsAdapter(activity: FragmentActivity, private val tabHost: TabHost, priv
         TabHost.OnTabChangeListener,
         ViewPager.OnPageChangeListener {
 
-    private val mContext: Context
+    private val context: Context
     private val fragments = ArrayList<Fragment>()
 
-    private class DummyTabFactory internal constructor(private val context: Context) : TabHost.TabContentFactory {
+    private class DummyTabFactory internal constructor(private val contextView: Context) : TabHost.TabContentFactory {
 
         override fun createTabContent(tag: String): View {
-            val view = View(context)
+            val view = View(contextView)
             view.minimumWidth = 0
             view.minimumHeight = 0
             return view
@@ -29,14 +29,14 @@ class TabsAdapter(activity: FragmentActivity, private val tabHost: TabHost, priv
     }
 
     init {
-        mContext = activity
+        context = activity
         tabHost.setOnTabChangedListener(this)
         viewPager.adapter = this
         viewPager.addOnPageChangeListener(this)
     }
 
     fun addTab(tabSpec: TabHost.TabSpec, fragment: Fragment) {
-        tabSpec.setContent(DummyTabFactory(mContext))
+        tabSpec.setContent(DummyTabFactory(context))
         tabHost.addTab(tabSpec)
         fragments.add(fragment)
         notifyDataSetChanged()
