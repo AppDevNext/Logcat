@@ -11,7 +11,16 @@ class CrashlyticsTree : Timber.Tree() {
         if (priority < Log.INFO) {
             return
         }
-        CrashlyticsTrackerDelegate.setInt("PRIORITY", priority)
+
+        CrashlyticsTrackerDelegate.setString("PRIORITY", when (priority) {
+            2 -> "Verbose"
+            3 -> "Debug"
+            4 -> "Info"
+            5 -> "Warn"
+            6 -> "Error"
+            7 -> "Assert"
+            else -> priority.toString()
+        })
         tag?.let { CrashlyticsTrackerDelegate.setString("TAG", it) }
 
         if (priority > Log.INFO) {
