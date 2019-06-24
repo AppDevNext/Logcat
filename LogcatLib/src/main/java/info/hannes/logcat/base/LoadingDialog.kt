@@ -40,7 +40,7 @@ class LoadingDialog : DialogFragment() {
         dialog.setCancelable(cancelable)
         if (!cancelable) {
             // disable the back button
-            val keyListener = DialogInterface.OnKeyListener { dialog1, keyCode, event -> keyCode == KeyEvent.KEYCODE_BACK }
+            val keyListener = DialogInterface.OnKeyListener { _, keyCode, _ -> keyCode == KeyEvent.KEYCODE_BACK }
             dialog.setOnKeyListener(keyListener)
         }
         return dialog
