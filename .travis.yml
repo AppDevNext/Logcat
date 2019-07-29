@@ -7,8 +7,11 @@ android:
     - extra-android-m2repository
   licenses:
     - 'android-sdk-license-.+'
-    
-jdk: oraclejdk8
+
+jdk:
+  - openjdk8
+
+dist: trusty
 
 script:
   - ./gradlew assembleDebug testDebugUnitTest
