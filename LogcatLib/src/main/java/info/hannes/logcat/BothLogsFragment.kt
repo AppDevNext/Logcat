@@ -61,18 +61,18 @@ class BothLogsFragment : Fragment() {
 
     companion object {
 
-        private val SOURCE_FILE_NAME = "source file name"
-        private val FILE_NAME = "file name"
-        private val SEARCH_HINT_LOGFILE = "searchHintfile"
-        private val SEARCH_HINT_LOGCAT = "searchHintlogcat"
+        private const val SOURCE_FILE_NAME = "source file name"
+        private const val FILE_NAME = "file name"
+        private const val SEARCH_HINT_LOGFILE = "searchHintfile"
+        private const val SEARCH_HINT_LOGCAT = "searchHintlogcat"
 
         fun newInstance(sourceFileName: String, targetFileName: String, searchHintLogfile: String, searchHintLogcat: String): BothLogsFragment {
             val fragment = BothLogsFragment()
             val args = Bundle()
-            args.putString(BothLogsFragment.SOURCE_FILE_NAME, sourceFileName)
-            args.putString(BothLogsFragment.FILE_NAME, targetFileName)
-            args.putString(BothLogsFragment.SEARCH_HINT_LOGFILE, searchHintLogfile)
-            args.putString(BothLogsFragment.SEARCH_HINT_LOGCAT, searchHintLogcat)
+            args.putString(SOURCE_FILE_NAME, sourceFileName)
+            args.putString(FILE_NAME, targetFileName)
+            args.putString(SEARCH_HINT_LOGFILE, searchHintLogfile)
+            args.putString(SEARCH_HINT_LOGCAT, searchHintLogcat)
             fragment.arguments = args
             return fragment
         }
