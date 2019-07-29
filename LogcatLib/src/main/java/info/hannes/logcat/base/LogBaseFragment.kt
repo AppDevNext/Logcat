@@ -80,7 +80,7 @@ abstract class LogBaseFragment : Fragment() {
 
         if (searchItem != null) {
             searchView = searchItem.actionView as SearchView
-            searchView?.setQueryHint(searchHint)
+            searchView?.queryHint = searchHint
         }
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
 
@@ -188,7 +188,7 @@ abstract class LogBaseFragment : Fragment() {
             startActivity(Intent.createChooser(intent, "$filename ..."))
         } catch (e: ActivityNotFoundException) {
             val snackbar = Snackbar.make(
-                    this@LogBaseFragment.activity!!.findViewById<View>(android.R.id.content),
+                    this@LogBaseFragment.activity!!.findViewById(android.R.id.content),
                     R.string.log_send_no_app,
                     Snackbar.LENGTH_LONG
             )
