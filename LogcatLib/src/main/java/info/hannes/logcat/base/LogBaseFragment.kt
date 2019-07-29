@@ -139,7 +139,12 @@ abstract class LogBaseFragment : Fragment() {
         var returnValue = true
         val i = item!!.itemId
         if (i == R.id.menu_share) {
-            filename?.let { sendLogContent(logListAdapter!!.filterLogs, it) }
+            filename?.let { fileName ->
+                logListAdapter?.let {
+                    sendLogContent(it.filterLogs, fileName)
+                }
+
+            }
         } else {
             returnValue = super.onOptionsItemSelected(item)
         }
