@@ -10,12 +10,12 @@ import android.os.StrictMode
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import info.hannes.logcat.R
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -58,7 +58,7 @@ abstract class LogBaseFragment : Fragment() {
         return view
     }
 
-    private fun showLogContent() = GlobalScope.launch(Dispatchers.Main) {
+    private fun showLogContent() = lifecycle.coroutineScope.launch(Dispatchers.Main) {
         showLoadingDialog()
         val logEntries = withContext(Dispatchers.Default) {
             Timber.d("try to read logEntries %s", Thread.currentThread().name)
