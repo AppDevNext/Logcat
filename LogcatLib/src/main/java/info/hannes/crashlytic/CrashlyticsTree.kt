@@ -26,9 +26,12 @@ class CrashlyticsTree : Timber.Tree() {
 
         if (priority > Log.INFO) {
             Crashlytics.log(message)
-        }
-        if (throwable != null && priority > Log.INFO) {
-            Crashlytics.logException(throwable)
+        } else if (priority > Log.WARN) {
+            var throwableLocal = throwable
+            if (throwableLocal == null) {
+                throwableLocal = Throwable(message)
+            }
+            Crashlytics.logException(throwableLocal)
         }
     }
 }
