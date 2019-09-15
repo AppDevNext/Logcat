@@ -13,7 +13,7 @@ The easiest way to add Logcat to your project is via Gradle. Just add the follow
 
 ```groovy
 dependencies {
-    implementation 'com.github.hannesa2:Logcat:1.1.0'
+    implementation 'com.github.hannesa2:Logcat:1.3.3'
 }
 ```
 
@@ -27,6 +27,29 @@ allprojects {
     }
 }
 ```
+
+## Crashlytic integration
+
+### Features
+
+* Get crash reports
+* Get non-fatal errors into Firebase Crashlytics dashboard in an easy way with Timber
+* Disable sending the reports to Firebase Crashlytics in DEBUG mode
+* A crash will be reported automatically
+* Logs a non-fatal via Timber.e() or Timber.w()
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(FileLoggingTree(externalCacheDir))
+        } else {
+            val crashlytics = CrashlyticsCore.Builder()
+                    .disabled(BuildConfig.DEBUG)
+                    .build()
+            Fabric.with(base, Crashlytics.Builder().core(crashlytics).build(), Answers())
+            CrashlyticsTrackerDelegate.setString(BuildConfig.FLAVOR, BuildConfig.VERSION_NAME)
+            Timber.plant(CrashlyticsTree())
+        }
+
+
 
 ## License
 
