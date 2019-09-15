@@ -22,7 +22,8 @@ class CrashlyticsTree : Timber.Tree() {
             7 -> "Assert"
             else -> priority.toString()
         })
-        tag?.let { CrashlyticsTrackerDelegate.setString("TAG", it) }
+        tag?.let { CrashlyticsTrackerDelegate.setString(KEY_TAG, it) }
+        Crashlytics.setString(KEY_MESSAGE, message)
 
         if (priority > Log.INFO) {
             Crashlytics.log(message)
@@ -33,5 +34,10 @@ class CrashlyticsTree : Timber.Tree() {
             }
             Crashlytics.logException(throwableLocal)
         }
+    }
+
+    companion object {
+        const val KEY_TAG = "TAG"
+        const val KEY_MESSAGE = "message"
     }
 }
