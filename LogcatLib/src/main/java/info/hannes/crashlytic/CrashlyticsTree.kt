@@ -13,6 +13,8 @@ class CrashlyticsTree : Timber.Tree() {
             return
         }
 
+        super.log(priority, tag, message, throwable)
+
         CrashlyticsTrackerDelegate.setString("PRIORITY", when (priority) {
             2 -> "Verbose"
             3 -> "Debug"
