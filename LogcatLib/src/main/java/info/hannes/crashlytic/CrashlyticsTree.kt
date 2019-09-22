@@ -26,7 +26,7 @@ class CrashlyticsTree : Timber.DebugTree() {
         })
         tag?.let { CrashlyticsTrackerDelegate.setString(KEY_TAG, it) }
         Crashlytics.setString(KEY_MESSAGE, message)
-        Crashlytics.setString(KEY_UNIT_TEST, runUnitTest.toString())
+        Crashlytics.setString(KEY_UNIT_TEST, isRunningUnitTests.toString())
         Crashlytics.setString(KEY_ESPRESSO, isRunningEspresso().toString())
 
         if (priority > Log.INFO) {
