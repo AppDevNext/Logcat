@@ -163,13 +163,13 @@ abstract class LogBaseFragment : Fragment() {
             ""
         }
 
-        val logtoSend = File(this@LogBaseFragment.activity?.externalCacheDir, filename)
-        logtoSend.writeText(filterLogs.joinToString("\n"))
+        val logToSend = File(this@LogBaseFragment.activity?.externalCacheDir, filename)
+        logToSend.writeText(filterLogs.joinToString("\n"))
 
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "application/zip"
 
-        val uri = Uri.fromFile(logtoSend)
+        val uri = Uri.fromFile(logToSend)
         intent.putExtra(Intent.EXTRA_STREAM, uri)
 
 

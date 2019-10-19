@@ -30,11 +30,10 @@ class CrashlyticsTree : Timber.Tree() {
         Crashlytics.setString(KEY_ESPRESSO, isRunningEspresso().toString())
 
         if (priority > Log.WARN) {
-            var throwableLocal = throwable
-            if (throwableLocal == null) {
-                throwableLocal = Throwable(message)
-            }
-            Crashlytics.logException(throwableLocal)
+            if (throwable != null)
+                Crashlytics.logException(throwable)
+            else
+                Crashlytics.log(priority, tag, message)
         } else if (priority > Log.INFO) {
             Crashlytics.log(message)
         }
