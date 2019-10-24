@@ -6,7 +6,7 @@ import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
 @Suppress("unused")
-class CrashlyticsTree : Timber.Tree() {
+class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
 
     override fun log(priority: Int, tag: String?, message: String, throwable: Throwable?) {
         if (priority < Log.INFO) {
@@ -28,6 +28,7 @@ class CrashlyticsTree : Timber.Tree() {
         Crashlytics.setString(KEY_MESSAGE, message)
         Crashlytics.setString(KEY_UNIT_TEST, isRunningUnitTests.toString())
         Crashlytics.setString(KEY_ESPRESSO, isRunningEspresso().toString())
+        identifier?.let { Crashlytics.setUserIdentifier(it) }
 
         if (priority > Log.WARN) {
             if (throwable != null)
