@@ -15,7 +15,7 @@ class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
 
         super.log(priority, tag, message, throwable)
 
-        CrashlyticsTrackerDelegate.setString("PRIORITY", when (priority) {
+        Crashlytics.setString("PRIORITY", when (priority) {
             2 -> "Verbose"
             3 -> "Debug"
             4 -> "Info"
@@ -24,7 +24,7 @@ class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
             7 -> "Assert"
             else -> priority.toString()
         })
-        tag?.let { CrashlyticsTrackerDelegate.setString(KEY_TAG, it) }
+        tag?.let { Crashlytics.setString(KEY_TAG, it) }
         Crashlytics.setString(KEY_MESSAGE, message)
         Crashlytics.setString(KEY_UNIT_TEST, isRunningUnitTests.toString())
         Crashlytics.setString(KEY_ESPRESSO, isRunningEspresso().toString())
