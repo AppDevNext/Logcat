@@ -220,7 +220,7 @@ abstract class LogBaseFragment : Fragment() {
 
         private const val DIALOG_WAIT_TAG = "DIALOG_WAIT"
 
-        const val FILE_NAME = "filename"
+        const val FILE_NAME = "targetFilename"
         const val SEARCH_HINT = "search_hint"
     }
 

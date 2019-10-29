@@ -1,6 +1,7 @@
 package info.hannes.timber
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import timber.log.Timber
 import java.io.File
@@ -9,11 +10,30 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("unused")
-class FileLoggingTree(externalCacheDir: File?) : Timber.DebugTree() {
+class FileLoggingTree(externalCacheDir: File, context: Context) : Timber.DebugTree() {
+
+    lateinit var file: File
+        private set
 
     init {
-        val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-        FILE = File(externalCacheDir, "$fileNameTimeStamp.log")
+        val logFiles = externalCacheDir.list { directory, filename ->
+            directory.length() > 0 && filename.endsWith(".log") && filename.startsWith(context.packageName)
+        }
+        logFiles?.sortDescending()
+
+        var candidateFile: File? = null
+        logFiles?.firstOrNull()?.let {
+            val firstLogFile = File(externalCacheDir, it)
+            if (firstLogFile.length() < MAX_FILE_SIZE)
+                candidateFile = firstLogFile
+        }
+
+        candidateFile?.let {
+            file = it
+        } ?: run {
+            val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            file = File(externalCacheDir, "${context.packageName}.$fileNameTimeStamp.log")
+        }
     }
 
     @SuppressLint("LogNotTimber")
@@ -31,7 +51,7 @@ class FileLoggingTree(externalCacheDir: File?) : Timber.DebugTree() {
                 else -> priority.toString()
             }
 
-            val writer = FileWriter(FILE, true)
+            val writer = FileWriter(file, true)
             writer.append(priorityText)
                     .append(" ")
                     .append(logTimeStamp)
@@ -56,10 +76,11 @@ class FileLoggingTree(externalCacheDir: File?) : Timber.DebugTree() {
         )
     }
 
+    fun getFileName(): String = file.absolutePath
+
     companion object {
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
-        private lateinit var FILE: File
-        fun getFileName(): String = FILE.absolutePath
+        private const val MAX_FILE_SIZE: Long = 2000000 // 2MB
     }
 }
