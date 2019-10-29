@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import info.hannes.logcat.sample.R
-import info.hannes.timber.FileLoggingTree
 
 
 class LogfileActivity : AppCompatActivity() {
@@ -25,7 +24,6 @@ class LogfileActivity : AppCompatActivity() {
 
             // Create a new Fragment to be placed in the activity layout
             val firstFragment = LogfileFragment.newInstance(
-                    FileLoggingTree.getFileName(),
                     "logfile.log",
                     "search logfile"
             )

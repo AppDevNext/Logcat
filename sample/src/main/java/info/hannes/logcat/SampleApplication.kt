@@ -18,7 +18,9 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Timber.plant(FileLoggingTree(externalCacheDir))
+        externalCacheDir?.let {
+            Timber.plant(FileLoggingTree(it, this))
+        }
 
         val crashlytics = CrashlyticsCore.Builder()
                 // .disabled(BuildConfig.DEBUG)
