@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import info.hannes.logcat.R
+import timber.log.Timber
 import java.util.*
 
 class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
@@ -16,8 +17,15 @@ class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String
         setFilter(filter)
     }
 
-    fun setFilter(filter: String) {
-        filterLogs = completeLogs.filter { it.contains(filter) }
+    fun setFilter(vararg filters: String) {
+        Timber.d(filters.toString())
+        filterLogs = completeLogs.filter { line ->
+            var include = false
+            for (filter in filters)
+                if (!include && line.contains(filter))
+                    include = true
+            include
+        }
         notifyDataSetChanged()
     }
 
@@ -27,7 +35,6 @@ class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String
     class LogViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val logContent: TextView = view.findViewById(R.id.logLine)
-
     }
 
     /**
@@ -51,11 +58,15 @@ class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
         holder.logContent.text = filterLogs[position]
         filterLogs[position].let {
-            if (it.contains(" E: ") || it.startsWith("E: ")) {
+            if (it.contains(" ${LogBaseFragment.ERROR_LINE}") || it.startsWith(LogBaseFragment.ERROR_LINE)) {
                 holder.logContent.setTextColor(Color.RED)
-            } else if (it.contains(" W: ") || it.startsWith("W: ")) {
+            } else if (it.contains(" ${LogBaseFragment.ASSERT_LINE}") || it.startsWith(LogBaseFragment.ASSERT_LINE)) {
+                holder.logContent.setTextColor(Color.RED)
+            } else if (it.contains(" ${LogBaseFragment.INFO_LINE}") || it.startsWith(LogBaseFragment.INFO_LINE)) {
+                holder.logContent.setTextColor(Color.BLACK)
+            } else if (it.contains(" ${LogBaseFragment.WARNING_LINE}") || it.startsWith(LogBaseFragment.WARNING_LINE)) {
                 holder.logContent.setTextColor(Color.MAGENTA)
-            } else if (it.contains(" V: ") || it.startsWith("V: ")) {
+            } else if (it.contains(" ${LogBaseFragment.VERBOSE_LINE}") || it.startsWith(LogBaseFragment.VERBOSE_LINE)) {
                 holder.logContent.setTextColor(Color.GRAY)
 //        } else {
 //            holder.logContent.setTextColor(ContextCompat.getColor(context, R.color.primary_dark))
