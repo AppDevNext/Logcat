@@ -3,14 +3,13 @@ package info.hannes.timber
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
-import timber.log.Timber
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("unused")
-class FileLoggingTree(externalCacheDir: File, context: Context) : Timber.DebugTree() {
+class FileLoggingTree(externalCacheDir: File, context: Context) : DebugTree() {
 
     lateinit var file: File
         private set
@@ -66,15 +65,6 @@ class FileLoggingTree(externalCacheDir: File, context: Context) : Timber.DebugTr
         }
 
         super.log(priority, tag, message, t)
-    }
-
-    override fun createStackElementTag(element: StackTraceElement): String? {
-
-        return String.format(" %s.%s:%s ",
-                super.createStackElementTag(element),
-                element.methodName,
-                element.lineNumber
-        )
     }
 
     fun getFileName(): String = file.absolutePath
