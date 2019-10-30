@@ -61,6 +61,7 @@ class FileLoggingTree(externalCacheDir: File, context: Context) : Timber.DebugTr
             writer.flush()
             writer.close()
         } catch (e: Exception) {
+            // Log to prevent an endless loop
             Log.e(LOG_TAG, "Error while logging into file : $e")
         }
 
