@@ -25,6 +25,7 @@ import java.util.*
 
 abstract class LogBaseFragment : Fragment() {
 
+    private var verboseItem: MenuItem? = null
     private lateinit var logsRecycler: RecyclerView
     private var logListAdapter: LogListAdapter? = null
     private var searchView: SearchView? = null
@@ -75,6 +76,7 @@ abstract class LogBaseFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
 
         inflater?.inflate(R.menu.menu_log, menu)
+        verboseItem = menu?.findItem(R.id.menu_show_verbose)
         val searchItem = menu?.findItem(R.id.menu_search)
         val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
 
@@ -131,24 +133,59 @@ abstract class LogBaseFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun setFilter2LogAdapter(filter: String) {
-        logListAdapter?.setFilter(filter)
+    private fun setFilter2LogAdapter(vararg filters: String) {
+        // reset to verbose
+        verboseItem?.let {
+            if (!it.isChecked && filters.size == 1 && filters.get(0) != "")
+                it.isChecked = true
+        }
+        logListAdapter?.setFilter(*filters)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         var returnValue = true
         val i = item!!.itemId
-        if (i == R.id.menu_share) {
-            filename?.let { fileName ->
+        when (i) {
+            R.id.menu_share -> filename?.let { fileName ->
                 logListAdapter?.let {
                     sendLogContent(it.filterLogs, fileName)
                 }
-
             }
-        } else {
-            returnValue = super.onOptionsItemSelected(item)
+            R.id.menu_show_verbose -> {
+                item.isChecked = true
+                stopSearchView()
+                setFilter2LogAdapter("")
+            }
+            R.id.menu_show_debug -> {
+                item.isChecked = true
+                stopSearchView()
+                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE, DEBUG_LINE)
+            }
+            R.id.menu_show_info -> {
+                item.isChecked = true
+                stopSearchView()
+                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE)
+            }
+            R.id.menu_show_warning -> {
+                item.isChecked = true
+                stopSearchView()
+                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE)
+            }
+            R.id.menu_show_error -> {
+                item.isChecked = true
+                stopSearchView()
+                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE)
+            }
+            else -> returnValue = super.onOptionsItemSelected(item)
         }
         return returnValue
+    }
+
+    private fun stopSearchView() {
+        val searchAutoComplete = searchView?.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
+
+        searchAutoComplete?.setText("")
+        searchView?.isIconified = true
     }
 
     private fun sendLogContent(filterLogs: List<String>, filename: String) {
@@ -222,6 +259,12 @@ abstract class LogBaseFragment : Fragment() {
 
         const val FILE_NAME = "targetFilename"
         const val SEARCH_HINT = "search_hint"
+        const val VERBOSE_LINE = "V: "
+        const val DEBUG_LINE = "D: "
+        const val INFO_LINE = "I: "
+        const val WARNING_LINE = "W: "
+        const val ERROR_LINE = "E: "
+        const val ASSERT_LINE = "A: "
     }
 
 }

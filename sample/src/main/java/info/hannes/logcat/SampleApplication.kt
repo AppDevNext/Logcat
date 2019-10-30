@@ -31,6 +31,7 @@ class SampleApplication : Application() {
         Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
 
         Timber.d("Debug test")
+        Timber.i("Info test")
         Timber.w("Warning test")
         Timber.e("Error test")
     }
