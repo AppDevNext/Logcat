@@ -150,7 +150,10 @@ abstract class LogBaseFragment : Fragment() {
                     sendLogContent(it.filterLogs, fileName)
                 }
             }
-            R.id.menu_clear -> clearLog()
+            R.id.menu_clear -> {
+                clearLog()
+                showLogContent()
+            }
             R.id.menu_show_verbose -> {
                 item.isChecked = true
                 stopSearchView()

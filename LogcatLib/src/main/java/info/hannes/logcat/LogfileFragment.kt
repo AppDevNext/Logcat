@@ -28,18 +28,11 @@ class LogfileFragment : LogBaseFragment() {
 
     override fun clearLog() {
         Timber.forest().fileLoggingTree()?.let {
-            val logfile= it.file
-            Timber.forest().remove(it)
-            if (logfile.exists())
-                logfile.delete()
-
-            requireContext().externalCacheDir?.let {
-                Timber.plant(FileLoggingTree(it, requireContext()))
+            it.file.run {
+                if (this.exists())
+                    this.delete()
             }
         }
-
-        Timber.forest().fileLoggingTree()!!.getFileName()
-        File(sourceFileName)
     }
 
     companion object {
