@@ -136,7 +136,7 @@ abstract class LogBaseFragment : Fragment() {
     private fun setFilter2LogAdapter(vararg filters: String) {
         // reset to verbose
         verboseItem?.let {
-            if (!it.isChecked && filters.size == 1 && filters.get(0) != "")
+            if (!it.isChecked && filters.size == 1 && filters[0] != "")
                 it.isChecked = true
         }
         logListAdapter?.setFilter(*filters)
@@ -144,13 +144,13 @@ abstract class LogBaseFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         var returnValue = true
-        val i = item!!.itemId
-        when (i) {
+        when (item!!.itemId) {
             R.id.menu_share -> filename?.let { fileName ->
                 logListAdapter?.let {
                     sendLogContent(it.filterLogs, fileName)
                 }
             }
+            R.id.menu_clear -> clearLog()
             R.id.menu_show_verbose -> {
                 item.isChecked = true
                 stopSearchView()
@@ -180,6 +180,8 @@ abstract class LogBaseFragment : Fragment() {
         }
         return returnValue
     }
+
+    abstract fun clearLog()
 
     private fun stopSearchView() {
         val searchAutoComplete = searchView?.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)

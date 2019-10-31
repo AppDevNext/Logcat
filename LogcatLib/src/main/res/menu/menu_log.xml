@@ -45,4 +45,11 @@
         android:title="Share"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/menu_clear"
+        android:icon="@android:drawable/ic_menu_share"
+        android:orderInCategory="100"
+        android:title="Clear log"
+        app:showAsAction="ifRoom" />
+
 </menu>

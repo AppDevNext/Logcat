@@ -35,8 +35,12 @@ class LogcatFragment : LogBaseFragment() {
         return logList
     }
 
+    override fun clearLog() {
+        Runtime.getRuntime().exec("logcat -c")
+    }
+
     companion object {
-        fun newInstance(targetFileName: String, searchHint :String): LogcatFragment {
+        fun newInstance(targetFileName: String, searchHint: String): LogcatFragment {
             val fragment = LogcatFragment()
             val args = Bundle()
             args.putString(FILE_NAME, targetFileName)
