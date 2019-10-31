@@ -11,28 +11,12 @@ import java.util.*
 @Suppress("unused")
 class FileLoggingTree(externalCacheDir: File, context: Context) : DebugTree() {
 
-    lateinit var file: File
+    var file: File
         private set
 
     init {
-        val logFiles = externalCacheDir.list { directory, filename ->
-            directory.length() > 0 && filename.endsWith(".log") && filename.startsWith(context.packageName)
-        }
-        logFiles?.sortDescending()
-
-        var candidateFile: File? = null
-        logFiles?.firstOrNull()?.let {
-            val firstLogFile = File(externalCacheDir, it)
-            if (firstLogFile.length() < MAX_FILE_SIZE)
-                candidateFile = firstLogFile
-        }
-
-        candidateFile?.let {
-            file = it
-        } ?: run {
-            val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-            file = File(externalCacheDir, "${context.packageName}.$fileNameTimeStamp.log")
-        }
+        val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        file = File(externalCacheDir, "${context.packageName}.$fileNameTimeStamp.log")
     }
 
     @SuppressLint("LogNotTimber")
@@ -72,6 +56,5 @@ class FileLoggingTree(externalCacheDir: File, context: Context) : DebugTree() {
     companion object {
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
-        private const val MAX_FILE_SIZE: Long = 2000000 // 2MB
     }
 }
