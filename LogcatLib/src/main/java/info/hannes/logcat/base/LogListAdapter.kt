@@ -18,7 +18,6 @@ class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String
     }
 
     fun setFilter(vararg filters: String) {
-        Timber.d(filters.toString())
         filterLogs = completeLogs.filter { line ->
             var include = false
             for (filter in filters)
