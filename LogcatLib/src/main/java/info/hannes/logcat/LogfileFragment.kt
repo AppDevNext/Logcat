@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import info.hannes.logcat.base.LogBaseFragment
-import info.hannes.timber.FileLoggingTree
 import info.hannes.timber.fileLoggingTree
 import timber.log.Timber
 import java.io.File
@@ -23,7 +22,12 @@ class LogfileFragment : LogBaseFragment() {
     }
 
     override fun readLogFile(): ArrayList<String> {
-        return File(sourceFileName).useLines { ArrayList(it.toList()) }
+        var array: ArrayList<String> = arrayListOf()
+        try {
+            array = File(sourceFileName).useLines { ArrayList(it.toList()) }
+        } catch (e: Exception) {
+        }
+        return array
     }
 
     override fun clearLog() {
