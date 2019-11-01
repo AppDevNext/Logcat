@@ -9,12 +9,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("unused")
+@SuppressLint("LogNotTimber")
 class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename: String = UUID.randomUUID().toString()) : DebugTree() {
 
     var file: File
         private set
 
     init {
+        if (!externalCacheDir.exists()) {
+            if (!externalCacheDir.mkdirs())
+                Log.e("FileLoggingTree", "couldn't create ${externalCacheDir.absoluteFile}")
+        }
         val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         file = if (context != null) {
             File(externalCacheDir, "${context.packageName}.$fileNameTimeStamp.log")
