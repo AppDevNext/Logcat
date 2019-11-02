@@ -18,7 +18,6 @@ import info.hannes.logcat.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import java.io.File
 import java.util.*
 
@@ -62,12 +61,10 @@ abstract class LogBaseFragment : Fragment() {
     private fun showLogContent() = lifecycle.coroutineScope.launch(Dispatchers.Main) {
         showLoadingDialog()
         val logEntries = withContext(Dispatchers.Default) {
-            Timber.d("try to read logEntries %s", Thread.currentThread().name)
             readLogFile()
         }
         logListAdapter = LogListAdapter(logEntries, currentFilter)
         logsRecycler.adapter = logListAdapter
-        Timber.d("read logEntries %s %s", logEntries.size, Thread.currentThread().name)
         logsRecycler.adapter?.itemCount?.minus(1)?.let { logsRecycler.scrollToPosition(it) }
 
         dismissLoadingDialog()
@@ -203,6 +200,7 @@ abstract class LogBaseFragment : Fragment() {
             getString(emailAddressId)
         } catch (e: Exception) {
             ""
+            ""
         }
 
         val logToSend = File(this@LogBaseFragment.activity?.externalCacheDir, filename)
@@ -213,7 +211,6 @@ abstract class LogBaseFragment : Fragment() {
 
         val uri = Uri.fromFile(logToSend)
         intent.putExtra(Intent.EXTRA_STREAM, uri)
-
 
         intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
         val subject = String.format(filename, getString(R.string.app_name))
@@ -229,30 +226,37 @@ abstract class LogBaseFragment : Fragment() {
 
             startActivity(Intent.createChooser(intent, "$filename ..."))
         } catch (e: ActivityNotFoundException) {
-            val snackbar = Snackbar.make(
+            val snackBar = Snackbar.make(
                     this@LogBaseFragment.activity!!.findViewById(android.R.id.content),
                     R.string.log_send_no_app,
                     Snackbar.LENGTH_LONG
             )
-            snackbar.show()
+            snackBar.show()
         }
 
     }
 
     abstract fun readLogFile(): ArrayList<String>
 
+    @Synchronized
     private fun showLoadingDialog() {
-        val loading = LoadingDialog.newInstance(false)
-        val fm = this@LogBaseFragment.activity!!.supportFragmentManager
-        val ft = fm.beginTransaction()
-        loading.show(ft, DIALOG_WAIT_TAG)
+        var loadingDialog : LoadingDialog? = this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG) as LoadingDialog?
+
+        loadingDialog?.let {
+            //Timber.i("showLogContent exists")
+        } ?: run {
+            loadingDialog = LoadingDialog.newInstance(false)
+            val fm = this@LogBaseFragment.activity!!.supportFragmentManager
+            val ft = fm.beginTransaction()
+            loadingDialog?.show(ft, DIALOG_WAIT_TAG)
+        }
     }
 
+    @Synchronized
     private fun dismissLoadingDialog() {
-        val frag = this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG)
-        if (frag != null) {
-            val loading = frag as LoadingDialog?
-            loading!!.dismiss()
+        this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG)?.let {
+            val loading = it as LoadingDialog
+            loading.dismiss()
         }
     }
 
