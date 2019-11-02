@@ -239,7 +239,7 @@ abstract class LogBaseFragment : Fragment() {
 
     @Synchronized
     private fun showLoadingDialog() {
-        var loadingDialog : LoadingDialog? = this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG) as LoadingDialog?
+        var loadingDialog: LoadingDialog? = this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG) as LoadingDialog?
 
         loadingDialog?.let {
             //Timber.i("showLogContent exists")
