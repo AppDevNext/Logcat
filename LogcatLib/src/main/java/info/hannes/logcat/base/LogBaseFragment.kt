@@ -200,7 +200,6 @@ abstract class LogBaseFragment : Fragment() {
             getString(emailAddressId)
         } catch (e: Exception) {
             ""
-            ""
         }
 
         val logToSend = File(this@LogBaseFragment.activity?.externalCacheDir, filename)
