@@ -18,4 +18,4 @@ before_script:
 #  - yes | sdkmanager --licenses # It's unknown ?
 
 script:
-  - ./gradlew assembleDebug testDebugUnitTest
+  - ./gradlew clean lint assembleDebug testDebugUnitTest

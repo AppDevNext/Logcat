@@ -29,7 +29,7 @@ class LogcatFragment : LogBaseFragment() {
             )
 
         } catch (e: IOException) {
-            Log.e("LoadingLogcatTask", e.message)
+            Log.e("LoadingLogcatTask", e.message!!)
         }
 
         return logList

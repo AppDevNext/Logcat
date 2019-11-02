@@ -8,12 +8,12 @@ import java.util.concurrent.atomic.AtomicBoolean
 @Suppress("unused")
 class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
 
-    override fun log(priority: Int, tag: String?, message: String, throwable: Throwable?) {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority < Log.INFO) {
             return
         }
 
-        super.log(priority, tag, message, throwable)
+        super.log(priority, tag, message, t)
 
         Crashlytics.setString("PRIORITY", when (priority) {
             2 -> "Verbose"
@@ -31,8 +31,8 @@ class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
         identifier?.let { Crashlytics.setUserIdentifier(it) }
 
         if (priority > Log.WARN) {
-            if (throwable != null)
-                Crashlytics.logException(throwable)
+            if (t != null)
+                Crashlytics.logException(t)
             else
                 Crashlytics.log(priority, tag, message)
         } else if (priority > Log.INFO) {
