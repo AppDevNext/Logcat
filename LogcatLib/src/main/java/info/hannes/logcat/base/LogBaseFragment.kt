@@ -25,7 +25,6 @@ import java.util.*
 
 abstract class LogBaseFragment : Fragment() {
 
-    private var showProgress = false
     private var verboseItem: MenuItem? = null
     private lateinit var logsRecycler: RecyclerView
     private var logListAdapter: LogListAdapter? = null
@@ -63,10 +62,8 @@ abstract class LogBaseFragment : Fragment() {
     private fun showLogContent() = lifecycle.coroutineScope.launch(Dispatchers.Main) {
         showLoadingDialog()
         val logEntries = withContext(Dispatchers.Default) {
-            Timber.d("logEntries begin >%s<", Thread.currentThread().name)
             readLogFile()
         }
-        Timber.d("read logEntries end >%s< %d ", Thread.currentThread().name, logEntries.size)
         logListAdapter = LogListAdapter(logEntries, currentFilter)
         logsRecycler.adapter = logListAdapter
         logsRecycler.adapter?.itemCount?.minus(1)?.let { logsRecycler.scrollToPosition(it) }
@@ -242,15 +239,13 @@ abstract class LogBaseFragment : Fragment() {
 
     abstract fun readLogFile(): ArrayList<String>
 
-    @Synchronized
     private fun showLoadingDialog() {
-        if (!showProgress) {
-            showProgress = true
+        showProgress++
+        if (showProgress == 1) {
             var loadingDialog: LoadingDialog? = this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG) as LoadingDialog?
             loadingDialog?.let {
-                Timber.i("showLogContent exists")
+                // Timber.i("showLogContent exists")
             } ?: run {
-                Timber.i("showLogContent new")
                 loadingDialog = LoadingDialog.newInstance(false)
                 val fm = this@LogBaseFragment.activity!!.supportFragmentManager
                 val ft = fm.beginTransaction()
@@ -259,17 +254,13 @@ abstract class LogBaseFragment : Fragment() {
         }
     }
 
-    @Synchronized
     private fun dismissLoadingDialog() {
-        Timber.v("showLogContent")
-        showProgress = false
-        this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG)?.let {
-            Timber.v("showLogContent dismiss")
-            val loading = it as LoadingDialog
-            loading.dismiss()
-            Timber.v("showLogContent dismiss after")
-        } ?: run {
-            Timber.w("showLogContent no dialog found")
+        showProgress--
+        if (showProgress == 0) {
+            this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG)?.let {
+                val loading = it as LoadingDialog
+                loading.dismiss()
+            }
         }
     }
 
@@ -279,6 +270,7 @@ abstract class LogBaseFragment : Fragment() {
 
         private const val DIALOG_WAIT_TAG = "DIALOG_WAIT"
 
+        private var showProgress = 0
         const val FILE_NAME = "targetFilename"
         const val SEARCH_HINT = "search_hint"
         const val VERBOSE_LINE = "V: "
