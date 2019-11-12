@@ -26,7 +26,8 @@ class BothLogActivity : AppCompatActivity() {
             val bothLogFragment = BothLogsFragment.newInstance(
                     "logfile.log",
                     "search logfile",
-                    "search logcat"
+                    "search logcat",
+                    "your@mail.com"
             )
 
             // In case this activity was started with special instructions from an

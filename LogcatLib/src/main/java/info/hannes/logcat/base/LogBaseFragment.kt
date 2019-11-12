@@ -29,6 +29,7 @@ abstract class LogBaseFragment : Fragment() {
     private var logListAdapter: LogListAdapter? = null
     private var searchView: SearchView? = null
     private val currentFilter = ""
+    private var emailAddress: String = ""
 
     private var filename: String? = null
     private var searchHint: String? = null
@@ -52,8 +53,13 @@ abstract class LogBaseFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        filename = arguments?.getString(FILE_NAME)
-        searchHint = arguments?.getString(SEARCH_HINT)
+        arguments?.let {
+            filename = it.getString(FILE_NAME)
+            searchHint = it.getString(SEARCH_HINT)
+            it.getString(MAIL_LOGGER)?.let { address ->
+                emailAddress = address
+            }
+        }
 
         return view
     }
@@ -191,17 +197,6 @@ abstract class LogBaseFragment : Fragment() {
     }
 
     private fun sendLogContent(filterLogs: List<String>, filename: String) {
-
-        val emailAddress: String
-        emailAddress = try {
-            val stringClass = R.string::class.java
-            val mailLoggerField = stringClass.getField("mail_logger")
-            val emailAddressId = mailLoggerField.get(null) as Int
-            getString(emailAddressId)
-        } catch (e: Exception) {
-            ""
-        }
-
         val logToSend = File(this@LogBaseFragment.activity?.externalCacheDir, filename)
         logToSend.writeText(filterLogs.joinToString("\n"))
 
@@ -271,6 +266,7 @@ abstract class LogBaseFragment : Fragment() {
         private var showProgress = 0
         const val FILE_NAME = "targetFilename"
         const val SEARCH_HINT = "search_hint"
+        const val MAIL_LOGGER = "mail_logger"
         const val VERBOSE_LINE = "V: "
         const val DEBUG_LINE = "D: "
         const val INFO_LINE = "I: "

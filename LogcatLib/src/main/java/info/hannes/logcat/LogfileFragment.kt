@@ -40,11 +40,12 @@ class LogfileFragment : LogBaseFragment() {
     }
 
     companion object {
-        fun newInstance(targetFileName: String, searchHint: String): LogfileFragment {
+        fun newInstance(targetFileName: String, searchHint: String, logMail: String = ""): LogfileFragment {
             val fragment = LogfileFragment()
             val args = Bundle()
             args.putString(FILE_NAME, targetFileName)
             args.putString(SEARCH_HINT, searchHint)
+            args.putString(MAIL_LOGGER, logMail)
             fragment.arguments = args
             return fragment
         }
