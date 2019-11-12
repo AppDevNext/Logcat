@@ -54,7 +54,11 @@ class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename
             writer.close()
         } catch (e: Exception) {
             // Log to prevent an endless loop
-            Log.e(LOG_TAG, "Error while logging into file : $e")
+            if (!logImpossible) {
+                // log this output just once
+                Log.w(LOG_TAG, "Can't log into file : $e")
+                logImpossible = true
+            }
         }
 
         super.log(priority, tag, message, t)
@@ -65,5 +69,6 @@ class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename
     companion object {
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
+        private var logImpossible = false
     }
 }
