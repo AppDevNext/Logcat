@@ -18,7 +18,6 @@ import info.hannes.logcat.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import java.io.File
 import java.util.*
 
@@ -200,7 +199,6 @@ abstract class LogBaseFragment : Fragment() {
             val emailAddressId = mailLoggerField.get(null) as Int
             getString(emailAddressId)
         } catch (e: Exception) {
-            Timber.e(e)
             ""
         }
 
