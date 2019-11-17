@@ -38,4 +38,8 @@ allprojects {
 
 ext {
     propCompileSdkVersion = 29
+    coreVersion = "1.1.0"
+    runnerVersion = "1.1.1"
+    extJUnitVersion = "1.1.0"
+    espresso_core = "3.2.0"
 }
