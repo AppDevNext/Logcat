@@ -13,12 +13,12 @@
 
         <item
             android:id="@+id/nav_drawer_logfile"
-            android:title="Timber logfile"
+            android:title="Timber Logfile"
             app:showAsAction="never" />
 
         <item
             android:id="@+id/nav_drawer_both_logfiles"
-            android:title="Both logfile"
+            android:title="@string/all_logfile"
             app:showAsAction="never" />
 
     </group>

@@ -2,5 +2,6 @@
 <resources>
 
     <string name="app_name" translatable="false">Logcat Sample</string>
+    <string name="all_logfile">Both logfile</string>
 
 </resources>
