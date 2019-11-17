@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name" translatable="false">Logcat Sample</string>
-    <string name="all_logfile">Both logfile</string>
+    <string name="all_logfile" tools:ignore="MissingTranslation">Both logfile</string>
 
 </resources>
