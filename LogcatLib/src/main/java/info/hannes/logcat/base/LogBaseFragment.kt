@@ -43,10 +43,10 @@ abstract class LogBaseFragment : Fragment() {
         logsRecycler = view.findViewById(R.id.log_recycler)
         logsRecycler.setHasFixedSize(true)
         logsRecycler.layoutManager = layoutManager
+        // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
+        logsRecycler.adapter = LogListAdapter(ArrayList(), currentFilter)
 
-        if (activity!!.actionBar != null) {
-            activity!!.actionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
+        activity!!.actionBar?.setDisplayHomeAsUpEnabled(true)
         if (savedInstanceState == null) {
             showLogContent()
         }
@@ -235,25 +235,14 @@ abstract class LogBaseFragment : Fragment() {
     private fun showLoadingDialog() {
         showProgress++
         if (showProgress == 1) {
-            var loadingDialog: LoadingDialog? = this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG) as LoadingDialog?
-            loadingDialog?.let {
-                // Timber.i("showLogContent exists")
-            } ?: run {
-                loadingDialog = LoadingDialog.newInstance(false)
-                val fm = this@LogBaseFragment.activity!!.supportFragmentManager
-                val ft = fm.beginTransaction()
-                loadingDialog?.show(ft, DIALOG_WAIT_TAG)
-            }
+
         }
     }
 
     private fun dismissLoadingDialog() {
         showProgress--
         if (showProgress == 0) {
-            this@LogBaseFragment.activity!!.supportFragmentManager.findFragmentByTag(DIALOG_WAIT_TAG)?.let {
-                val loading = it as LoadingDialog
-                loading.dismiss()
-            }
+
         }
     }
 
