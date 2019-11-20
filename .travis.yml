@@ -186,14 +186,16 @@ after_script:
   - export MY_MOD="sample"
   - pwd
   - export MY_LOG_DIR="$(pwd)/${MY_MOD}/build/reports/androidTests/connected/" && echo MY_LOG_DIR=$MY_LOG_DIR
+  - zip -r androidTests.zip $MY_LOG_DIR
+  - ls -la androidTests.zip
   # - export MY_LOG_DIR_RESULT="$(pwd)/${MY_MOD}/build/reports/androidTest-result/connected/"
   #- sudo apt-get install -qq lynx && lynx --dump index.html > myIndex.log
   #- lynx --dump com.android.builder.testing.ConnectedDevice.html > myConnectedDevice.log
   #- lynx --dump com.android.builder.testing.html > myTesting.log
-  - find $MY_LOG_DIR -name "*.html" | while read -r file ; do echo $file; echo "-------"; cat $file; done
-  - pwd && cd "${MY_LOG_DIR:-.}"
+  #- find $MY_LOG_DIR -name "*.html" | while read -r file ; do echo $file; echo "-------"; cat $file; done
+  - pwd && cd "${MY_LOG_DIR}"
   - pwd && ls -al
-  - for file in *.html; do echo "$file"; echo "====================="; cat "$file"; done || true
+  #- for file in *.html; do echo "$file"; echo "====================="; cat "$file"; done || true
 #  - pwd && cd "${MY_LOG_DIR_RESULT:-.}" && pwd && ls -al
 #  - for file in *.html; do echo "$file"; echo "====================="; cat "$file"; done || true
 
