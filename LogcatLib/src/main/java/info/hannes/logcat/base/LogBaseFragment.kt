@@ -43,10 +43,10 @@ abstract class LogBaseFragment : Fragment() {
         logsRecycler = view.findViewById(R.id.log_recycler)
         logsRecycler.setHasFixedSize(true)
         logsRecycler.layoutManager = layoutManager
+        // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
+        logsRecycler.adapter = LogListAdapter(ArrayList(), currentFilter)
 
-        if (activity!!.actionBar != null) {
-            activity!!.actionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
+        activity!!.actionBar?.setDisplayHomeAsUpEnabled(true)
         if (savedInstanceState == null) {
             showLogContent()
         }
