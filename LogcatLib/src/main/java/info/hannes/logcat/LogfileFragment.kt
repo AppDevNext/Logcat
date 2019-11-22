@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import info.hannes.logcat.base.LogBaseFragment
 import info.hannes.timber.fileLoggingTree
-import timber.log.Timber
 import java.io.File
 import java.util.*
 
@@ -16,7 +15,7 @@ class LogfileFragment : LogBaseFragment() {
     private lateinit var sourceFileName: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        sourceFileName = Timber.forest().fileLoggingTree()!!.getFileName()
+        sourceFileName = fileLoggingTree()!!.getFileName()
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -31,10 +30,12 @@ class LogfileFragment : LogBaseFragment() {
     }
 
     override fun clearLog() {
-        Timber.forest().fileLoggingTree()?.let {
-            it.file.run {
-                if (this.exists())
-                    this.delete()
+        fileLoggingTree()?.let { tree ->
+            tree.file.parent?.let { dir ->
+                File(dir).listFiles()?.filter { it.name.endsWith(".log") }?.forEach { foundFile ->
+                    if (foundFile.exists())
+                        foundFile.delete()
+                }
             }
         }
     }
