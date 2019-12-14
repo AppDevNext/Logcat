@@ -48,7 +48,7 @@ env:
     - ABI=x86
     - GOO=google_apis_playstore
 
-# https://travis-ci:org/hannesa2/Logcat/builds/624709511
+  # https://travis-ci:org/hannesa2/Logcat/builds/624709511
 
   # matrix of APIxABIxGOO
   # (see "sdkmanager --list --verbose| grep ^system-images" for full list)
@@ -192,6 +192,10 @@ env:
 #    - env: API=16 ABI=x86         GOO=default     # FlutterDriver: It is taking an unusually long time to connect to the VM...
 #    - env: API=16 ABI=armeabi-v7a GOO=google_apis # hangs after installing apk
 #    - env: API=16 ABI=armeabi-v7a GOO=default     # hangs after installing apk
+
+branches:
+  only:
+    - master
 
 before_install:
   - java -version
