@@ -2,7 +2,7 @@ package info.hannes.timber
 
 import timber.log.Timber
 
-open class DebugTree(delegator: Class<*>? = null) : Timber.DebugTree(delegator) {
+open class DebugTree : Timber.DebugTree() {
 
     override fun createStackElementTag(element: StackTraceElement): String? {
         return String.format(

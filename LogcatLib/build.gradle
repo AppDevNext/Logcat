@@ -25,7 +25,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     api 'com.google.android.material:material:1.0.0'
-    // pull request to move it to Timber master https://github.com/JakeWharton/timber/pull/371
-    api 'com.github.hannesa2:Timber:211bd84ddd63'
+    api 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }
