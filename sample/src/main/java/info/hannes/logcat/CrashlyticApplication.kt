@@ -12,7 +12,7 @@ import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
 
-class SampleApplication : Application() {
+class CrashlyticApplication : Application() {
 
     @SuppressLint("HardwareIds")
     override fun onCreate() {

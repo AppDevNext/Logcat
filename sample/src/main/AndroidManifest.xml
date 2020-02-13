@@ -4,7 +4,7 @@
     package="info.hannes.logcat.sample">
 
     <application
-        android:name="info.hannes.logcat.SampleApplication"
+        android:name="info.hannes.logcat.CrashlyticApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,18 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="info.hannes.logcat.LogcatActivity"
-            android:label="Logcat"
-            android:theme="@style/DetailTheme" />
-        <activity
-            android:name="info.hannes.logcat.LogfileActivity"
-            android:label="Timber"
-            android:theme="@style/DetailTheme" />
-        <activity
-            android:name="info.hannes.logcat.BothLogActivity"
-            android:label="All log"
-            android:theme="@style/DetailTheme" />
     </application>
 
 </manifest>

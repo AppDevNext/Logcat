@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TabHost
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import info.hannes.logcat.base.LogBaseFragment
 import info.hannes.logcat.base.LogBaseFragment.Companion.MAIL_LOGGER
 
 /**
@@ -31,7 +30,7 @@ class BothLogsFragment : Fragment() {
             targetFilename = it.getString(TARGET_FILE_NAME, "")
             searchHintLogcat = it.getString(SEARCH_HINT_LOGCAT, "")
             searchHintLogfile = it.getString(SEARCH_HINT_LOGFILE, "")
-            it.getString(LogBaseFragment.MAIL_LOGGER)?.let { address ->
+            it.getString(MAIL_LOGGER)?.let { address ->
                 emailAddress = address
             }
         }
