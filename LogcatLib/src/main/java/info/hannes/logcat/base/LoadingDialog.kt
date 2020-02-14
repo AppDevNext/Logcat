@@ -47,8 +47,8 @@ class LoadingDialog : DialogFragment() {
     }
 
     override fun onDestroyView() {
-        if (dialog != null && retainInstance) {
-            dialog.setDismissMessage(null)
+        if (this.dialog != null && retainInstance) {
+            dialog!!.setDismissMessage(null)
         }
         super.onDestroyView()
     }

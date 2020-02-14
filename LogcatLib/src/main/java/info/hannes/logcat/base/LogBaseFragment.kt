@@ -76,11 +76,11 @@ abstract class LogBaseFragment : Fragment() {
         dismissLoadingDialog()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
-        inflater?.inflate(R.menu.menu_log, menu)
-        verboseItem = menu?.findItem(R.id.menu_show_verbose)
-        val searchItem = menu?.findItem(R.id.menu_search)
+        inflater.inflate(R.menu.menu_log, menu)
+        verboseItem = menu.findItem(R.id.menu_show_verbose)
+        val searchItem = menu.findItem(R.id.menu_search)
         val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
 
         if (searchItem != null) {
@@ -145,9 +145,9 @@ abstract class LogBaseFragment : Fragment() {
         logListAdapter?.setFilter(*filters)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var returnValue = true
-        when (item!!.itemId) {
+        when (item.itemId) {
             R.id.menu_share -> filename?.let { fileName ->
                 logListAdapter?.let {
                     sendLogContent(it.filterLogs, fileName)

@@ -3,7 +3,6 @@ package info.hannes.logcat
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import info.hannes.logcat.sample.R
 
 
 class BothLogActivity : AppCompatActivity() {
