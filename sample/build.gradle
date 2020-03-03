@@ -40,8 +40,6 @@ dependencies {
 
     androidTestImplementation "androidx.test.ext:junit:$extJUnitVersion"
     androidTestImplementation "androidx.test.ext:truth:$extJUnitVersion"
-    androidTestImplementation("com.google.truth:truth:0.45") {
-        exclude group: 'com.google.guava', module: 'guava'
-    }
+    androidTestImplementation "com.google.truth:truth:1.0.1"
 }
 
