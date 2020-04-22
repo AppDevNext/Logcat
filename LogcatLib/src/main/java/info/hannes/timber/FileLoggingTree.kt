@@ -3,6 +3,7 @@ package info.hannes.timber
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
@@ -44,14 +45,11 @@ class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename
             }
 
             val writer = FileWriter(file, true)
-            writer.append(priorityText)
-                    .append(" ")
-                    .append(logTimeStamp)
-                    .append(tag)
-                    .append(message)
-                    .append("\n")
+            val textLine = "$priorityText $logTimeStamp$tag$message\n"
+            writer.append(textLine)
             writer.flush()
             writer.close()
+            lastLogEntry.value = textLine
         } catch (e: Exception) {
             // Log to prevent an endless loop
             if (!logImpossible) {
@@ -70,5 +68,6 @@ class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private var logImpossible = false
+        val lastLogEntry: MutableLiveData<String> = MutableLiveData<String>()
     }
 }

@@ -4,20 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import info.hannes.logcat.base.LogBaseFragment
+import info.hannes.timber.FileLoggingTree
 import info.hannes.timber.fileLoggingTree
 import java.io.File
 import java.util.*
 
 
-class LogfileFragment : LogBaseFragment() {
+class LogfileFragment : LogBaseFragment(), Observer<String> {
 
     private lateinit var sourceFileName: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         sourceFileName = fileLoggingTree()!!.getFileName()
-
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FileLoggingTree.lastLogEntry.observeForever(this)
+    }
+
+    override fun onStop() {
+        FileLoggingTree.lastLogEntry.removeObserver(this)
+        super.onStop()
     }
 
     override fun readLogFile(): ArrayList<String> {
@@ -49,6 +60,12 @@ class LogfileFragment : LogBaseFragment() {
             args.putString(MAIL_LOGGER, logMail)
             fragment.arguments = args
             return fragment
+        }
+    }
+
+    override fun onChanged(line: String?) {
+        line?.let {
+            logListAdapter?.addLine(it)
         }
     }
 }
