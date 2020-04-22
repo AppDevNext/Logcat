@@ -26,7 +26,7 @@ abstract class LogBaseFragment : Fragment() {
 
     private var verboseItem: MenuItem? = null
     private lateinit var logsRecycler: RecyclerView
-    private var logListAdapter: LogListAdapter? = null
+    protected var logListAdapter: LogListAdapter? = null
     private var searchView: SearchView? = null
     private val currentFilter = ""
     private var emailAddress: String = ""
@@ -41,10 +41,9 @@ abstract class LogBaseFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
         logsRecycler = view.findViewById(R.id.log_recycler)
-        logsRecycler.setHasFixedSize(true)
         logsRecycler.layoutManager = layoutManager
         // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
-        logsRecycler.adapter = LogListAdapter(ArrayList(), currentFilter)
+        logsRecycler.adapter = LogListAdapter(mutableListOf(), currentFilter)
 
         activity!!.actionBar?.setDisplayHomeAsUpEnabled(true)
         if (savedInstanceState == null) {
@@ -249,8 +248,6 @@ abstract class LogBaseFragment : Fragment() {
     companion object {
 
         private const val MAIL_ATTACHMENT_TYPE = "text/plain"
-
-        private const val DIALOG_WAIT_TAG = "DIALOG_WAIT"
 
         private var showProgress = 0
         const val FILE_NAME = "targetFilename"

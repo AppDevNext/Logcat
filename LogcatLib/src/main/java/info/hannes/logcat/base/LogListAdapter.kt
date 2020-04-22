@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import info.hannes.logcat.R
 import java.util.*
 
-class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
+class LogListAdapter(private val completeLogs: MutableList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
+
+    private var currentFilter: Array<out String>? = null
     var filterLogs: List<String> = ArrayList()
 
     init {
@@ -17,11 +19,28 @@ class LogListAdapter(private val completeLogs: ArrayList<String>, filter: String
     }
 
     fun setFilter(vararg filters: String) {
+        currentFilter = filters
         filterLogs = completeLogs.filter { line ->
             var include = false
             for (filter in filters)
                 if (!include && line.contains(filter))
                     include = true
+            include
+        }
+        notifyDataSetChanged()
+    }
+
+    fun addLine(addLine: String) {
+
+        completeLogs.add(completeLogs.size, addLine)
+
+        filterLogs = completeLogs.filter { line ->
+            var include = false
+            currentFilter?.let {
+                for (filter in it)
+                    if (!include && line.contains(filter))
+                        include = true
+            }
             include
         }
         notifyDataSetChanged()
