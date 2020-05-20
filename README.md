@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/hannesa2/Logcat.svg)](https://jitpack.io/#hannesa2/Logcat)
+[![](https://jitpack.io/v/AppDevNext/Logcat.svg)](https://jitpack.io/#AppDevNext/Logcat)
 
 # LogcatLib - Show Logcat in release buildtype and Timber log when it logs to a file
 
@@ -13,7 +13,7 @@ The easiest way to add Logcat to your project is via Gradle. Just add the follow
 
 ```groovy
 dependencies {
-    implementation 'com.github.hannesa2:Logcat:$latest_version'
+    implementation 'com.github.AppDevNext:Logcat:$latest_version'
 }
 ```
 
@@ -54,7 +54,7 @@ allprojects {
 
 ## License
 
-    Copyright (C) 2012-2019 hannesa2
+    Copyright (C) 2012-2019 AppDevNext
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
