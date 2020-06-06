@@ -28,7 +28,7 @@ class CrashlyticApplication : Application() {
                 .disabled(false)
                 .build()
         Fabric.with(baseContext, Crashlytics.Builder().core(crashlytics).build(), Answers())
-        Crashlytics.setString(BuildConfig.FLAVOR, BuildConfig.VERSION_NAME)
+        Crashlytics.setString("VERSION_NAME", BuildConfig.VERSION_NAME)
         Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
 
         Timber.d("Debug test")
