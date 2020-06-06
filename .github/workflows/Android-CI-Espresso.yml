@@ -45,8 +45,9 @@ jobs:
           abi: x86
       - name: Archive Espresso results
         uses: actions/upload-artifact@v1
+        if: ${{ always() }}
         with:
-          name: Espresso-report
+          name: Logcat-Espresso-report
           path: sample/build/reports/androidTests/connected
       - name: Reclaim memory
         run: ./gradlew --stop && jps|grep -E 'KotlinCompileDaemon|GradleDaemon'| awk '{print $1}'| xargs kill -9
@@ -54,6 +55,7 @@ jobs:
         run: ./gradlew check --stacktrace
       - name: Archive Lint report
         uses: actions/upload-artifact@v1
+        if: ${{ always() }}
         with:
-          name: Lint-report
+          name: Logcat-Lint-report
           path: sample/build/reports/lint-results.html
