@@ -10,10 +10,6 @@
             android:name="info.hannes.logcat.LogfileActivity"
             android:label="Timber"
             android:theme="@style/DetailTheme" />
-        <activity
-            android:name="info.hannes.logcat.BothLogActivity"
-            android:label="All log"
-            android:theme="@style/DetailTheme" />
     </application>
 
 </manifest>

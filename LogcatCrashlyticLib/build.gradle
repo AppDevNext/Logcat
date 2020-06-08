@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion propCompileSdkVersion
+
+    defaultConfig {
+        versionName "1.0.0"
+
+        minSdkVersion 16
+        project.archivesBaseName = "LogcatCrashlytic"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api project(':LogcatCoreLib')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api 'com.google.firebase:firebase-analytics:17.4.3'
+    api 'com.google.firebase:firebase-crashlytics:17.0.1'
+}

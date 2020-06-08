@@ -20,11 +20,6 @@ class CrashlyticApplication : Application() {
             Timber.plant(FileLoggingTree(it, this))
         }
 
-//        val crashlytics = CrashlyticsCore.Builder()
-//                // .disabled(BuildConfig.DEBUG)
-//                .disabled(false)
-//                .build()
-//        Fabric.with(baseContext, Crashlytics.Builder().core(crashlytics).build(), Answers())
         FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", BuildConfig.VERSION_NAME)
         Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
 

@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="info.hannes.logcat.crashlytic">
+
+    <application>
+        <activity
+            android:name=".BothLogActivity"
+            android:label="All log"
+            android:theme="@style/DetailTheme" />
+    </application>
+
+</manifest>
