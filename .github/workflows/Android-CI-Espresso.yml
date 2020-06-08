@@ -11,8 +11,8 @@ on:
       - master
 
 jobs:
-  build:
-    name: JDK ${{ matrix.java_version }}
+  BuildTest:
+    name: Build and test JDK ${{ matrix.java_version }}
     runs-on: macOS-latest
     strategy:
       matrix:
@@ -29,7 +29,7 @@ jobs:
       - name: Install Android SDK
         uses: malinskiy/action-android/install-sdk@release/0.0.3
       - name: Build project
-        run: ./gradlew assemble --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
       - name: Run tests
         run: ./gradlew test --stacktrace
       - name: Run instrumentation tests
@@ -45,8 +45,16 @@ jobs:
         with:
           name: Logcat-Espresso-report
           path: sample/build/reports/androidTests/connected
-      - name: Reclaim memory
-        run: ./gradlew --stop && jps|grep -E 'KotlinCompileDaemon|GradleDaemon'| awk '{print $1}'| xargs kill -9
+  Check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install JDK ${{ matrix.java_version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
       - name: Final checks
         run: ./gradlew check --stacktrace
       - name: Archive Lint report
