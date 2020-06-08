@@ -39,7 +39,7 @@ dependencies {
     androidTestImplementation "androidx.test:core:$coreVersion"
 
     androidTestImplementation "androidx.test.ext:junit:$extJUnitVersion"
-    androidTestImplementation "androidx.test.ext:truth:$extJUnitVersion"
+    androidTestImplementation "androidx.test.ext:truth:1.2.0"
     androidTestImplementation "com.google.truth:truth:1.0.1"
 }
 
