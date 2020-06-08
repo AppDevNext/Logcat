@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import info.hannes.logcat.R
-import java.util.*
+import java.util.ArrayList
 
 class LogListAdapter(private val completeLogs: MutableList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
 
@@ -76,8 +76,7 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
      * @param position
      */
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
-        holder.logContent.text = filterLogs[position]
-        filterLogs[position].let {
+        holder.logContent.text = filterLogs[position].also {
             if (it.contains(" ${LogBaseFragment.ERROR_LINE}") || it.startsWith(LogBaseFragment.ERROR_LINE)) {
                 holder.logContent.setTextColor(Color.RED)
             } else if (it.contains(" ${LogBaseFragment.ASSERT_LINE}") || it.startsWith(LogBaseFragment.ASSERT_LINE)) {
@@ -94,8 +93,7 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
         }
     }
 
-    override fun getItemCount(): Int {
-        return filterLogs.size
+    override fun getItemCount(): Int = filterLogs.size
 
     companion object {
         fun getColorAttr(context: Context, attr: Int): ColorStateList? {

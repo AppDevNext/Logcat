@@ -19,7 +19,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     init {
         if (!externalCacheDir.exists()) {
             if (!externalCacheDir.mkdirs())
-                Log.e("FileLoggingTree", "couldn't create ${externalCacheDir.absoluteFile}")
+                Log.e(LOG_TAG, "couldn't create ${externalCacheDir.absoluteFile}")
         }
         val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         file = if (context != null) {
@@ -41,7 +41,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
                 5 -> "W:"
                 6 -> "E:"
                 7 -> "A:"
-                else -> priority.toString()
+                else -> "$priority"
             }
 
             val writer = FileWriter(file, true)
@@ -65,7 +65,6 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     fun getFileName(): String = file.absolutePath
 
     companion object {
-
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private var logImpossible = false
         val lastLogEntry: MutableLiveData<String> = MutableLiveData<String>()
