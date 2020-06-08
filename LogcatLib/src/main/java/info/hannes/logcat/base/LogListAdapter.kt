@@ -1,5 +1,8 @@
 package info.hannes.logcat.base
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -85,8 +88,8 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
                 holder.logContent.setTextColor(Color.MAGENTA)
             } else if (it.contains(" ${LogBaseFragment.VERBOSE_LINE}") || it.startsWith(LogBaseFragment.VERBOSE_LINE)) {
                 holder.logContent.setTextColor(Color.GRAY)
-//        } else {
-//            holder.logContent.setTextColor(ContextCompat.getColor(context, R.color.primary_dark))
+            } else {
+                holder.logContent.setTextColor(getColorAttr(holder.logContent.context, android.R.attr.textColorSecondary))
             }
         }
         when {
@@ -100,6 +103,16 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
 
     override fun getItemCount(): Int {
         return filterLogs.size
+
+    companion object {
+        fun getColorAttr(context: Context, attr: Int): ColorStateList? {
+            val ta: TypedArray = context.obtainStyledAttributes(intArrayOf(attr))
+            return try {
+                ta.getColorStateList(0)
+            } finally {
+                ta.recycle()
+            }
+        }
     }
 
 }
