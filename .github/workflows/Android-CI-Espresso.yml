@@ -45,6 +45,19 @@ jobs:
         with:
           name: Logcat-Espresso-report
           path: sample/build/reports/androidTests/connected
+      - name: Save logcat output
+        uses: actions/upload-artifact@master
+        if: failure()
+        with:
+          name: logcat
+          path: artifacts/logcat.log
+      - name: png-find
+        run: find screenshots -name '*.png'
+      - name: Archive screenshots
+        uses: actions/upload-artifact@v1
+        with:
+          name: Logcat-Screenshots
+          path: screenshots/adb
   Check:
     name: Check
     runs-on: ubuntu-latest
