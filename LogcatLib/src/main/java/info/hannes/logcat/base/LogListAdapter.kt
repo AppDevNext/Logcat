@@ -92,13 +92,6 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
                 holder.logContent.setTextColor(getColorAttr(holder.logContent.context, android.R.attr.textColorSecondary))
             }
         }
-        when {
-            filterLogs[position].contains(" E: ") -> holder.logContent.setTextColor(Color.RED)
-            filterLogs[position].contains(" W: ") -> holder.logContent.setTextColor(Color.MAGENTA)
-            filterLogs[position].contains(" V: ") -> holder.logContent.setTextColor(Color.GRAY)
-//        } else {
-//            holder.logContent.setTextColor(ContextCompat.getColor(context, R.color.primary_dark))
-        }
     }
 
     override fun getItemCount(): Int {
