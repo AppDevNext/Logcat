@@ -23,3 +23,4 @@ proguard.cfg
 #Gradle
 .gradle
 build
+screenshots
