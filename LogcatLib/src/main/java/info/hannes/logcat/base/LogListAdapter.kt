@@ -1,5 +1,8 @@
 package info.hannes.logcat.base
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import info.hannes.logcat.R
-import java.util.*
+import java.util.ArrayList
 
 class LogListAdapter(private val completeLogs: MutableList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
 
@@ -23,7 +26,7 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
         filterLogs = completeLogs.filter { line ->
             var include = false
             for (filter in filters)
-                if (!include && line.contains(filter))
+                if (!include && line.contains(filter, true))
                     include = true
             include
         }
@@ -38,7 +41,7 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
             var include = false
             currentFilter?.let {
                 for (filter in it)
-                    if (!include && line.contains(filter))
+                    if (!include && line.contains(filter, true))
                         include = true
             }
             include
@@ -73,8 +76,7 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
      * @param position
      */
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
-        holder.logContent.text = filterLogs[position]
-        filterLogs[position].let {
+        holder.logContent.text = filterLogs[position].also {
             if (it.contains(" ${LogBaseFragment.ERROR_LINE}") || it.startsWith(LogBaseFragment.ERROR_LINE)) {
                 holder.logContent.setTextColor(Color.RED)
             } else if (it.contains(" ${LogBaseFragment.ASSERT_LINE}") || it.startsWith(LogBaseFragment.ASSERT_LINE)) {
@@ -85,21 +87,23 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
                 holder.logContent.setTextColor(Color.MAGENTA)
             } else if (it.contains(" ${LogBaseFragment.VERBOSE_LINE}") || it.startsWith(LogBaseFragment.VERBOSE_LINE)) {
                 holder.logContent.setTextColor(Color.GRAY)
-//        } else {
-//            holder.logContent.setTextColor(ContextCompat.getColor(context, R.color.primary_dark))
+            } else {
+                holder.logContent.setTextColor(getColorAttr(holder.logContent.context, android.R.attr.textColorSecondary))
             }
-        }
-        when {
-            filterLogs[position].contains(" E: ") -> holder.logContent.setTextColor(Color.RED)
-            filterLogs[position].contains(" W: ") -> holder.logContent.setTextColor(Color.MAGENTA)
-            filterLogs[position].contains(" V: ") -> holder.logContent.setTextColor(Color.GRAY)
-//        } else {
-//            holder.logContent.setTextColor(ContextCompat.getColor(context, R.color.primary_dark))
         }
     }
 
-    override fun getItemCount(): Int {
-        return filterLogs.size
+    override fun getItemCount(): Int = filterLogs.size
+
+    companion object {
+        fun getColorAttr(context: Context, attr: Int): ColorStateList? {
+            val ta: TypedArray = context.obtainStyledAttributes(intArrayOf(attr))
+            return try {
+                ta.getColorStateList(0)
+            } finally {
+                ta.recycle()
+            }
+        }
     }
 
 }

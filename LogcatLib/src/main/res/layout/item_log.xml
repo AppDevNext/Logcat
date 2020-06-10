@@ -4,6 +4,8 @@
     android:id="@+id/logLine"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:fontFamily="monospace"
     android:lines="1"
-    android:textColor="?attr/colorPrimary"
+    android:textColor="?android:attr/textColorSecondary"
+    android:textIsSelectable="true"
     tools:text="log content" />

@@ -11,7 +11,7 @@ import java.util.*
 
 @Suppress("unused")
 @SuppressLint("LogNotTimber")
-class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename: String = UUID.randomUUID().toString()) : DebugTree() {
+open class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename: String = UUID.randomUUID().toString()) : DebugTree() {
 
     var file: File
         private set
@@ -19,7 +19,7 @@ class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename
     init {
         if (!externalCacheDir.exists()) {
             if (!externalCacheDir.mkdirs())
-                Log.e("FileLoggingTree", "couldn't create ${externalCacheDir.absoluteFile}")
+                Log.e(LOG_TAG, "couldn't create ${externalCacheDir.absoluteFile}")
         }
         val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         file = if (context != null) {
@@ -41,7 +41,7 @@ class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename
                 5 -> "W:"
                 6 -> "E:"
                 7 -> "A:"
-                else -> priority.toString()
+                else -> "$priority"
             }
 
             val writer = FileWriter(file, true)
@@ -65,7 +65,6 @@ class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename
     fun getFileName(): String = file.absolutePath
 
     companion object {
-
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private var logImpossible = false
         val lastLogEntry: MutableLiveData<String> = MutableLiveData<String>()
