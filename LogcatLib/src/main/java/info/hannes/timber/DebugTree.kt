@@ -1,5 +1,7 @@
 package info.hannes.timber
 
+import org.json.JSONException
+import org.json.JSONObject
 import timber.log.Timber
 
 open class DebugTree : Timber.DebugTree() {
@@ -13,5 +15,18 @@ open class DebugTree : Timber.DebugTree() {
                 super.createStackElementTag(element)?.replaceFirst(element.fileName.takeWhile { it != '.' }, ""),
                 element.methodName
         )
+    }
+
+    // if there is an JSON string, try to print out pretty
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+        var localMessage = message.trim()
+        if (localMessage.startsWith("{") && localMessage.endsWith("}")) {
+            val json = JSONObject(message)
+            try {
+                localMessage = json.toString(3)
+            } catch (e: JSONException) {
+            }
+        }
+        super.log(priority, tag, localMessage, t)
     }
 }
