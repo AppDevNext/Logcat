@@ -14,10 +14,10 @@ import java.util.*
 
 class LogfileFragment : LogBaseFragment(), Observer<String> {
 
-    private lateinit var sourceFileName: String
+    private var sourceFileName: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        sourceFileName = fileLoggingTree()!!.getFileName()
+        sourceFileName = fileLoggingTree()?.getFileName()
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -34,7 +34,9 @@ class LogfileFragment : LogBaseFragment(), Observer<String> {
     override fun readLogFile(): ArrayList<String> {
         var array: ArrayList<String> = arrayListOf()
         try {
-            array = File(sourceFileName).useLines { ArrayList(it.toList()) }
+            sourceFileName?.let {
+                array = File(it).useLines { ArrayList(it.toList()) }
+            }
         } catch (e: Exception) {
         }
         return array
