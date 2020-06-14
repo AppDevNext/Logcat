@@ -41,7 +41,7 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
             var include = false
             currentFilter?.let {
                 for (filter in it)
-                    if (!include && line.contains(filter, true))
+                    if (!include && line.contains(filter))
                         include = true
             }
             include
