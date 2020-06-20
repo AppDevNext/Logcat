@@ -6,7 +6,8 @@ android {
     compileSdkVersion propCompileSdkVersion
 
     defaultConfig {
-        versionName "1.0.0"
+        versionName getTag()
+        versionCode getGitCommitCount()
 
         minSdkVersion 16
         project.archivesBaseName = "LogcatCrashlytic"
