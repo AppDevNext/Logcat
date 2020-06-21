@@ -43,11 +43,7 @@ allprojects {
             Timber.plant(FileLoggingTree(it, this))
         }
 
-        val crashlytics = CrashlyticsCore.Builder()
-                .disabled(false)
-                .build()
-        Fabric.with(baseContext, Crashlytics.Builder().core(crashlytics).build(), Answers())
-        Crashlytics.setString(BuildConfig.FLAVOR, BuildConfig.VERSION_NAME)
+        FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", BuildConfig.VERSION_NAME)
         Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
 
 
@@ -55,7 +51,7 @@ allprojects {
 
 ## License
 
-    Copyright (C) 2012-2019 AppDevNext
+    Copyright (C) 2012-2020 AppDevNext
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
