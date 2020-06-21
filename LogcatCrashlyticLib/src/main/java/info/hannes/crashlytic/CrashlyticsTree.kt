@@ -1,7 +1,7 @@
 package info.hannes.crashlytic
 
 import android.util.Log
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -15,7 +15,7 @@ class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
 
         super.log(priority, tag, message, t)
 
-        Crashlytics.setString("PRIORITY", when (priority) {
+        FirebaseCrashlytics.getInstance().setCustomKey("PRIORITY", when (priority) {
             2 -> "Verbose"
             3 -> "Debug"
             4 -> "Info"
@@ -24,19 +24,19 @@ class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
             7 -> "Assert"
             else -> priority.toString()
         })
-        tag?.let { Crashlytics.setString(KEY_TAG, it) }
-        Crashlytics.setString(KEY_MESSAGE, message)
-        Crashlytics.setString(KEY_UNIT_TEST, isRunningUnitTests.toString())
-        Crashlytics.setString(KEY_ESPRESSO, isRunningEspresso().toString())
-        identifier?.let { Crashlytics.setUserIdentifier(it) }
+        tag?.let { FirebaseCrashlytics.getInstance().setCustomKey(KEY_TAG, it) }
+        FirebaseCrashlytics.getInstance().setCustomKey(KEY_MESSAGE, message)
+        FirebaseCrashlytics.getInstance().setCustomKey(KEY_UNIT_TEST, isRunningUnitTests.toString())
+        FirebaseCrashlytics.getInstance().setCustomKey(KEY_ESPRESSO, isRunningEspresso().toString())
+        identifier?.let { FirebaseCrashlytics.getInstance().setUserId(it) }
 
         if (priority > Log.WARN) {
             if (t != null)
-                Crashlytics.logException(t)
+                FirebaseCrashlytics.getInstance().recordException(t)
             else
-                Crashlytics.log(priority, tag, message)
+                FirebaseCrashlytics.getInstance().recordException(Throwable(message))
         } else if (priority > Log.INFO) {
-            Crashlytics.log(message)
+            FirebaseCrashlytics.getInstance().log(message)
         }
     }
 

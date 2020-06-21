@@ -6,10 +6,11 @@ android {
     compileSdkVersion propCompileSdkVersion
 
     defaultConfig {
-        versionName "1.0.0"
+        versionName getTag()
+        versionCode getGitCommitCount()
 
-        minSdkVersion 14
-        project.archivesBaseName = "Logcat"
+        minSdkVersion 16
+        project.archivesBaseName = "LogcatCore"
     }
 
     compileOptions {
@@ -26,5 +27,4 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     api 'com.google.android.material:material:1.1.0'
     api 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }

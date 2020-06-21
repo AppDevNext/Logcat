@@ -13,7 +13,8 @@ The easiest way to add Logcat to your project is via Gradle. Just add the follow
 
 ```groovy
 dependencies {
-    implementation 'com.github.AppDevNext:Logcat:$latest_version'
+    implementation 'com.github.AppDevNext.Logcat:LogcatCore:$latest_version'
+    implementation 'com.github.AppDevNext.Logcat:LogcatCrashlytic:$latest_version'
 }
 ```
 

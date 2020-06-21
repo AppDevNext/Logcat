@@ -1,0 +1,55 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="100"
+        android:title="@android:string/search_go"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+
+    <group
+        android:id="@+id/group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_show_verbose"
+            android:checked="true"
+            android:title="Verbose"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/menu_show_debug"
+            android:title="Debug"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/menu_show_info"
+            android:title="Info"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/menu_show_warning"
+            android:title="Warning"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/menu_show_error"
+            android:title="Error"
+            tools:ignore="HardcodedText" />
+    </group>
+
+    <group android:checkableBehavior="single" />
+
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@android:drawable/ic_menu_share"
+        android:orderInCategory="100"
+        android:title="Share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_clear"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:orderInCategory="100"
+        android:title="Clear log"
+        app:showAsAction="ifRoom" />
+
+</menu>

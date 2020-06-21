@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 class AllFragmentsTest {
 
     @get:Rule
-    var mActivityTestRule = ActivityTestRule(BothLogActivity::class.java)
+    var mActivityTestRule = ActivityTestRule(info.hannes.logcat.crashlytic.BothLogActivity::class.java)
 
     @get:Rule
     val grantPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
