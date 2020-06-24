@@ -1,4 +1,4 @@
-package info.hannes.logcat.crashlytic
+package info.hannes.logcat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.TabHost
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import info.hannes.logcat.LogcatFragment
-import info.hannes.logcat.LogfileFragment
-import info.hannes.logcat.TabsAdapter
 import info.hannes.logcat.base.LogBaseFragment.Companion.MAIL_LOGGER
+import info.hannes.logcat.crashlytic.R
 
 /**
  * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon screen orientation changes).

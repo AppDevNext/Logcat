@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         when (itemId) {
             R.id.nav_drawer_logcat -> startActivity(Intent(this, LogcatActivity::class.java))
             R.id.nav_drawer_logfile -> startActivity(Intent(this, LogfileActivity::class.java))
-            R.id.nav_drawer_both_logfiles -> startActivity(Intent(this, info.hannes.logcat.crashlytic.BothLogActivity::class.java))
+            R.id.nav_drawer_both_logfiles -> startActivity(Intent(this, BothLogActivity::class.java))
             R.id.nav_drawer_other_github -> {
                 val url = "https://github.com/hannesa2/Logcat"
                 val i = Intent(Intent.ACTION_VIEW)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, LogfileActivity::class.java))
             }
             R.id.nav_drawer_both_logfiles -> {
-                startActivity(Intent(this, info.hannes.logcat.crashlytic.BothLogActivity::class.java))
+                startActivity(Intent(this, BothLogActivity::class.java))
             }
         }
 

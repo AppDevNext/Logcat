@@ -1,4 +1,4 @@
-package info.hannes.logcat.crashlytic
+package info.hannes.logcat
 
 import android.os.Bundle
 import android.view.View
