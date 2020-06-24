@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".BothLogActivity"
+            android:name="info.hannes.logcat.BothLogActivity"
             android:label="All log"
             android:theme="@style/DetailTheme" />
     </application>
