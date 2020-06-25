@@ -3,12 +3,16 @@
 
     <application>
         <activity
-            android:name="info.hannes.logcat.LogcatActivity"
+            android:name=".LogcatActivity"
             android:label="Logcat"
             android:theme="@style/DetailTheme" />
         <activity
-            android:name="info.hannes.logcat.LogfileActivity"
+            android:name=".LogfileActivity"
             android:label="Timber"
+            android:theme="@style/DetailTheme" />
+        <activity
+            android:name=".BothLogActivity"
+            android:label="All log"
             android:theme="@style/DetailTheme" />
     </application>
 

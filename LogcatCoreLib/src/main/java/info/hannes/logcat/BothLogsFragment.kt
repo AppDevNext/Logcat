@@ -9,7 +9,6 @@ import android.widget.TabHost
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import info.hannes.logcat.base.LogBaseFragment.Companion.MAIL_LOGGER
-import info.hannes.logcat.crashlytic.R
 
 /**
  * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon screen orientation changes).
