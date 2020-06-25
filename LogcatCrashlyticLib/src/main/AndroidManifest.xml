@@ -2,10 +2,7 @@
     package="info.hannes.logcat.crashlytic">
 
     <application>
-        <activity
-            android:name="info.hannes.logcat.BothLogActivity"
-            android:label="All log"
-            android:theme="@style/DetailTheme" />
+
     </application>
 
 </manifest>
