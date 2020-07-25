@@ -2,6 +2,7 @@ package info.hannes.timber
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import java.io.File
@@ -44,12 +45,12 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
                 else -> "$priority"
             }
 
-            val writer = FileWriter(file, true)
             val textLine = "$priorityText $logTimeStamp$tag$message\n"
-            writer.append(textLine)
-            writer.flush()
-            writer.close()
-            lastLogEntry.value = textLine
+
+            if (!threadCheck && Thread.currentThread().name == "main")
+                doFileLogging(textLine)
+            else
+                Handler().post { doFileLogging(textLine) }
         } catch (e: Exception) {
             // Log to prevent an endless loop
             if (!logImpossible) {
@@ -62,11 +63,20 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
         super.log(priority, tag, message, t)
     }
 
+    private fun doFileLogging(textLine: String) {
+        val writer = FileWriter(file, true)
+        writer.append(textLine)
+        writer.flush()
+        writer.close()
+        lastLogEntry.value = textLine
+    }
+
     fun getFileName(): String = file.absolutePath
 
     companion object {
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private var logImpossible = false
+        var threadCheck = false
         val lastLogEntry: MutableLiveData<String> = MutableLiveData<String>()
     }
 }
