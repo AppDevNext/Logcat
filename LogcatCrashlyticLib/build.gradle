@@ -23,6 +23,6 @@ dependencies {
     api project(':LogcatCoreLib')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    api 'com.google.firebase:firebase-analytics:17.4.3'
-    api 'com.google.firebase:firebase-crashlytics:17.1.0'
+    api 'com.google.firebase:firebase-analytics:17.4.4'
+    api 'com.google.firebase:firebase-crashlytics:17.1.1'
 }
