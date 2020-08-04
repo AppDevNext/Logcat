@@ -29,13 +29,13 @@ jobs:
       - name: Install Android SDK
         uses: malinskiy/action-android/install-sdk@release/0.0.7
       - name: Build project
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug
       - name: Run tests
-        run: ./gradlew test --stacktrace
+        run: ./gradlew test
       - name: Run instrumentation tests
         uses: malinskiy/action-android/emulator-run-cmd@release/0.0.7
         with:
-          cmd: ./gradlew cAT --stacktrace
+          cmd: ./gradlew cAT
           api: 28
           tag: default
           abi: x86
@@ -69,7 +69,7 @@ jobs:
         with:
           java-version: 1.8
       - name: gradle check
-        run: ./gradlew check --stacktrace
+        run: ./gradlew check
       - name: Archive Lint report
         uses: actions/upload-artifact@v1
         if: ${{ always() }}
