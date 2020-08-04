@@ -19,7 +19,7 @@ class CountlyTree(private val analytics: Analytics, private val serverIgnoreToke
     private val t = serverIgnoreToken
     private val regex: Regex = "$t.+?$t|$t[^$t]*$".toRegex()
 
-    override fun log(priority: Int, tag: String?, message: String, throwable: Throwable?) {
+    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
         // we ignore INFO, DEBUG and VERBOSE
         if (priority <= Log.INFO) {
             return
@@ -30,9 +30,9 @@ class CountlyTree(private val analytics: Analytics, private val serverIgnoreToke
         }
 
         when {
-            throwable != null -> analytics.recordError(throwable)
-            priority == Log.WARN -> analytics.recordEvent(localMessage)
-            else -> analytics.recordError(localMessage)
+            t != null -> analytics.recordError(t)
+            priority == Log.WARN -> analytics.recordEvent(localMessage, args)
+            else -> analytics.recordError(localMessage, args)
         }
     }
 
