@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="info.hannes.logcat.countly">
+
+    <application>
+
+    </application>
+
+</manifest>

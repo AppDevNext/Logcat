@@ -1,3 +1,4 @@
 include ':LogcatCoreLib'
 include ':LogcatCrashlyticLib'
+include ':LogcatCountlyLib'
 include ':sample'

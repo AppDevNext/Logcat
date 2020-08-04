@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion propCompileSdkVersion
+
+    defaultConfig {
+        versionName getTag()
+        versionCode getGitCommitCount()
+
+        minSdkVersion 16
+        project.archivesBaseName = "LogcatCountly"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api project(':LogcatCoreLib')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api "ly.count.android:sdk:20.04.4"
+}
