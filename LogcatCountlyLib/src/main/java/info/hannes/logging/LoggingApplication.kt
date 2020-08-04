@@ -2,7 +2,7 @@ package info.hannes.logging
 
 import android.app.Application
 import info.hannes.countly.Analytics
-import info.hannes.countly.CountlyTree
+import info.hannes.timber.CountlyTree
 import info.hannes.timber.DebugTree
 import timber.log.Timber
 

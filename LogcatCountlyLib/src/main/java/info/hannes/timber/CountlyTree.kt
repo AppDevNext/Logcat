@@ -1,7 +1,7 @@
-package info.hannes.countly
+package info.hannes.timber
 
 import android.util.Log
-import info.hannes.timber.DebugTree
+import info.hannes.countly.Analytics
 
 class CountlyTree(private val analytics: Analytics, private val serverIgnoreToken: String? = null) : DebugTree() {
 
