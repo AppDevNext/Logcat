@@ -58,12 +58,11 @@ class Analytics : IAnalytics {
     }
 
     companion object {
-        private const val COUNTLY_HOST = "https://countly.apinext.bmw.com"
 
         val segmentation = HashMap<String, String>()
 
         @SuppressLint("HardwareIds")
-        fun initAnalytics(context: Context, loggingEnabled: Boolean = false, countlyKey: String) {
+        fun initAnalytics(context: Context, loggingEnabled: Boolean = false, countlyKey: String, countlyHost: String) {
             var version = ""
             try {
                 val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
@@ -78,7 +77,7 @@ class Analytics : IAnalytics {
                     .setContext(context)
                     .setDeviceId(Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID))
                     .setIdMode(DeviceId.Type.DEVELOPER_SUPPLIED)
-                    .setServerURL(COUNTLY_HOST)
+                    .setServerURL(countlyHost)
                     .setLoggingEnabled(loggingEnabled)
                     .setViewTracking(true)
                     .setHttpPostForced(true)

@@ -7,6 +7,7 @@ import info.hannes.timber.DebugTree
 import timber.log.Timber
 
 abstract class LoggingApplication(
+    private val countlyHost: String,
     private val countlyKey: String,
     private val debugBuildType: Boolean,
     private val serverIgnoreToken: String? = null
@@ -29,7 +30,7 @@ abstract class LoggingApplication(
     protected fun setupLogging(countlyLogging: Boolean) {
         Timber.plant(DebugTree())
         if (countlyLogging) {
-            Analytics.initAnalytics(this, countlyLogging, countlyKey)
+            Analytics.initAnalytics(this, countlyLogging, countlyKey, countlyHost)
             Timber.plant(CountlyTree(Analytics(), serverIgnoreToken))
         }
     }
