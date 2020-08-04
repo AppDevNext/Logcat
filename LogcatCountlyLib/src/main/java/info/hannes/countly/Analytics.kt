@@ -23,25 +23,25 @@ class Analytics : IAnalytics {
 
     override fun recordEvent(event: String) {
         if (isInitialized()) {
-            countlyInstance.recordEvent(event, segmentation, 1)
+            countlyInstance.events().recordEvent(event, segmentation, 1)
         }
     }
 
     override fun recordError(message: String) {
         if (isInitialized()) {
-            countlyInstance.recordHandledException(RuntimeException(message))
+            countlyInstance.crashes().recordHandledException(RuntimeException(message))
         }
     }
 
     override fun recordError(throwable: Throwable) {
         if (isInitialized()) {
-            countlyInstance.recordHandledException(throwable)
+            countlyInstance.crashes().recordHandledException(throwable)
         }
     }
 
     override fun recordWarning(message: String) {
         if (isInitialized()) {
-            countlyInstance.recordHandledException(RuntimeException(message))
+            countlyInstance.crashes().recordHandledException(RuntimeException(message))
         }
     }
 
@@ -58,8 +58,7 @@ class Analytics : IAnalytics {
     }
 
     companion object {
-
-        val segmentation = HashMap<String, String>()
+        val segmentation = mutableMapOf<String, Any>()
 
         @SuppressLint("HardwareIds")
         fun initAnalytics(context: Context, loggingEnabled: Boolean = false, countlyKey: String, countlyHost: String) {
