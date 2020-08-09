@@ -3,12 +3,15 @@ package info.hannes.timber
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
 
 @Suppress("unused")
 @SuppressLint("LogNotTimber")
@@ -45,12 +48,17 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
                 else -> "$priority"
             }
 
+            val writer = FileWriter(file, true)
             val textLine = "$priorityText $logTimeStamp$tag$message\n"
+            writer.append(textLine)
+            writer.flush()
+            writer.close()
 
-            if (!threadCheck && Thread.currentThread().name == "main")
-                doFileLogging(textLine)
+            if (Thread.currentThread().name == "main")
+                lastLogEntry.value = textLine
             else
-                Handler().post { doFileLogging(textLine) }
+                Handler(Looper.getMainLooper()).post { lastLogEntry.value = textLine }
+
         } catch (e: Exception) {
             // Log to prevent an endless loop
             if (!logImpossible) {
@@ -63,20 +71,11 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
         super.log(priority, tag, message, t)
     }
 
-    private fun doFileLogging(textLine: String) {
-        val writer = FileWriter(file, true)
-        writer.append(textLine)
-        writer.flush()
-        writer.close()
-        lastLogEntry.value = textLine
-    }
-
     fun getFileName(): String = file.absolutePath
 
     companion object {
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private var logImpossible = false
-        var threadCheck = false
         val lastLogEntry: MutableLiveData<String> = MutableLiveData<String>()
     }
 }
