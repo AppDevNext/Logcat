@@ -2,12 +2,16 @@ package info.hannes.timber
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
 
 @Suppress("unused")
 @SuppressLint("LogNotTimber")
@@ -49,7 +53,12 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
             writer.append(textLine)
             writer.flush()
             writer.close()
-            lastLogEntry.value = textLine
+
+            if (Thread.currentThread().name == "main")
+                lastLogEntry.value = textLine
+            else
+                Handler(Looper.getMainLooper()).post { lastLogEntry.value = textLine }
+
         } catch (e: Exception) {
             // Log to prevent an endless loop
             if (!logImpossible) {
