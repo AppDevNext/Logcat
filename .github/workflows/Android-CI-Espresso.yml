@@ -40,7 +40,7 @@ jobs:
           tag: default
           abi: x86
       - name: Archive Espresso results
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
           name: Logcat-Espresso-report
@@ -71,7 +71,7 @@ jobs:
       - name: gradle check
         run: ./gradlew check
       - name: Archive Lint report
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
           name: Logcat-Lint-report
