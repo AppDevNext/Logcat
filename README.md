@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/AppDevNext/Logcat.svg)](https://jitpack.io/#AppDevNext/Logcat)
 
-# LogcatLib - Show Logcat in release buildtype and Timber log when it logs to a file
+# Show Logcat in release buildtype and Timber log when it logs to a file
 
 This library provides an easy way to show Logcat in `release` ! and Timber history, which was written to file.
 Right Timber `FileLoggingTree.kt` is provided too  
