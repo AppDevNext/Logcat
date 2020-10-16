@@ -69,7 +69,7 @@ class Analytics : IAnalytics {
             } catch (ignore: PackageManager.NameNotFoundException) {
             }
             segmentation["app_version"] = version
-            segmentation["logging_version"] = BuildConfig.VERSION_NAME
+            segmentation["logging_version"] = BuildConfig.VERSIONNAME
 
             val config = CountlyConfig()
                     .setAppKey(countlyKey)
