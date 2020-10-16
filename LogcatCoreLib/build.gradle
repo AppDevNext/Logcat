@@ -8,6 +8,7 @@ android {
     defaultConfig {
         versionName getTag()
         versionCode getGitCommitCount()
+        buildConfigField "String", "VERSIONNAME", "\"" + getTag() + "\""
 
         minSdkVersion 16
         project.archivesBaseName = "LogcatCore"

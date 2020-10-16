@@ -20,7 +20,7 @@ class CrashlyticApplication : Application() {
             Timber.plant(FileLoggingTree(it, this))
         }
 
-        FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", BuildConfig.VERSION_NAME)
+        FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", BuildConfig.VERSIONNAME)
         Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
 
         Timber.d("Debug test")
