@@ -3,6 +3,7 @@ package info.hannes.logcat
 import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import info.hannes.crashlytic.CrashlyticsTree
@@ -33,10 +34,10 @@ class CrashlyticApplication : Application() {
             override fun run() {
                 Timber.d("live=$x")
                 x++
-                Handler().postDelayed(this, 3000)
+                Handler(Looper.getMainLooper()).postDelayed(this, 3000)
             }
         }
 
-        Handler().postDelayed(runner, 3000)
+        Handler(Looper.getMainLooper()).postDelayed(runner, 3000)
     }
 }
