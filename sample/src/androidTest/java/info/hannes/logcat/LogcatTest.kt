@@ -1,14 +1,13 @@
 package info.hannes.logcat
 
 import android.Manifest
-import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.filters.Suppress
-import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.moka.utils.Screenshot
 import org.hamcrest.Matchers.allOf
@@ -21,7 +20,7 @@ import org.junit.runner.RunWith
 class LogcatTest {
 
     @get:Rule
-    var mActivityTestRule = ActivityTestRule(LogcatActivity::class.java)
+    var mActivityTestRule = ActivityScenarioRule(LogcatActivity::class.java)
 
     @get:Rule
     val grantPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -31,7 +30,7 @@ class LogcatTest {
     @Test
     @Suppress
     fun basicTest() {
-        onView(allOf<View>(withContentDescription("Logcat"),
+        onView(allOf(withContentDescription("Logcat"),
                 withParent(withId(R.id.action_bar)),
                 isDisplayed()))
 
