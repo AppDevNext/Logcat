@@ -9,7 +9,7 @@ android {
         versionName getTag()
         versionCode getGitCommitCount()
 
-        minSdkVersion 16
+        minSdkVersion 17
         project.archivesBaseName = "LogcatCountly"
     }
 
@@ -23,5 +23,5 @@ dependencies {
     api project(':LogcatCoreLib')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    api "ly.count.android:sdk:20.04.4"
+    api "ly.count.android:sdk:20.04.5"
 }
