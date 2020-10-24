@@ -40,7 +40,7 @@ jobs:
           tag: default
           abi: x86
       - name: Archive Espresso results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2.2.0
         if: ${{ always() }}
         with:
           name: Logcat-Espresso-report
@@ -49,12 +49,12 @@ jobs:
         uses: actions/upload-artifact@master
         if: failure()
         with:
-          name: logcat
+          name: Logcat-logcat
           path: artifacts/logcat.log
       - name: png-find
         run: find screenshots -name '*.png'
       - name: Archive screenshots
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2.2.0
         with:
           name: Logcat-Screenshots
           path: screenshots/adb
@@ -71,7 +71,7 @@ jobs:
       - name: gradle check
         run: ./gradlew check
       - name: Archive Lint report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2.2.0
         if: ${{ always() }}
         with:
           name: Logcat-Lint-report
