@@ -18,8 +18,6 @@ jobs:
       matrix:
         java_version: [1.8]
     steps:
-      - name: Install coreutils for macOS
-        run: brew install coreutils
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install JDK ${{ matrix.java_version }}
