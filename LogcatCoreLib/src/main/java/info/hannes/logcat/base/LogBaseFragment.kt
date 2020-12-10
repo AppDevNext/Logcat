@@ -64,15 +64,12 @@ abstract class LogBaseFragment : Fragment() {
     }
 
     private fun showLogContent() = lifecycle.coroutineScope.launch(Dispatchers.Main) {
-        showLoadingDialog()
         val logEntries = withContext(Dispatchers.Default) {
             readLogFile()
         }
         logListAdapter = LogListAdapter(logEntries, currentFilter)
         logsRecycler.adapter = logListAdapter
         logsRecycler.adapter?.itemCount?.minus(1)?.let { logsRecycler.scrollToPosition(it) }
-
-        dismissLoadingDialog()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -231,25 +228,10 @@ abstract class LogBaseFragment : Fragment() {
 
     abstract fun readLogFile(): ArrayList<String>
 
-    private fun showLoadingDialog() {
-        showProgress++
-        if (showProgress == 1) {
-
-        }
-    }
-
-    private fun dismissLoadingDialog() {
-        showProgress--
-        if (showProgress == 0) {
-
-        }
-    }
-
     companion object {
 
         private const val MAIL_ATTACHMENT_TYPE = "text/plain"
 
-        private var showProgress = 0
         const val FILE_NAME = "targetFilename"
         const val SEARCH_HINT = "search_hint"
         const val MAIL_LOGGER = "mail_logger"
