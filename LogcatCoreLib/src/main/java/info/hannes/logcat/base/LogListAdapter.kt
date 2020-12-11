@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import info.hannes.logcat.R
 import java.util.*
 
-class LogListAdapter(private val completeLogs: MutableList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
+class LogListAdapter(private var completeLogs: MutableList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
 
     private var currentFilter: Array<out String>? = null
     var filterLogs: List<String> = ArrayList()
@@ -21,9 +21,15 @@ class LogListAdapter(private val completeLogs: MutableList<String>, filter: Stri
         setFilter(filter)
     }
 
+    fun setItems(newItems: MutableList<String>) {
+        completeLogs = newItems
+        setFilter(currentFilter!![0])
+        notifyDataSetChanged()
+    }
+
     fun setFilter(vararg filters: String) {
         currentFilter = filters
-        filterLogs = completeLogs.filter { line ->
+        filterLogs = Collections.synchronizedList(completeLogs).filter { line ->
             var include = false
             for (filter in filters)
                 if (filter.length == 3 && filter.takeLast(2) == ": ") { // eg 'E: '

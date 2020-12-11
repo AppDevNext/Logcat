@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.StrictMode
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -33,6 +35,7 @@ abstract class LogBaseFragment : Fragment() {
 
     private var filename: String? = null
     private var searchHint: String? = null
+    protected var live: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -43,7 +46,10 @@ abstract class LogBaseFragment : Fragment() {
         logsRecycler = view.findViewById(R.id.log_recycler)
         logsRecycler.layoutManager = layoutManager
         // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
-        logsRecycler.adapter = LogListAdapter(mutableListOf(), currentFilter)
+        logListAdapter = LogListAdapter(mutableListOf(), currentFilter)
+        logsRecycler.adapter = logListAdapter
+
+        setFilter2LogAdapter("")
 
         activity!!.actionBar?.setDisplayHomeAsUpEnabled(true)
         if (savedInstanceState == null) {
@@ -63,13 +69,19 @@ abstract class LogBaseFragment : Fragment() {
         return view
     }
 
-    private fun showLogContent() = lifecycle.coroutineScope.launch(Dispatchers.Main) {
-        val logEntries = withContext(Dispatchers.Default) {
-            readLogFile()
+    private fun showLogContent() {
+        lifecycle.coroutineScope.launch(Dispatchers.Main) {
+            val logEntries = withContext(Dispatchers.Default) {
+                readLogFile()
+            }
+            logListAdapter?.setItems(logEntries)
+            logsRecycler.adapter = logListAdapter
+            logsRecycler.adapter?.itemCount?.minus(1)?.let { logsRecycler.scrollToPosition(it) }
+
+            if (live) {
+                Handler(Looper.getMainLooper()).postDelayed({ showLogContent() }, 1000)
+            }
         }
-        logListAdapter = LogListAdapter(logEntries, currentFilter)
-        logsRecycler.adapter = logListAdapter
-        logsRecycler.adapter?.itemCount?.minus(1)?.let { logsRecycler.scrollToPosition(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
