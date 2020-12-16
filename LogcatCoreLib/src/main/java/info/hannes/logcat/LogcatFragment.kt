@@ -47,6 +47,7 @@ class LogcatFragment : LogBaseFragment() {
 
     override fun clearLog() {
         Runtime.getRuntime().exec("logcat -c")
+        logList.clear()
     }
 
     companion object {
