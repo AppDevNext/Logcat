@@ -23,7 +23,7 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
 
     fun setItems(newItems: MutableList<String>) {
         completeLogs = newItems
-        setFilter(currentFilter!![0])
+        setFilter(*currentFilter!!)
         notifyDataSetChanged()
     }
 
