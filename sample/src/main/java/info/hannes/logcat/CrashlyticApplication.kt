@@ -1,7 +1,6 @@
 package info.hannes.logcat
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
@@ -11,7 +10,7 @@ import info.hannes.timber.FileLoggingTree
 import timber.log.Timber
 
 
-class CrashlyticApplication : Application() {
+class CrashlyticApplication : LoggingApplication() {
 
     @SuppressLint("HardwareIds")
     override fun onCreate() {
