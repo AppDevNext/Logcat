@@ -43,11 +43,13 @@ ext {
     espresso_core = "3.3.0"
 }
 
+@SuppressWarnings('unused')
 static def getTag() {
     def process = "git describe --tags --abbrev=0".execute()
     return process.text.toString().trim()
 }
 
+@SuppressWarnings('unused')
 static def getGitCommitCount() {
     def process = "git rev-list HEAD --count".execute()
     return process.text.toInteger()
