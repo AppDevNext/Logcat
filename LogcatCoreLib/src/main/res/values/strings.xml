@@ -3,4 +3,7 @@
     <string name="placeholder" translatable="false" />
     <string name="app_name" translatable="false" />
     <string name="log_send_no_app" tools:ignore="MissingTranslation">No app found.</string>
+    <string name="live">Live</string>
+    <string name="share">Share</string>
+    <string name="clear_log">Clear log</string>
 </resources>
