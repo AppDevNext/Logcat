@@ -16,7 +16,7 @@ class LogcatFragment : LogBaseFragment() {
     private val logList = ArrayList<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        live = true
+        showLive = true
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 

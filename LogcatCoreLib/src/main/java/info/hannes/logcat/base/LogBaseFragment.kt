@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.StrictMode
 import android.view.*
+import android.widget.Switch
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
@@ -35,7 +36,12 @@ abstract class LogBaseFragment : Fragment() {
 
     private var filename: String? = null
     private var searchHint: String? = null
-    protected var live: Boolean = false
+    protected var showLive: Boolean = false
+        set(value) {
+            field = value
+            requireActivity().invalidateOptionsMenu()
+        }
+    private var live: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -141,7 +147,19 @@ abstract class LogBaseFragment : Fragment() {
                 }
             }
         }
+
+        val switch = menu.findItem(R.id.menu_live).actionView as Switch
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            live = isChecked
+            if (live)
+                showLogContent()
+        }
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.menu_live).isVisible = showLive
     }
 
     private fun setFilter2LogAdapter(vararg filters: String) {
