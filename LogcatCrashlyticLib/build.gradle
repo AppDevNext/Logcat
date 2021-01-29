@@ -24,5 +24,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     api 'com.google.firebase:firebase-analytics:18.0.2'
-    api 'com.google.firebase:firebase-crashlytics:17.3.0'
+    api 'com.google.firebase:firebase-crashlytics:17.3.1'
 }
