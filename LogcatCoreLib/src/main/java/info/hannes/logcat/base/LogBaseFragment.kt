@@ -4,14 +4,11 @@ import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.StrictMode
+import android.os.*
 import android.view.*
 import android.widget.Switch
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -229,15 +226,14 @@ abstract class LogBaseFragment : Fragment() {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "application/zip"
 
-        val uri = Uri.fromFile(logToSend)
-        intent.putExtra(Intent.EXTRA_STREAM, uri)
+        val logsUri = FileProvider.getUriForFile(requireContext(), context?.applicationContext?.packageName + ".provider", logToSend)
 
         intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
         val subject = String.format(filename, getString(R.string.app_name))
         intent.putExtra(Intent.EXTRA_SUBJECT, subject)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.type = MAIL_ATTACHMENT_TYPE
-        intent.putExtra(Intent.EXTRA_STREAM, uri)
+        intent.putExtra(Intent.EXTRA_STREAM, logsUri)
         try {
             // prevent from a "exposed beyond app through ClipData.Item.getUri()"
             // https://stackoverflow.com/questions/48117511/exposed-beyond-app-through-clipdata-item-geturi
@@ -253,7 +249,6 @@ abstract class LogBaseFragment : Fragment() {
             )
             snackBar.show()
         }
-
     }
 
     abstract fun readLogFile(): ArrayList<String>
