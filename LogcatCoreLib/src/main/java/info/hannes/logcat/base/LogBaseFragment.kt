@@ -224,7 +224,6 @@ abstract class LogBaseFragment : Fragment() {
         logToSend.writeText(filterLogs.joinToString("\n"))
 
         val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "application/zip"
 
         val logsUri = FileProvider.getUriForFile(requireContext(), context?.applicationContext?.packageName + ".provider", logToSend)
 
