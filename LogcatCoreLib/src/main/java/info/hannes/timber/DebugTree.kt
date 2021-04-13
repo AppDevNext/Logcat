@@ -4,7 +4,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
 
-open class DebugTree : Timber.DebugTree() {
+open class DebugTree(delegator: Class<*>? = null) : Timber.DebugTree(delegator = delegator) {
 
     override fun createStackElementTag(element: StackTraceElement): String? {
         return String.format(
@@ -18,7 +18,7 @@ open class DebugTree : Timber.DebugTree() {
     }
 
     // if there is an JSON string, try to print out pretty
-    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
         var localMessage = message.trim()
         if (localMessage.startsWith("{") && localMessage.endsWith("}")) {
             try {
@@ -27,6 +27,6 @@ open class DebugTree : Timber.DebugTree() {
             } catch (e: JSONException) {
             }
         }
-        super.log(priority, tag, localMessage, t)
+        super.logMessage(priority, tag, localMessage, t, *args)
     }
 }
