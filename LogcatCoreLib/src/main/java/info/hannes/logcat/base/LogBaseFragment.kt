@@ -4,7 +4,10 @@ import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.StrictMode
 import android.view.*
 import android.widget.Switch
 import androidx.appcompat.widget.SearchView
@@ -20,7 +23,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.*
-
 
 abstract class LogBaseFragment : Fragment() {
 
@@ -88,10 +90,9 @@ abstract class LogBaseFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
         inflater.inflate(R.menu.menu_log, menu)
         verboseItem = menu.findItem(R.id.menu_show_verbose)
-        val searchItem = menu.findItem(R.id.menu_search)
+        val searchItem: MenuItem? = menu.findItem(R.id.menu_search)
         val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
 
         if (searchItem != null) {
@@ -156,7 +157,7 @@ abstract class LogBaseFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.menu_live).isVisible = showLive
+        menu.findItem(R.id.menu_live)?.isVisible = showLive
     }
 
     private fun setFilter2LogAdapter(vararg filters: String) {
@@ -242,7 +243,7 @@ abstract class LogBaseFragment : Fragment() {
             startActivity(Intent.createChooser(intent, "$filename ..."))
         } catch (e: ActivityNotFoundException) {
             val snackBar = Snackbar.make(
-                    this@LogBaseFragment.activity!!.findViewById(android.R.id.content),
+                    this@LogBaseFragment.requireActivity().findViewById(android.R.id.content),
                     R.string.log_send_no_app,
                     Snackbar.LENGTH_LONG
             )

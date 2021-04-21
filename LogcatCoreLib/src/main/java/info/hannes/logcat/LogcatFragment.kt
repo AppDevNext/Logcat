@@ -10,7 +10,6 @@ import info.hannes.logcat.base.LogBaseFragment
 import java.io.IOException
 import java.util.*
 
-
 class LogcatFragment : LogBaseFragment() {
 
     private val logList = ArrayList<String>()

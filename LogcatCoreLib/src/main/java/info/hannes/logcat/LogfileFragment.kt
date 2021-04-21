@@ -11,7 +11,6 @@ import info.hannes.timber.fileLoggingTree
 import java.io.File
 import java.util.*
 
-
 class LogfileFragment : LogBaseFragment(), Observer<String> {
 
     private var sourceFileName: String? = null
