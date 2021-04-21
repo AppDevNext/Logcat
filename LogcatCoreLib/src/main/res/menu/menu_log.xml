@@ -45,8 +45,6 @@
             tools:ignore="HardcodedText" />
     </group>
 
-    <group android:checkableBehavior="single" />
-
     <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_menu_share_24"
