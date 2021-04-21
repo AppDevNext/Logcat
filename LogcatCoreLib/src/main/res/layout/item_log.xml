@@ -6,6 +6,10 @@
     android:layout_height="wrap_content"
     android:fontFamily="monospace"
     android:lines="1"
+    android:paddingStart="16dp"
+    android:paddingLeft="16dp"
+    android:paddingEnd="16dp"
+    android:paddingRight="16dp"
     android:textColor="?android:attr/textColorSecondary"
     android:textIsSelectable="true"
     tools:text="log content" />
