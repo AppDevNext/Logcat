@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Theme">
+        <attr name="colorAssertLine" format="color" />
+
+        <attr name="colorDebugLine" format="color" />
+
+        <attr name="colorErrorLine" format="color" />
+
+        <attr name="colorInfoLine" format="color" />
+
+        <attr name="colorVerboseLine" format="color" />
+
+        <attr name="colorWarningLine" format="color" />
+    </declare-styleable>
+</resources>
