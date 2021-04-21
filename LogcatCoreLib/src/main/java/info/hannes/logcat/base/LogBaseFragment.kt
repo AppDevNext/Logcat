@@ -54,7 +54,6 @@ abstract class LogBaseFragment : Fragment() {
 
         setFilter2LogAdapter("")
 
-        activity!!.actionBar?.setDisplayHomeAsUpEnabled(true)
         if (savedInstanceState == null) {
             showLogContent()
         }
