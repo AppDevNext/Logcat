@@ -26,11 +26,11 @@ class LogcatFragment : LogBaseFragment() {
 
             process.inputStream.bufferedReader().use {
                 it.readLines().map { line ->
-                    val newLine = line.replace(" W/", " W: ")
-                            .replace(" E/", " E: ")
-                            .replace(" V/", " V: ")
-                            .replace(" I/", " I: ")
-                            .replace(" D/", " D: ")
+                    val newLine = line.replace(" W/", " $WARNING_LINE")
+                            .replace(" E/", " $ERROR_LINE")
+                            .replace(" V/", " $VERBOSE_LINE")
+                            .replace(" I/", " $INFO_LINE")
+                            .replace(" D/", " $DEBUG_LINE")
 
                     if (!logList.contains(newLine))
                         logList.add(newLine)
