@@ -96,19 +96,9 @@ abstract class LogBaseFragment : Fragment() {
 
         if (searchItem != null) {
             searchView = searchItem.actionView as SearchView
-            searchView?.queryHint = searchHint
         }
-        searchView?.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
 
         val searchAutoComplete = searchView?.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
-
-        if (currentFilter != "") {
-            searchAutoComplete?.setText(currentFilter)
-            searchView?.isIconified = false
-        } else {
-            searchAutoComplete?.setText("")
-            searchView?.isIconified = true
-        }
 
         val queryTextListener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
@@ -134,15 +124,18 @@ abstract class LogBaseFragment : Fragment() {
         })
 
         searchView?.let {
-            it.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
             it.setIconifiedByDefault(true)
             it.setMaxWidth(Int.MAX_VALUE)
             it.setOnQueryTextListener(queryTextListener)
+            it.setQueryHint(searchHint)
+            it.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
             if (currentFilter != "") {
-                if (searchAutoComplete != null && searchItem != null) {
-                    searchItem.expandActionView()
-                    searchAutoComplete.setText(currentFilter)
-                }
+                searchItem?.expandActionView()
+                searchAutoComplete?.setText(currentFilter)
+                it.isIconified = false
+            } else {
+                searchAutoComplete?.setText("")
+                it.isIconified = true
             }
         }
 
