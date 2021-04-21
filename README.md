@@ -2,7 +2,7 @@
 
 # Show Logcat in release buildtype and Timber log when it logs to a file
 
-This library provides an easy way to show Logcat in `release` ! and Timber history, which was written to file.
+This library provides an easy way to show Logcat in **release** ! and Timber history, which was written to file.
 Right Timber `FileLoggingTree.kt` is provided too  
 
 ![Screenshot](screenshot.png)
@@ -51,7 +51,7 @@ allprojects {
 
 ## License
 
-    Copyright (C) 2012-2020 AppDevNext
+    Copyright (C) 2012-2021 AppDevNext
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
