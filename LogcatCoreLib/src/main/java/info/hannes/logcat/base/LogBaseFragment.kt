@@ -9,7 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.StrictMode
 import android.view.*
-import android.widget.Switch
+import android.widget.CompoundButton
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -146,7 +146,7 @@ abstract class LogBaseFragment : Fragment() {
             }
         }
 
-        val switch = menu.findItem(R.id.menu_live).actionView as Switch
+        val switch = menu.findItem(R.id.menu_live).actionView as CompoundButton
         switch.setOnCheckedChangeListener { _, isChecked ->
             live = isChecked
             if (live)

@@ -16,7 +16,7 @@
         android:orderInCategory="100"
         android:title="@string/live"
         android:visible="false"
-        app:actionViewClass="android.widget.Switch"
+        app:actionViewClass="androidx.appcompat.widget.SwitchCompat"
         app:showAsAction="always" />
 
     <group
