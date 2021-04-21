@@ -19,17 +19,32 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@main
+        with:
+          configuration: ".github/changelog-configuration.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get the version
+        id: tagger
+        uses: jimschubert/query-tag-action@v2
+        with:
+          skip-unshallow: 'true'
+          abbrev: false
+          commit-ish: HEAD
       - name: Install Android SDK
         uses: malinskiy/action-android/install-sdk@release/0.1.1
       - name: Build project
         run: ./gradlew clean build
         env:
-          VERSION: ${{ github.ref }}
-      - run: |
-          assetsAAR=$(find . -name *release.aar | while read -r asset ; do echo "-a $asset" ; done)
-          VERSION=$(echo $VERSION | cut -d'/' -f3)
-          tag_name="${GITHUB_REF##*/}"
-          hub release create ${assetsAAR} -m "$tag_name" "$tag_name"
+          VERSION: ${{steps.tagger.outputs.tag}}
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          name: ${{steps.tagger.outputs.tag}}
+          body: ${{steps.github_release.outputs.changelog}}
+          files: touchview/build/outputs/aar/touchview-release.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ github.ref }}
