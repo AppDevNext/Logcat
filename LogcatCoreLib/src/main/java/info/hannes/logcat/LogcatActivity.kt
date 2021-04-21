@@ -1,6 +1,7 @@
 package info.hannes.logcat
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
@@ -9,6 +10,7 @@ class LogcatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Check that the activity is using the layout version with the fragment_container FrameLayout
         if (findViewById<View>(R.id.fragment_container) != null) {
@@ -32,6 +34,17 @@ class LogcatActivity : AppCompatActivity() {
                     .add(R.id.fragment_container, firstFragment).commit()
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                // Override home navigation button to call onBackPressed
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
