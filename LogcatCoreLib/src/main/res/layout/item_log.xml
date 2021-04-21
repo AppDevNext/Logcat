@@ -12,4 +12,4 @@
     android:paddingRight="16dp"
     android:textColor="?android:attr/textColorSecondary"
     android:textIsSelectable="true"
-    tools:text="log content" />
+    tools:text="@tools:sample/lorem/random" />
