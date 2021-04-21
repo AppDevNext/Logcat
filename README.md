@@ -46,7 +46,15 @@ allprojects {
         FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", BuildConfig.VERSION_NAME)
         Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
 
+### Using newest version of the lib in a Kotlin 1.3.xx project
 
+To avoid build failure due to higher version of kotlinx-coroutines-android (you are then responsible for loading the excluded required dependencies)
+
+        implementation('com.github.AppDevNext.Logcat:LogcatCore:2.6.0') {
+            exclude group: 'androidx.lifecycle'
+            exclude group: 'org.jetbrains.kotlin'
+            exclude group: 'org.jetbrains.kotlinx'
+        }
 
 
 ## License
