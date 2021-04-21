@@ -136,6 +136,7 @@ abstract class LogBaseFragment : Fragment() {
         searchView?.let {
             it.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
             it.setIconifiedByDefault(true)
+            it.setMaxWidth(Int.MAX_VALUE)
             it.setOnQueryTextListener(queryTextListener)
             if (currentFilter != "") {
                 if (searchAutoComplete != null && searchItem != null) {
