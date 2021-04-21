@@ -33,7 +33,7 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
             var include = false
             for (filter in filters)
                 if (filter.length == 3 && filter.takeLast(2) == ": ") { // eg 'E: '
-                    if (!include && line.contains(filter, false))
+                    if (!include && (line.contains(" $filter", false) || line.startsWith(filter, false)))
                         include = true
                 } else {
                     if (!include && line.contains(filter, true))
