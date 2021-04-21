@@ -1,7 +1,16 @@
 <resources>
 
     <style name="DetailTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="colorAssertLine">#ff0000</item>
+        <item name="colorDebugLine">?android:attr/textColorSecondary</item>
+        <item name="colorErrorLine">#ff0000</item>
+        <item name="colorInfoLine">?android:attr/textColorPrimary</item>
+        <item name="colorVerboseLine">#888888</item>
+        <item name="colorWarningLine">#ff00ff</item>
     </style>
 
 </resources>

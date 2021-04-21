@@ -2,7 +2,7 @@ package info.hannes.logcat.base
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.TypedArray
+import android.content.res.Resources
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -87,32 +87,54 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
      * @param position
      */
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
-        holder.logContent.text = filterLogs[position].also {
-            if (it.contains(" ${LogBaseFragment.ERROR_LINE}") || it.startsWith(LogBaseFragment.ERROR_LINE)) {
-                holder.logContent.setTextColor(Color.RED)
-            } else if (it.contains(" ${LogBaseFragment.ASSERT_LINE}") || it.startsWith(LogBaseFragment.ASSERT_LINE)) {
-                holder.logContent.setTextColor(Color.RED)
-            } else if (it.contains(" ${LogBaseFragment.INFO_LINE}") || it.startsWith(LogBaseFragment.INFO_LINE)) {
-                holder.logContent.setTextColor(Color.BLACK)
-            } else if (it.contains(" ${LogBaseFragment.WARNING_LINE}") || it.startsWith(LogBaseFragment.WARNING_LINE)) {
-                holder.logContent.setTextColor(Color.MAGENTA)
-            } else if (it.contains(" ${LogBaseFragment.VERBOSE_LINE}") || it.startsWith(LogBaseFragment.VERBOSE_LINE)) {
-                holder.logContent.setTextColor(Color.GRAY)
-            } else {
-                holder.logContent.setTextColor(getColorAttr(holder.logContent.context, android.R.attr.textColorSecondary))
-            }
+        val text = filterLogs[position]
+        holder.logContent.let {
+            it.text = text
+
+            when {
+                text.contains(" ${LogBaseFragment.ERROR_LINE}") || text.startsWith(LogBaseFragment.ERROR_LINE) -> {
+                    getAttrColorStateList(it.context, R.attr.colorErrorLine) ?: ColorStateList.valueOf(Color.RED)
+                }
+                text.contains(" ${LogBaseFragment.ASSERT_LINE}") || text.startsWith(LogBaseFragment.ASSERT_LINE) -> {
+                    getAttrColorStateList(it.context, R.attr.colorAssertLine) ?: ColorStateList.valueOf(Color.RED)
+                }
+                text.contains(" ${LogBaseFragment.INFO_LINE}") || text.startsWith(LogBaseFragment.INFO_LINE) -> {
+                    getAttrColorStateList(it.context, R.attr.colorInfoLine) ?: getAttrColorStateList(it.context, android.R.attr.textColorPrimary)
+                }
+                text.contains(" ${LogBaseFragment.WARNING_LINE}") || text.startsWith(LogBaseFragment.WARNING_LINE) -> {
+                    getAttrColorStateList(it.context, R.attr.colorWarningLine) ?: ColorStateList.valueOf(Color.MAGENTA)
+                }
+                text.contains(" ${LogBaseFragment.VERBOSE_LINE}") || text.startsWith(LogBaseFragment.VERBOSE_LINE) -> {
+                    getAttrColorStateList(it.context, R.attr.colorVerboseLine) ?: ColorStateList.valueOf(Color.GRAY)
+                }
+                else -> {
+                    getAttrColorStateList(it.context, R.attr.colorDebugLine) ?: getAttrColorStateList(it.context, android.R.attr.textColorSecondary)
+                }
+            }?.let { colors: ColorStateList -> it.setTextColor(colors) }
         }
     }
 
     override fun getItemCount(): Int = filterLogs.size
 
     companion object {
-        fun getColorAttr(context: Context, attr: Int): ColorStateList? {
-            val ta: TypedArray = context.obtainStyledAttributes(intArrayOf(attr))
-            return try {
-                ta.getColorStateList(0)
-            } finally {
+
+        /**
+         * Retrieve the ColorStateList for the given attribute. The value may be either a single solid
+         * color or a reference to a color or complex [android.content.res.ColorStateList]
+         * description.
+         *
+         * @param context
+         * @param attr
+         * @return
+         */
+        fun getAttrColorStateList(context: Context, attr: Int): ColorStateList? {
+            try {
+                val ta = context.obtainStyledAttributes(intArrayOf(attr))
+                val colorStateList = ta.getColorStateList(0)
                 ta.recycle()
+                return colorStateList
+            } catch (e: Resources.NotFoundException) {
+                return null
             }
         }
     }
