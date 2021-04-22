@@ -45,6 +45,9 @@ jobs:
           tag_name: ${{ github.ref }}
           name: ${{steps.tagger.outputs.tag}}
           body: ${{steps.github_release.outputs.changelog}}
-          files: touchview/build/outputs/aar/touchview-release.aar
+          files: |
+            LogcatCrashlyticLib/build/outputs/aar/LogcatCrashlytic-release.aar
+            LogcatCountlyLib/build/outputs/aar/LogcatCountly-release.aar
+            LogcatCoreLib/build/outputs/aar/LogcatCore-release.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
