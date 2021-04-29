@@ -5,7 +5,9 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import info.hannes.logcat.Event
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
@@ -53,9 +55,9 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
             writer.close()
 
             if (Thread.currentThread().name == "main")
-                lastLogEntry.value = textLine
+                _lastLogEntry.value = Event(textLine)
             else
-                Handler(Looper.getMainLooper()).post { lastLogEntry.value = textLine }
+                Handler(Looper.getMainLooper()).post { _lastLogEntry.value = Event(textLine) }
 
         } catch (e: Exception) {
             // Log to prevent an endless loop
@@ -75,6 +77,8 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private var logImpossible = false
-        val lastLogEntry: MutableLiveData<String> = MutableLiveData<String>()
+        private val _lastLogEntry = MutableLiveData<Event<String>>()
+        val lastLogEntry: LiveData<Event<String>>
+            get() = _lastLogEntry
     }
 }

@@ -10,7 +10,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.uiautomator.UiDevice
 import info.hannes.logcat.utils.RecyclerViewItemDuplicateAssertion
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,7 +27,6 @@ class ResumeTest {
             Manifest.permission.READ_EXTERNAL_STORAGE)
 
     @Test
-    @Ignore("Currently we have duplicate lines after resume from tasklist")
     fun checkForDuplicateAfterRressRecentApps() {
         // Might be a good idea to initialize it somewhere else
         val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

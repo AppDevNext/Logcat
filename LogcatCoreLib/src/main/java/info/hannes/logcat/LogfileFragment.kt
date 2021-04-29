@@ -10,7 +10,7 @@ import info.hannes.timber.FileLoggingTree
 import info.hannes.timber.fileLoggingTree
 import java.io.File
 
-class LogfileFragment : LogBaseFragment(), Observer<String> {
+class LogfileFragment : LogBaseFragment(), Observer<Event<String>> {
 
     private var sourceFileName: String? = null
 
@@ -43,8 +43,8 @@ class LogfileFragment : LogBaseFragment(), Observer<String> {
         }
     }
 
-    override fun onChanged(line: String?) {
-        line?.let {
+    override fun onChanged(line: Event<String>?) {
+        line?.getContentIfNotHandled()?.let {
             logListAdapter?.addLine(it)
         }
     }
