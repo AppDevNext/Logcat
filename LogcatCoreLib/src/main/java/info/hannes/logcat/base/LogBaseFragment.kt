@@ -22,7 +22,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.util.*
 
 abstract class LogBaseFragment : Fragment() {
 
@@ -244,7 +243,7 @@ abstract class LogBaseFragment : Fragment() {
         }
     }
 
-    abstract fun readLogFile(): ArrayList<String>
+    abstract fun readLogFile(): MutableList<String>
 
     companion object {
 

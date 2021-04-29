@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import info.hannes.logcat.base.LogBaseFragment
 import java.io.IOException
-import java.util.*
 
 class LogcatFragment : LogBaseFragment() {
 
-    private val logList = ArrayList<String>()
+    private val logList = mutableListOf<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         showLive = true
@@ -20,7 +19,7 @@ class LogcatFragment : LogBaseFragment() {
     }
 
     @SuppressLint("LogNotTimber")
-    override fun readLogFile(): ArrayList<String> {
+    override fun readLogFile(): MutableList<String> {
         try {
             val process = Runtime.getRuntime().exec("logcat -dv time")
 

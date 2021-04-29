@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import java.util.*
 
 class TabsAdapter(activity: FragmentActivity, private val tabHost: TabHost, private val viewPager: ViewPager) :
         FragmentPagerAdapter(activity.supportFragmentManager),
@@ -16,7 +15,7 @@ class TabsAdapter(activity: FragmentActivity, private val tabHost: TabHost, priv
         ViewPager.OnPageChangeListener {
 
     private val context: Context
-    private val fragments = ArrayList<Fragment>()
+    private val fragments = mutableListOf<Fragment>()
 
     private class DummyTabFactory internal constructor(private val contextView: Context) : TabHost.TabContentFactory {
 
