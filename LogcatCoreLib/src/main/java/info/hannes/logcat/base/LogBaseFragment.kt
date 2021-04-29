@@ -12,6 +12,7 @@ import android.view.*
 import android.widget.CompoundButton
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.FileProvider
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,6 +51,11 @@ abstract class LogBaseFragment : Fragment() {
             it.layoutManager = LinearLayoutManager(it.context)
             it.recycledViewPool.setMaxRecycledViews(R.layout.item_log, DEFAULT_MAX_SCRAP)
         }
+
+        logsRecycler?.doOnLayout {
+            it.minimumWidth = (it.parent as ViewGroup).width
+        }
+
         // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
         logListAdapter = LogListAdapter(mutableListOf(), currentFilter).also {
             it.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
