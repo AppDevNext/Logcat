@@ -127,15 +127,13 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
          * @param attr
          * @return
          */
-        fun getAttrColorStateList(context: Context, attr: Int): ColorStateList? {
-            try {
-                val ta = context.obtainStyledAttributes(intArrayOf(attr))
-                val colorStateList = ta.getColorStateList(0)
-                ta.recycle()
-                return colorStateList
-            } catch (e: Resources.NotFoundException) {
-                return null
-            }
+        fun getAttrColorStateList(context: Context, attr: Int): ColorStateList? = try {
+            val ta = context.obtainStyledAttributes(intArrayOf(attr))
+            val colorStateList = ta.getColorStateList(0)
+            ta.recycle()
+            colorStateList
+        } catch (e: Resources.NotFoundException) {
+            null
         }
     }
 

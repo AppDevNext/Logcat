@@ -47,7 +47,7 @@ class TabsAdapter(activity: FragmentActivity, private val tabHost: TabHost, priv
     }
 
     override fun getItem(position: Int): Fragment {
-        return fragments.get(position)
+        return fragments[position]
     }
 
     override fun onTabChanged(tabId: String) {
