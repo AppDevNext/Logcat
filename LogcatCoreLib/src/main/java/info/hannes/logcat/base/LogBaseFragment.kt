@@ -55,9 +55,7 @@ abstract class LogBaseFragment : Fragment() {
 
         setFilter2LogAdapter("")
 
-        if (savedInstanceState == null) {
-            showLogContent()
-        }
+        showLogContent()
 
         setHasOptionsMenu(true)
 
