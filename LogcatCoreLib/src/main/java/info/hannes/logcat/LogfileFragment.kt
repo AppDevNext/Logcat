@@ -16,17 +16,9 @@ class LogfileFragment : LogBaseFragment(), Observer<String> {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         sourceFileName = fileLoggingTree()?.getFileName()
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        FileLoggingTree.lastLogEntry.observeForever(this)
-    }
-
-    override fun onStop() {
-        FileLoggingTree.lastLogEntry.removeObserver(this)
-        super.onStop()
+        val view = super.onCreateView(inflater, container, savedInstanceState)
+        FileLoggingTree.lastLogEntry.observe(viewLifecycleOwner, this)
+        return view
     }
 
     override fun readLogFile(): MutableList<String> {
