@@ -48,6 +48,7 @@ abstract class LogBaseFragment : Fragment() {
 
         logsRecycler = view.findViewById<RecyclerView>(R.id.log_recycler).also {
             it.layoutManager = LinearLayoutManager(it.context)
+            it.recycledViewPool.setMaxRecycledViews(R.layout.item_log, DEFAULT_MAX_SCRAP)
         }
         // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
         logListAdapter = LogListAdapter(mutableListOf(), currentFilter)
@@ -243,6 +244,8 @@ abstract class LogBaseFragment : Fragment() {
     abstract fun readLogFile(): MutableList<String>
 
     companion object {
+
+        private const val DEFAULT_MAX_SCRAP = 5 * 10
 
         private const val MAIL_ATTACHMENT_TYPE = "text/plain"
 

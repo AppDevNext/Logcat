@@ -108,6 +108,10 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
         }
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return R.layout.item_log
+    }
+
     override fun getItemCount(): Int = filterLogs.size
 
     /**
