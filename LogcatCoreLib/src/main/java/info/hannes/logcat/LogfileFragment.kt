@@ -9,7 +9,6 @@ import info.hannes.logcat.base.LogBaseFragment
 import info.hannes.timber.FileLoggingTree
 import info.hannes.timber.fileLoggingTree
 import java.io.File
-import java.util.*
 
 class LogfileFragment : LogBaseFragment(), Observer<String> {
 
@@ -30,11 +29,11 @@ class LogfileFragment : LogBaseFragment(), Observer<String> {
         super.onStop()
     }
 
-    override fun readLogFile(): ArrayList<String> {
-        var array: ArrayList<String> = arrayListOf()
+    override fun readLogFile(): MutableList<String> {
+        var array = mutableListOf<String>()
         try {
             sourceFileName?.let {
-                array = File(it).useLines { ArrayList(it.toList()) }
+                array = File(it).useLines { it.toMutableList() }
             }
         } catch (e: Exception) {
         }

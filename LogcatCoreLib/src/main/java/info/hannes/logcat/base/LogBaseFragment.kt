@@ -22,7 +22,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.util.*
 
 abstract class LogBaseFragment : Fragment() {
 
@@ -214,7 +213,7 @@ abstract class LogBaseFragment : Fragment() {
     }
 
     private fun sendLogContent(filterLogs: List<String>, filename: String) {
-        val logToSend = File(this@LogBaseFragment.activity?.externalCacheDir, filename)
+        val logToSend = File(requireActivity().externalCacheDir, filename)
         logToSend.writeText(filterLogs.joinToString("\n"))
 
         val intent = Intent(Intent.ACTION_SEND)
@@ -236,7 +235,7 @@ abstract class LogBaseFragment : Fragment() {
             startActivity(Intent.createChooser(intent, "$filename ..."))
         } catch (e: ActivityNotFoundException) {
             val snackBar = Snackbar.make(
-                    this@LogBaseFragment.requireActivity().findViewById(android.R.id.content),
+                    requireActivity().findViewById(android.R.id.content),
                     R.string.log_send_no_app,
                     Snackbar.LENGTH_LONG
             )
@@ -244,7 +243,7 @@ abstract class LogBaseFragment : Fragment() {
         }
     }
 
-    abstract fun readLogFile(): ArrayList<String>
+    abstract fun readLogFile(): MutableList<String>
 
     companion object {
 
