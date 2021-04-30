@@ -46,9 +46,10 @@ abstract class LogBaseFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_log, container, false)
 
-        val layoutManager = LinearLayoutManager(context)
-        logsRecycler = view.findViewById(R.id.log_recycler)
-        logsRecycler.layoutManager = layoutManager
+        logsRecycler = view.findViewById<RecyclerView>(R.id.log_recycler).apply {
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
         // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
         logListAdapter = LogListAdapter(mutableListOf(), currentFilter)
         logsRecycler.adapter = logListAdapter
