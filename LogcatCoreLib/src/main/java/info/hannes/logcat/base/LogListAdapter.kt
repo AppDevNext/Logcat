@@ -31,7 +31,7 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
         currentFilter = filters
         filterLogs = Collections.synchronizedList(completeLogs).filter { line ->
             var include = false
-            for (filter in filters)
+            for (filter in filters) {
                 if (filter.length == 3 && filter.takeLast(2) == ": ") { // eg 'E: '
                     if (!include && (line.contains(" $filter", false) || line.startsWith(filter, false)))
                         include = true
@@ -39,6 +39,7 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
                     if (!include && line.contains(filter, true))
                         include = true
                 }
+            }
             include
         }
         notifyDataSetChanged()
@@ -51,21 +52,14 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
         filterLogs = completeLogs.filter { line ->
             var include = false
             currentFilter?.let {
-                for (filter in it)
+                for (filter in it) {
                     if (!include && line.contains(filter))
                         include = true
+                }
             }
             include
         }
         notifyDataSetChanged()
-    }
-
-    /**
-     * Define the view for each log in the list
-     */
-    class LogViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        val logContent: TextView = view.findViewById(R.id.logLine)
     }
 
     /**
@@ -116,6 +110,14 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
 
     override fun getItemCount(): Int = filterLogs.size
 
+    /**
+     * Define the view for each log in the list
+     */
+    class LogViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        val logContent: TextView = view.findViewById(R.id.logLine)
+    }
+
     companion object {
 
         /**
@@ -136,5 +138,4 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
             null
         }
     }
-
 }

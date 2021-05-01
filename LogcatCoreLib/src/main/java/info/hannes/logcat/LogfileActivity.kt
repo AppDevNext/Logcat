@@ -33,8 +33,7 @@ class LogfileActivity : AppCompatActivity() {
             // firstFragment.arguments = intent.extras
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit()
+            supportFragmentManager.beginTransaction().add(R.id.fragment_container, firstFragment).commit()
         }
 
     }
@@ -49,5 +48,4 @@ class LogfileActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

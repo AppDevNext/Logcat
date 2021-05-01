@@ -51,7 +51,14 @@ class LogfileFragment : LogBaseFragment(), Observer<String> {
         }
     }
 
+    override fun onChanged(line: String?) {
+        line?.let {
+            logListAdapter?.addLine(it)
+        }
+    }
+
     companion object {
+
         fun newInstance(targetFileName: String, searchHint: String, logMail: String = ""): LogfileFragment {
             val fragment = LogfileFragment()
             val args = Bundle()
@@ -60,12 +67,6 @@ class LogfileFragment : LogBaseFragment(), Observer<String> {
             args.putString(MAIL_LOGGER, logMail)
             fragment.arguments = args
             return fragment
-        }
-    }
-
-    override fun onChanged(line: String?) {
-        line?.let {
-            logListAdapter?.addLine(it)
         }
     }
 }

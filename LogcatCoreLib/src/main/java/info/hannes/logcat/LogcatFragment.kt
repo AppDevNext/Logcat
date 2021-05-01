@@ -35,7 +35,6 @@ class LogcatFragment : LogBaseFragment() {
                         logList.add(newLine)
                 }
             }
-
         } catch (e: IOException) {
             Log.e("LoadingLogcatTask", e.message!!)
         }
@@ -49,6 +48,7 @@ class LogcatFragment : LogBaseFragment() {
     }
 
     companion object {
+
         fun newInstance(targetFileName: String, searchHint: String, logMail: String = ""): LogcatFragment {
             val fragment = LogcatFragment()
             val args = Bundle()
@@ -58,6 +58,5 @@ class LogcatFragment : LogBaseFragment() {
             fragment.arguments = args
             return fragment
         }
-
     }
 }
