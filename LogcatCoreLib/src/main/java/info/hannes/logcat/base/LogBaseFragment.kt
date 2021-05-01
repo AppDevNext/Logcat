@@ -259,5 +259,4 @@ abstract class LogBaseFragment : Fragment() {
         const val ERROR_LINE = "E: "
         const val ASSERT_LINE = "A: "
     }
-
 }

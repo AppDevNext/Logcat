@@ -17,7 +17,7 @@ class TabsAdapter(activity: FragmentActivity, private val tabHost: TabHost, priv
     private val context: Context
     private val fragments = mutableListOf<Fragment>()
 
-    private class DummyTabFactory internal constructor(private val contextView: Context) : TabHost.TabContentFactory {
+    private class DummyTabFactory(private val contextView: Context) : TabHost.TabContentFactory {
 
         override fun createTabContent(tag: String): View {
             val view = View(contextView)
@@ -71,5 +71,4 @@ class TabsAdapter(activity: FragmentActivity, private val tabHost: TabHost, priv
     }
 
     override fun onPageScrollStateChanged(state: Int) = Unit
-
 }

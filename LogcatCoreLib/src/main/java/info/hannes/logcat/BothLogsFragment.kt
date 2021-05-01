@@ -56,7 +56,6 @@ class BothLogsFragment : Fragment() {
                 mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"))
             } catch (ignored: Exception) {
             }
-
         }
         return view
     }
@@ -77,7 +76,5 @@ class BothLogsFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
-
     }
-
 }

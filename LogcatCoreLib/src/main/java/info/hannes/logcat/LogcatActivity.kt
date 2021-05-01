@@ -30,10 +30,8 @@ class LogcatActivity : AppCompatActivity() {
             // firstFragment.arguments = intent.extras
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit()
+            supportFragmentManager.beginTransaction().add(R.id.fragment_container, firstFragment).commit()
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -46,5 +44,4 @@ class LogcatActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

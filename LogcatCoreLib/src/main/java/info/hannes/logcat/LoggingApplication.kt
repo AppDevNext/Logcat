@@ -16,5 +16,4 @@ open class LoggingApplication : Application() {
         LoggingTools.globalErrorCatcher()
         Timber.plant(DebugTree())
     }
-
 }
