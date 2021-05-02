@@ -32,8 +32,8 @@ class ToFileTest {
                 withParent(withId(R.id.action_bar)),
                 isDisplayed()))
 
-        val menu = onView(withId(R.id.log_recycler))
-        menu.check(ViewAssertions.matches(isDisplayed()))
+        val recycler = onView(withId(R.id.log_recycler))
+        recycler.check(ViewAssertions.matches(isDisplayed()))
         Screenshot.takeScreenshot("End")
     }
 
