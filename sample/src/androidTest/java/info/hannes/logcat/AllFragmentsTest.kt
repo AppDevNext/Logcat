@@ -7,7 +7,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
-import androidx.test.filters.Suppress
 import androidx.test.rule.GrantPermissionRule
 import com.moka.utils.Screenshot
 import org.hamcrest.Matchers.allOf
@@ -28,7 +27,6 @@ class AllFragmentsTest {
             Manifest.permission.READ_EXTERNAL_STORAGE)
 
     @Test
-    @Suppress
     fun basicTest() {
         onView(allOf(withContentDescription("All log"),
                 withParent(withId(R.id.action_bar)),
