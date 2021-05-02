@@ -10,23 +10,15 @@ import info.hannes.timber.FileLoggingTree
 import info.hannes.timber.fileLoggingTree
 import java.io.File
 
-class LogfileFragment : LogBaseFragment(), Observer<String> {
+class LogfileFragment : LogBaseFragment(), Observer<Event<String>> {
 
     private var sourceFileName: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         sourceFileName = fileLoggingTree()?.getFileName()
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        FileLoggingTree.lastLogEntry.observeForever(this)
-    }
-
-    override fun onStop() {
-        FileLoggingTree.lastLogEntry.removeObserver(this)
-        super.onStop()
+        val view = super.onCreateView(inflater, container, savedInstanceState)
+        FileLoggingTree.lastLogEntry.observe(viewLifecycleOwner, this)
+        return view
     }
 
     override fun readLogFile(): MutableList<String> {
@@ -51,8 +43,8 @@ class LogfileFragment : LogBaseFragment(), Observer<String> {
         }
     }
 
-    override fun onChanged(line: String?) {
-        line?.let {
+    override fun onChanged(line: Event<String>?) {
+        line?.getContentIfNotHandled()?.let {
             logListAdapter?.addLine(it)
         }
     }
