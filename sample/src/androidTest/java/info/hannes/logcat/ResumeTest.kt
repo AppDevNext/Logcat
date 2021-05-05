@@ -29,7 +29,7 @@ class ResumeTest {
             Manifest.permission.READ_EXTERNAL_STORAGE)
 
     @Test
-    fun checkForDuplicateAfterRressRecentApps() {
+    fun checkForDuplicateAfterPressRecentApps() {
         // Might be a good idea to initialize it somewhere else
         val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         uiDevice.pressRecentApps()
