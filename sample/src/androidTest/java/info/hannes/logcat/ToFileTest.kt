@@ -38,6 +38,9 @@ class ToFileTest {
         recycler.check(ViewAssertions.matches(isDisplayed()))
 
         recycler.check(RecyclerViewItemCountAssertion(2, MatchOperator.GRATER_EQUAL))
+
+        // Screenshot is too fast. It generates black screens
+        Thread.sleep(300)
         Screenshot.takeScreenshot("End")
     }
 
