@@ -9,6 +9,8 @@ import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.uiautomator.UiDevice
+import info.hannes.logcat.utils.MatchOperator
+import info.hannes.logcat.utils.RecyclerViewItemCountAssertion
 import info.hannes.logcat.utils.RecyclerViewItemDuplicateAssertion
 import org.junit.Rule
 import org.junit.Test
@@ -37,6 +39,8 @@ class ResumeTest {
 
         val recycler = Espresso.onView(ViewMatchers.withId(R.id.log_recycler))
         recycler.check(RecyclerViewItemDuplicateAssertion())
+
+        recycler.check(RecyclerViewItemCountAssertion(2, MatchOperator.GRATER_EQUAL))
     }
 
     companion object {
