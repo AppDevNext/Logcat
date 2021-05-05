@@ -9,6 +9,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.rule.GrantPermissionRule
 import com.moka.utils.Screenshot
+import info.hannes.logcat.utils.MatchOperator
+import info.hannes.logcat.utils.RecyclerViewItemCountAssertion
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -34,6 +36,8 @@ class ToFileTest {
 
         val recycler = onView(withId(R.id.log_recycler))
         recycler.check(ViewAssertions.matches(isDisplayed()))
+
+        recycler.check(RecyclerViewItemCountAssertion(2, MatchOperator.GRATER_EQUAL))
         Screenshot.takeScreenshot("End")
     }
 
