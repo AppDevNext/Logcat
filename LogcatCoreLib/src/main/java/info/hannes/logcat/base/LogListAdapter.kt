@@ -49,11 +49,12 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
         completeLogs.add(completeLogs.size, line)
 
         currentFilter.let {
-            for (filter in it)
+            for (filter in it) {
                 if (line.contains(filter)) {
                     filterLogs.add(filterLogs.size, line)
                     notifyItemInserted(filterLogs.size - 1)
                 }
+            }
         }
     }
 
