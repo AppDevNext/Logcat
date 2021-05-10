@@ -14,8 +14,8 @@ import java.util.*
 
 class LogListAdapter(private var completeLogs: MutableList<String>, filter: String) : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
 
-    private var currentFilter: Array<out String>? = null
-    var filterLogs: List<String> = ArrayList()
+    private lateinit var currentFilter: Array<out String>
+    var filterLogs = mutableListOf<String>()
 
     init {
         setFilter(filter)
@@ -23,7 +23,7 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
 
     fun setItems(newItems: MutableList<String>) {
         completeLogs = newItems
-        setFilter(*currentFilter!!)
+        setFilter(*currentFilter)
         notifyDataSetChanged()
     }
 
@@ -41,25 +41,20 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
                 }
             }
             include
-        }
+        }.toMutableList()
         notifyDataSetChanged()
     }
 
-    fun addLine(addLine: String) {
+    fun addLine(line: String) {
+        completeLogs.add(completeLogs.size, line)
 
-        completeLogs.add(completeLogs.size, addLine)
-
-        filterLogs = completeLogs.filter { line ->
-            var include = false
-            currentFilter?.let {
-                for (filter in it) {
-                    if (!include && line.contains(filter))
-                        include = true
+        currentFilter.let {
+            for (filter in it)
+                if (line.contains(filter)) {
+                    filterLogs.add(filterLogs.size, line)
+                    notifyItemInserted(filterLogs.size - 1)
                 }
-            }
-            include
         }
-        notifyDataSetChanged()
     }
 
     /**
