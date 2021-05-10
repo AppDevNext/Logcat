@@ -77,7 +77,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
         private var logImpossible = false
-        private val _lastLogEntry = MutableLiveData<Event<String>>()
+        protected val _lastLogEntry = MutableLiveData<Event<String>>()
         val lastLogEntry: LiveData<Event<String>>
             get() = _lastLogEntry
     }
