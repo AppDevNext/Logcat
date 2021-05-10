@@ -32,8 +32,9 @@ class LogcatTest {
     @Test
     fun basicLogcatTest() {
         onView(allOf(withContentDescription("Logcat"), withParent(withId(R.id.action_bar)), isDisplayed()))
-
+        Screenshot.takeScreenshot("Step1")
         WaitingAssertion.checkAssertion(R.id.log_recycler, isDisplayed(), 1500)
+        Screenshot.takeScreenshot("Step2")
         onView(withId(R.id.log_recycler)).check(RecyclerViewItemCountAssertion(15, MatchOperator.GRATER_EQUAL))
         Screenshot.takeScreenshot("End")
     }
