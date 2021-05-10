@@ -51,12 +51,15 @@ abstract class LogBaseFragment : Fragment() {
             it.recycledViewPool.setMaxRecycledViews(R.layout.item_log, DEFAULT_MAX_SCRAP)
         }
         // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
-        logListAdapter = LogListAdapter(mutableListOf(), currentFilter)
+        logListAdapter = LogListAdapter(mutableListOf(), currentFilter).also {
+            it.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
+
         logsRecycler.adapter = logListAdapter
 
         setFilter2LogAdapter("")
 
-        showLogContent()
+        showLogContent(savedInstanceState)
 
         setHasOptionsMenu(true)
 
@@ -71,16 +74,19 @@ abstract class LogBaseFragment : Fragment() {
         return view
     }
 
-    private fun showLogContent() {
+    private fun showLogContent(savedInstanceState: Bundle?) {
         lifecycle.coroutineScope.launch(Dispatchers.Main) {
             val logEntries = withContext(Dispatchers.Default) {
                 readLogFile()
             }
             logListAdapter?.setItems(logEntries)
-            logListAdapter?.itemCount?.minus(1)?.let { logsRecycler.scrollToPosition(it) }
+
+            if (savedInstanceState == null) {
+                logListAdapter?.itemCount?.minus(1)?.let { logsRecycler.scrollToPosition(it) }
+            }
 
             if (live) {
-                Handler(Looper.getMainLooper()).postDelayed({ showLogContent() }, 1000)
+                Handler(Looper.getMainLooper()).postDelayed({ showLogContent(null) }, 1000)
             }
         }
     }
@@ -140,7 +146,7 @@ abstract class LogBaseFragment : Fragment() {
         switch.setOnCheckedChangeListener { _, isChecked ->
             live = isChecked
             if (live)
-                showLogContent()
+                showLogContent(null)
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -169,7 +175,7 @@ abstract class LogBaseFragment : Fragment() {
             }
             R.id.menu_clear -> {
                 clearLog()
-                showLogContent()
+                showLogContent(null)
             }
             R.id.menu_show_verbose -> {
                 item.isChecked = true
