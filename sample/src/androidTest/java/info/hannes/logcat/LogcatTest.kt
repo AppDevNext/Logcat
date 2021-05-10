@@ -30,7 +30,7 @@ class LogcatTest {
     )
 
     @Test
-    fun basicTest() {
+    fun basicLogcatTest() {
         onView(allOf(withContentDescription("Logcat"), withParent(withId(R.id.action_bar)), isDisplayed()))
 
         WaitingAssertion.checkAssertion(R.id.log_recycler, isDisplayed(), 1500)
