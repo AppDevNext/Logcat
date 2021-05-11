@@ -9,8 +9,6 @@ import androidx.test.filters.SdkSuppress
 import androidx.test.rule.GrantPermissionRule
 import com.moka.lib.assertions.WaitingAssertion
 import com.moka.utils.Screenshot
-import info.hannes.logcat.utils.MatchOperator
-import info.hannes.logcat.utils.RecyclerViewItemCountAssertion
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +33,8 @@ class LogcatTest {
 
         WaitingAssertion.checkAssertion(R.id.log_recycler, isDisplayed(), 1500)
         Screenshot.takeScreenshot("Step1")
-        onView(withId(R.id.log_recycler)).check(RecyclerViewItemCountAssertion(15, MatchOperator.GRATER_EQUAL))
+        // TODO Moka 0.8 comes with assertRecyclerAdapterItemsCount()
+        WaitingAssertion.assertAdapterMinimumItemsCount(R.id.log_recycler, 15, 1500)
         Screenshot.takeScreenshot("End")
     }
 
