@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import info.hannes.logcat.base.LogBaseFragment
-import info.hannes.timber.FileLoggingTree
 import info.hannes.timber.fileLoggingTree
 import java.io.File
 
@@ -16,7 +15,7 @@ class LogfileFragment : LogBaseFragment(), Observer<Event<String>> {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        FileLoggingTree.lastLogEntry.observe(viewLifecycleOwner, this)
+        fileLoggingTree()?.lastLogEntry?.observe(viewLifecycleOwner, this)
         return view
     }
 
