@@ -34,7 +34,7 @@ class LogcatTest {
 
         WaitingAssertion.checkAssertion(R.id.log_recycler, isDisplayed(), 1500)
         Screenshot.takeScreenshot("Step1")
-        WaitingAssertion.assertRecyclerAdapterItemsCount(R.id.log_recycler, 15, MatchOperator.GRATER, 1500)
+        WaitingAssertion.assertRecyclerAdapterItemsCount(R.id.log_recycler, 15, MatchOperator.GREATER, 1500)
         Screenshot.takeScreenshot("End")
     }
 
