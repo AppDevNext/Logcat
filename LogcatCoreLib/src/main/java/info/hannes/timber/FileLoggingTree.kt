@@ -20,6 +20,13 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     var file: File
         private set
 
+    val lastLogEntry: LiveData<Event<String>>
+        get() = _lastLogEntry
+
+    protected val _lastLogEntry = MutableLiveData<Event<String>>()
+
+    private var logImpossible = false
+
     init {
         if (!externalCacheDir.exists()) {
             if (!externalCacheDir.mkdirs())
@@ -76,9 +83,5 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     companion object {
 
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
-        private var logImpossible = false
-        protected val _lastLogEntry = MutableLiveData<Event<String>>()
-        val lastLogEntry: LiveData<Event<String>>
-            get() = _lastLogEntry
     }
 }
