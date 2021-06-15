@@ -21,8 +21,8 @@ open class DebugTree : Timber.DebugTree() {
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         var localMessage = message.trim()
         if (localMessage.startsWith("{") && localMessage.endsWith("}")) {
-            val json = JSONObject(message)
             try {
+                val json = JSONObject(message)
                 localMessage = json.toString(3)
             } catch (e: JSONException) {
             }
