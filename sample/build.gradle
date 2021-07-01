@@ -40,7 +40,7 @@ dependencies {
 
     androidTestImplementation 'com.github.AppDevNext:Moka:1.0'
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
-    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
     androidTestImplementation "androidx.test:runner:$runnerVersion"
     androidTestImplementation "androidx.test:core:$coreVersion"
 
