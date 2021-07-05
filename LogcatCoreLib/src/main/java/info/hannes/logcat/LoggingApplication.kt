@@ -12,7 +12,7 @@ open class LoggingApplication : Application() {
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
-    protected fun setupLogging() {
+    protected open fun setupLogging() {
         LoggingTools.globalErrorCatcher()
         Timber.plant(DebugTree())
     }
