@@ -3,7 +3,7 @@ package info.hannes.logcat
 import info.hannes.timber.FileLoggingTree
 import timber.log.Timber
 
-class FileLoggingApplication : LoggingApplication() {
+open class FileLoggingApplication : LoggingApplication() {
 
     override fun setupLogging() {
         super.setupLogging()
