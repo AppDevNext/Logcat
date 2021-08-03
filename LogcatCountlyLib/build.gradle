@@ -21,7 +21,7 @@ dependencies {
     api project(':LogcatCoreLib')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    api "ly.count.android:sdk:20.11.8"
+    api "ly.count.android:sdk:20.11.9"
 }
 
 project.afterEvaluate {
