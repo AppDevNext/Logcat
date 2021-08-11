@@ -28,6 +28,16 @@ allprojects {
     }
 }
 ```
+In `AndroidManifest.xml`
+```
+    <application
+        android:name="info.hannes.logcat.LoggingApplication"
+```
+or for file logging
+```
+    <application
+        android:name="info.hannes.logcat.FileLoggingApplication"
+```
 
 ## Crashlytic integration
 
