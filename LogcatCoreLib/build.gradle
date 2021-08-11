@@ -26,7 +26,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     api 'com.google.android.material:material:1.4.0'
-    api 'com.jakewharton.timber:timber:4.7.1'
+    api 'com.jakewharton.timber:timber:5.0.0'
 }
 
 project.afterEvaluate {
