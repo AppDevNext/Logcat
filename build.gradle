@@ -45,7 +45,7 @@ allprojects {
 }
 
 ext {
-    propCompileSdkVersion = 30
+    propCompileSdkVersion = 31
     coreVersion = "1.4.0"
     runnerVersion = "1.4.0"
     extJUnitVersion = "1.1.3"
