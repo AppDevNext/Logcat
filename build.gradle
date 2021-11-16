@@ -37,8 +37,8 @@ allprojects {
     gradle.projectsEvaluated {
         tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
             kotlinOptions {
-                apiVersion = '1.3'
-                languageVersion = '1.3'
+                apiVersion = '1.4'
+                languageVersion = '1.4'
             }
         }
     }
