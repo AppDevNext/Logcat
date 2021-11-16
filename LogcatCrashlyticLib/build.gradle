@@ -11,7 +11,7 @@ android {
         versionName getTag()
         versionCode getGitCommitCount()
 
-        minSdkVersion 16
+        minSdkVersion 19
         project.archivesBaseName = "LogcatCrashlytic"
     }
 
