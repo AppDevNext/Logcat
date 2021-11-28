@@ -43,6 +43,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{steps.tagger.outputs.tag}}
+          prerelease: ${{ ${{steps.tagger.outputs.tag}} == *"alpha"* || ${{steps.tagger.outputs.tag}} == *"beta"* }}
           name: ${{steps.tagger.outputs.tag}}
           body: ${{steps.github_release.outputs.changelog}}
           files: |
