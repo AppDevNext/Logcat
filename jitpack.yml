@@ -1,4 +1,4 @@
 jdk:
   - openjdk11
 install:
-  - ./gradlew build publishToMavenLocal -x test
+  - ./gradlew :LogcatCoreLib:assembleRelease :LogcatCoreLib:publishToMavenLocal :LogcatCrashlyticLib:assembleRelease :LogcatCrashlyticLib:publishToMavenLocal :LogcatCountlyLib:assembleRelease :LogcatCountlyLib:publishToMavenLocal
