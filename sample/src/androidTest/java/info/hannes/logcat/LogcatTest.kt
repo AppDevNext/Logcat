@@ -10,6 +10,7 @@ import androidx.test.rule.GrantPermissionRule
 import com.moka.lib.assertions.MatchOperator
 import com.moka.lib.assertions.WaitingAssertion
 import com.moka.utils.Screenshot
+import info.hannes.logcat.ui.LogcatActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -30,11 +31,11 @@ class LogcatTest {
 
     @Test
     fun basicLogcatTest() {
-        onView(allOf(withContentDescription("Logcat"), withParent(withId(R.id.action_bar)), isDisplayed()))
+        onView(allOf(withContentDescription("Logcat"), withParent(withId(info.hannes.logcat.ui.R.id.action_bar)), isDisplayed()))
 
-        WaitingAssertion.checkAssertion(R.id.log_recycler, isDisplayed(), 1500)
+        WaitingAssertion.checkAssertion(info.hannes.logcat.ui.R.id.log_recycler, isDisplayed(), 1500)
         Screenshot.takeScreenshot("Step1")
-        WaitingAssertion.assertRecyclerAdapterItemsCount(R.id.log_recycler, 15, MatchOperator.GREATER, 1500)
+        WaitingAssertion.assertRecyclerAdapterItemsCount(info.hannes.logcat.ui.R.id.log_recycler, 15, MatchOperator.GREATER, 1500)
         Screenshot.takeScreenshot("End")
     }
 

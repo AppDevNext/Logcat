@@ -11,6 +11,7 @@ import androidx.test.rule.GrantPermissionRule
 import com.moka.lib.assertions.MatchOperator
 import com.moka.lib.assertions.RecyclerViewItemCountAssertion
 import com.moka.utils.Screenshot
+import info.hannes.logcat.ui.LogfileActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -31,10 +32,10 @@ class ToFileTest {
     @Test
     fun logFileBasicTest() {
         onView(allOf(withContentDescription("Timber Logfile"),
-                withParent(withId(R.id.action_bar)),
+                withParent(withId(info.hannes.logcat.ui.R.id.action_bar)),
                 isDisplayed()))
 
-        val recycler = onView(withId(R.id.log_recycler))
+        val recycler = onView(withId(info.hannes.logcat.ui.R.id.log_recycler))
         recycler.check(ViewAssertions.matches(isDisplayed()))
 
         recycler.check(RecyclerViewItemCountAssertion(2, MatchOperator.GREATER_EQUAL))
