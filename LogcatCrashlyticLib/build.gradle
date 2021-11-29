@@ -19,8 +19,6 @@ android {
 
 dependencies {
     api project(':LogcatCoreLib')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-
     api 'com.google.firebase:firebase-analytics:20.0.0'
     api 'com.google.firebase:firebase-crashlytics:18.2.4'
 }
