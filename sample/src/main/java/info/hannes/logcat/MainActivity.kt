@@ -11,6 +11,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import info.hannes.logcat.sample.R
+import info.hannes.logcat.ui.BothLogActivity
+import info.hannes.logcat.ui.LogcatActivity
+import info.hannes.logcat.ui.LogfileActivity
 
 class MainActivity : AppCompatActivity() {
 

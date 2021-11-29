@@ -1,11 +1,11 @@
-package info.hannes.logcat
+package info.hannes.logcat.ui
 
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
-class LogfileActivity : AppCompatActivity() {
+class LogcatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +23,7 @@ class LogfileActivity : AppCompatActivity() {
             }
 
             // Create a new Fragment to be placed in the activity layout
-            val firstFragment = LogfileFragment.newInstance(
-                    "logfile.log",
-                    "search logfile"
-            )
+            val firstFragment = LogcatFragment.newInstance("logcat.log", "search logcat")
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
@@ -35,7 +32,6 @@ class LogfileActivity : AppCompatActivity() {
             // Add the fragment to the 'fragment_container' FrameLayout
             supportFragmentManager.beginTransaction().add(R.id.fragment_container, firstFragment).commit()
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

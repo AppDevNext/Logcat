@@ -1,4 +1,4 @@
-package info.hannes.logcat
+package info.hannes.logcat.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -43,9 +43,9 @@ class BothLogsFragment : Fragment() {
         val logcatFragment = LogcatFragment.newInstance(targetFilename, searchHintLogcat, emailAddress)
 
         val logfileFragment = LogfileFragment.newInstance(
-                targetFilename,
-                searchHintLogfile,
-                emailAddress
+            targetFilename,
+            searchHintLogfile,
+            emailAddress
         )
 
         mTabsAdapter.addTab(mTabHost.newTabSpec("nameC").setIndicator("Logcat"), logcatFragment)

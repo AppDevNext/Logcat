@@ -1,4 +1,4 @@
-package info.hannes.logcat
+package info.hannes.logcat.ui
 
 import android.content.Context
 import android.view.View

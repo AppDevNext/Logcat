@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import info.hannes.logcat.R
+import info.hannes.logcat.ui.R
 
 class LoadingDialog : DialogFragment() {
 
