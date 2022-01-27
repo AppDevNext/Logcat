@@ -19,7 +19,7 @@ android {
 
 dependencies {
     api project(':LogcatCoreLib')
-    api "ly.count.android:sdk:20.11.11"
+    api "ly.count.android:sdk:20.11.12"
 }
 
 project.afterEvaluate {
