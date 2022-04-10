@@ -3,7 +3,7 @@ package info.hannes.logging
 import android.app.Application
 import info.hannes.countly.Analytics
 import info.hannes.timber.CountlyTree
-import info.hannes.timber.DebugTree
+import info.hannes.timber.DebugFormatTree
 import timber.log.Timber
 
 abstract class LoggingApplication(
@@ -28,7 +28,7 @@ abstract class LoggingApplication(
 
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun setupLogging(countlyLogging: Boolean) {
-        Timber.plant(DebugTree())
+        Timber.plant(DebugFormatTree())
         if (countlyLogging) {
             Analytics.initAnalytics(this, countlyLogging, countlyKey, countlyHost)
             Timber.plant(CountlyTree(Analytics(), serverIgnoreToken))
