@@ -4,7 +4,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
 
-open class DebugTree : Timber.DebugTree() {
+open class DebugFormatTree : Timber.DebugTree() {
 
     override fun createStackElementTag(element: StackTraceElement): String? {
         return String.format(

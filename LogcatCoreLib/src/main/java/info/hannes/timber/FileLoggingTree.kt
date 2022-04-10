@@ -15,7 +15,7 @@ import java.util.*
 
 @Suppress("unused")
 @SuppressLint("LogNotTimber")
-open class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename: String = UUID.randomUUID().toString()) : DebugTree() {
+open class FileLoggingTree(externalCacheDir: File, context: Context? = null, filename: String = UUID.randomUUID().toString()) : DebugFormatTree() {
 
     var file: File
         private set

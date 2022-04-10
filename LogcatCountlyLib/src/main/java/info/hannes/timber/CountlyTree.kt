@@ -3,7 +3,7 @@ package info.hannes.timber
 import android.util.Log
 import info.hannes.countly.Analytics
 
-class CountlyTree(private val analytics: Analytics, private val serverIgnoreToken: String? = null) : DebugTree() {
+class CountlyTree(private val analytics: Analytics, private val serverIgnoreToken: String? = null) : DebugFormatTree() {
 
     // some regex explanation :
     // $t sign to search
