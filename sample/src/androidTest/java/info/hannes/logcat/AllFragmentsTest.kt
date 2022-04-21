@@ -9,6 +9,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.rule.GrantPermissionRule
 import com.moka.utils.Screenshot
+import info.hannes.logcat.ui.BothLogActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -29,7 +30,7 @@ class AllFragmentsTest {
     @Test
     fun basicTest() {
         onView(allOf(withContentDescription("All log"),
-                withParent(withId(R.id.action_bar)),
+                withParent(withId(info.hannes.logcat.ui.R.id.action_bar)),
                 isDisplayed()))
 
         onView(withText("Logcat")).check(ViewAssertions.matches(isDisplayed()))

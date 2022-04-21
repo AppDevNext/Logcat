@@ -11,6 +11,7 @@ import androidx.test.rule.GrantPermissionRule
 import androidx.test.uiautomator.UiDevice
 import com.moka.lib.assertions.MatchOperator
 import com.moka.lib.assertions.RecyclerViewItemCountAssertion
+import info.hannes.logcat.ui.LogfileActivity
 import info.hannes.logcat.utils.RecyclerViewItemDuplicateAssertion
 import org.junit.Rule
 import org.junit.Test
@@ -37,7 +38,7 @@ class ResumeTest {
         uiDevice.pressRecentApps()
         Thread.sleep(WAIT)
 
-        val recycler = Espresso.onView(ViewMatchers.withId(R.id.log_recycler))
+        val recycler = Espresso.onView(ViewMatchers.withId(info.hannes.logcat.ui.R.id.log_recycler))
         recycler.check(RecyclerViewItemDuplicateAssertion())
 
         recycler.check(RecyclerViewItemCountAssertion(2, MatchOperator.GREATER_EQUAL))

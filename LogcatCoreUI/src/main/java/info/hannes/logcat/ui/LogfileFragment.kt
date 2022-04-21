@@ -1,10 +1,11 @@
-package info.hannes.logcat
+package info.hannes.logcat.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import info.hannes.logcat.Event
 import info.hannes.logcat.base.LogBaseFragment
 import info.hannes.timber.fileLoggingTree
 import java.io.File

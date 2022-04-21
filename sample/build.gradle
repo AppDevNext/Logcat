@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation project(':LogcatCoreLib')
+    implementation project(':LogcatCoreUI')
     implementation project(':LogcatCrashlyticLib')
     implementation project(':LogcatCountlyLib')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
