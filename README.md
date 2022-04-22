@@ -14,6 +14,7 @@ The easiest way to add Logcat to your project is via Gradle. Just add the follow
 ```groovy
 dependencies {
     implementation "com.github.AppDevNext.Logcat:LogcatCoreLib:$latest_version"
+    implementation "com.github.AppDevNext.Logcat:LogcatCoreUI:$latest_version" // UI related classes like Activity, Fragment
     implementation 'com.github.AppDevNext.Logcat:LogcatCrashlyticLib:$latest_version'
 }
 ```
