@@ -20,7 +20,7 @@ android {
 dependencies {
     api project(':LogcatCoreLib')
     api 'com.google.firebase:firebase-analytics:20.1.2'
-    api 'com.google.firebase:firebase-crashlytics:18.2.9'
+    api 'com.google.firebase:firebase-crashlytics:18.2.10'
 }
 
 project.afterEvaluate {
