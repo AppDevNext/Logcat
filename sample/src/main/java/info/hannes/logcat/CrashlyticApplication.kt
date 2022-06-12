@@ -10,7 +10,9 @@ import info.hannes.timber.FileLoggingTree
 import timber.log.Timber
 
 
-class CrashlyticApplication : LoggingApplication() {
+class CrashlyticApplication : LoggingApplication(delegator = CustomLogger::class.java) {
+
+    private val logger = CustomLogger()
 
     @SuppressLint("HardwareIds")
     override fun onCreate() {
@@ -23,15 +25,15 @@ class CrashlyticApplication : LoggingApplication() {
         FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", BuildConfig.VERSIONNAME)
         Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
 
-        Timber.d("Debug test")
-        Timber.i("Info test")
-        Timber.w("Warning test")
-        Timber.e("Error test")
+        logger.d("Debug test")
+        logger.i("Info test")
+        logger.w("Warning test")
+        logger.e("Error test")
 
         var x = 0
         val runner: Runnable = object : Runnable {
             override fun run() {
-                Timber.d("live=$x")
+                logger.d("live=$x")
                 x++
                 Handler(Looper.getMainLooper()).postDelayed(this, 3000)
             }
