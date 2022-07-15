@@ -78,3 +78,17 @@ jobs:
         with:
           name: Logcat-Lint-report
           path: sample/build/reports/lint-results.html
+
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install JDK ${{ matrix.java_version }}
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11
+      - name: publish
+        run: ./gradlew :LogcatCoreLib:assembleRelease :LogcatCoreLib:publishToMavenLocal :LogcatCoreUI:assembleRelease :LogcatCoreUI:publishToMavenLocal :LogcatCrashlyticLib:assembleRelease :LogcatCrashlyticLib:publishToMavenLocal :LogcatCountlyLib:assembleRelease :LogcatCountlyLib:publishToMavenLocal
