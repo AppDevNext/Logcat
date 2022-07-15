@@ -41,7 +41,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     }
 
     @SuppressLint("LogNotTimber")
-    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         try {
             val logTimeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS", Locale.getDefault()).format(Date())
 
@@ -75,7 +75,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
             }
         }
         // Don't call super, otherwise it logs twice
-        //super.logMessage(priority, tag, message, t, args)
+        //super.log(priority, tag, message, t)
     }
 
     fun getFileName(): String = file.absolutePath
