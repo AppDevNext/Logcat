@@ -78,7 +78,7 @@ def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reportin
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name == 'connectedDebugAndroidTest') {
+    if (task.name == 'connectedDebugAndroidTest' || task.name == 'cAT') {
         task.mustRunAfter {
             clearScreenshotsTask
         }
