@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="info.hannes.logcat.LogfileActivity"
+    tools:context="info.hannes.logcat.ui.BothLogActivity"
     tools:showIn="@layout/activity_log">
 
     <FrameLayout
