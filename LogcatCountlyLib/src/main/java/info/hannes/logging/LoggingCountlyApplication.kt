@@ -6,7 +6,7 @@ import info.hannes.timber.CountlyTree
 import info.hannes.timber.DebugFormatTree
 import timber.log.Timber
 
-abstract class LoggingApplication(
+abstract class LoggingCountlyApplication(
     private val countlyHost: String,
     private val countlyKey: String,
     private val debugBuildType: Boolean,

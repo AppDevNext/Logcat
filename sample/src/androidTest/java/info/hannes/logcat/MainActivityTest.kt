@@ -10,6 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.rule.GrantPermissionRule
 import com.moka.utils.Screenshot
+import info.hannes.logcat.sample.MainActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
 import org.junit.Rule

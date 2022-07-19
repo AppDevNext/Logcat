@@ -1,4 +1,4 @@
-package info.hannes.logcat
+package info.hannes.logcat.sample
 
 import android.content.Intent
 import android.net.Uri
@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import info.hannes.logcat.sample.R
 import info.hannes.logcat.ui.BothLogActivity
 import info.hannes.logcat.ui.LogcatActivity
 import info.hannes.logcat.ui.LogfileActivity
