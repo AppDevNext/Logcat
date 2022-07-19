@@ -77,4 +77,4 @@ jobs:
         if: ${{ always() }}
         with:
           name: Logcat-Lint-report
-          path: sample/build/reports/lint-results.html
+          path: ./**/build/reports/lint-results*.html
