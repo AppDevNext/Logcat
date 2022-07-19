@@ -61,21 +61,5 @@ class LoadingDialog : DialogFragment() {
         private const val MESSAGE_ID = "MESSAGE_ID"
         private const val CANCELABLE = "CANCELABLE"
 
-        internal fun newInstance(messageId: Int, cancelable: Boolean): LoadingDialog {
-            val fragment = LoadingDialog()
-            val args = Bundle()
-            args.putInt(MESSAGE_ID, messageId)
-            args.putBoolean(CANCELABLE, cancelable)
-            fragment.arguments = args
-            return fragment
-        }
-
-        fun newInstance(cancelable: Boolean): LoadingDialog {
-            val fragment = LoadingDialog()
-            val args = Bundle()
-            args.putBoolean(CANCELABLE, cancelable)
-            fragment.arguments = args
-            return fragment
-        }
     }
 }
