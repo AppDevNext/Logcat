@@ -9,6 +9,7 @@ android {
     compileSdkVersion propCompileSdkVersion
 
     defaultConfig {
+        applicationId 'info.hannes.logcat.sample'
         versionCode 1
         versionName "1.0"
 
