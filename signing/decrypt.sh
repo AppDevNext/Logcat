@@ -14,6 +14,9 @@ else
    echo "\$CRYPT_PASS available"
 fi
 
+ls -la ./sample/google-services.json.enc
+set +x
+
 # to encrypt
 #openssl aes-256-cbc -salt -pbkdf2 -k "$CRYPT_PASS" -in ./sample/google-services.json -out ./sample/google-services.json.enc
 
