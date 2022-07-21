@@ -20,6 +20,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: decrypt
+        run: |
+          openssl version
+          brew install openssl@3
+          echo 'export PATH="/usr/local/opt/openssl@3/bin:$PATH"' >> /Users/runner/.bash_profile
+          . /Users/runner/.bash_profile
+          export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
+          export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+          openssl version
+          ./signing/decrypt.sh
+        env:
+          CRYPT_PASS: ${{ secrets.CRYPT_PASS }}
       - name: Install JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v3
         with:
@@ -27,12 +39,6 @@ jobs:
           java-version: ${{ matrix.java_version }}
       - name: Install Android SDK
         uses: malinskiy/action-android/install-sdk@release/0.1.3
-      - name: decrypt
-        run: |
-          openssl version
-          ./signing/decrypt.sh
-        env:
-          CRYPT_PASS: ${{ secrets.CRYPT_PASS }}
       - name: Build project
         run: ./gradlew assembleDebug
       - name: Run tests

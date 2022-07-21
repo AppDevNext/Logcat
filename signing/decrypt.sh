@@ -17,7 +17,7 @@ fi
 pushd signing
 
 # to encrypt
-#openssl aes-256-cbc -a -pbkdf2 -iter 100000 -salt -k "$CRYPT_PASS" -in ./sample/google-services.json -out ./sample/google-services.json.enc
+#openssl aes-256-cbc -salt -pbkdf2 -k "$CRYPT_PASS" -in ./sample/google-services.json -out ./sample/google-services.json.enc
 
 # Ubuntu 18.04 (openssl 1.1.0g+) needs -md md5
 # https://askubuntu.com/questions/1067762/unable-to-decrypt-text-files-with-openssl-on-ubuntu-18-04/1076708
