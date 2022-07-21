@@ -23,12 +23,6 @@ jobs:
       - name: decrypt
         run: |
           openssl version
-          brew install openssl@3
-          echo 'export PATH="/usr/local/opt/openssl@3/bin:$PATH"' >> /Users/runner/.bash_profile
-          . /Users/runner/.bash_profile
-          export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
-          export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
-          openssl version
           ./signing/decrypt.sh
         env:
           CRYPT_PASS: ${{ secrets.CRYPT_PASS }}
