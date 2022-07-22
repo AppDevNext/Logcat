@@ -8,6 +8,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import info.hannes.logcat.Event
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
@@ -28,15 +31,17 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     private var logImpossible = false
 
     init {
-        if (!externalCacheDir.exists()) {
-            if (!externalCacheDir.mkdirs())
-                Log.e(LOG_TAG, "couldn't create ${externalCacheDir.absoluteFile}")
-        }
-        val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-        file = if (context != null) {
-            File(externalCacheDir, "${context.packageName}.$fileNameTimeStamp.log")
-        } else {
-            File(externalCacheDir, "$filename.$fileNameTimeStamp.log")
+        externalCacheDir.let {
+            if (!it.exists()) {
+                if (!it.mkdirs())
+                    Log.e(LOG_TAG, "couldn't create ${it.absoluteFile}")
+            }
+            val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            file = if (context != null) {
+                File(it, "${context.packageName}.$fileNameTimeStamp.log")
+            } else {
+                File(it, "$filename.$fileNameTimeStamp.log")
+            }
         }
     }
 
@@ -55,11 +60,15 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
                 else -> "$priority"
             }
 
-            val writer = FileWriter(file, true)
             val textLine = "$priorityText $logTimeStamp$tag$message\n"
-            writer.append(textLine)
-            writer.flush()
-            writer.close()
+            CoroutineScope(Dispatchers.IO).launch {
+                runCatching {
+                    val writer = FileWriter(file, true)
+                    writer.append(textLine)
+                    writer.flush()
+                    writer.close()
+                }
+            }
 
             if (Thread.currentThread().name == "main")
                 _lastLogEntry.value = Event(textLine)

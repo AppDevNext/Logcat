@@ -3,11 +3,15 @@ package info.hannes.logcat.sample
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
+import android.os.StrictMode
 import android.provider.Settings
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import info.hannes.crashlytic.CrashlyticsTree
 import info.hannes.logcat.LoggingApplication
 import info.hannes.timber.FileLoggingTree
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
@@ -17,8 +21,20 @@ class CrashlyticApplication : LoggingApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        externalCacheDir?.let {
-            Timber.plant(FileLoggingTree(it, this))
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectDiskReads()
+                .detectDiskWrites()
+                .detectNetwork()
+                .penaltyDialog()
+                .penaltyLog()
+                .build()
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            externalCacheDir?.let {
+                Timber.plant(FileLoggingTree(it, this@CrashlyticApplication))
+            }
         }
 
         FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", info.hannes.logcat.ui.BuildConfig.VERSIONNAME)
