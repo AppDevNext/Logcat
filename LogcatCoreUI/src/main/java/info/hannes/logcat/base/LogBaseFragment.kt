@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import info.hannes.logcat.ui.R
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -223,33 +224,37 @@ abstract class LogBaseFragment : Fragment() {
     }
 
     private fun sendLogContent(filterLogs: List<String>, filename: String) {
-        val logToSend = File(requireActivity().externalCacheDir, filename)
-        logToSend.writeText(filterLogs.joinToString("\n"))
+        CoroutineScope(Dispatchers.IO).launch {
+            val logToSend = File(requireActivity().externalCacheDir, filename)
+            logToSend.writeText(filterLogs.joinToString("\n"))
 
-        val intent = Intent(Intent.ACTION_SEND)
+            val intent = Intent(Intent.ACTION_SEND)
 
-        val logsUri = FileProvider.getUriForFile(requireContext(), context?.applicationContext?.packageName + ".provider", logToSend)
+            val logsUri = FileProvider.getUriForFile(requireContext(), context?.applicationContext?.packageName + ".provider", logToSend)
 
-        intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
-        val subject = String.format(filename, getString(R.string.app_name))
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.type = MAIL_ATTACHMENT_TYPE
-        intent.putExtra(Intent.EXTRA_STREAM, logsUri)
-        try {
-            // prevent from a "exposed beyond app through ClipData.Item.getUri()"
-            // https://stackoverflow.com/questions/48117511/exposed-beyond-app-through-clipdata-item-geturi
-            val builder = StrictMode.VmPolicy.Builder()
-            StrictMode.setVmPolicy(builder.build())
+            intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
+            val subject = String.format(filename, getString(R.string.app_name))
+            intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.type = MAIL_ATTACHMENT_TYPE
+            intent.putExtra(Intent.EXTRA_STREAM, logsUri)
+            try {
+                // prevent from a "exposed beyond app through ClipData.Item.getUri()"
+                // https://stackoverflow.com/questions/48117511/exposed-beyond-app-through-clipdata-item-geturi
+                val builder = StrictMode.VmPolicy.Builder()
+                StrictMode.setVmPolicy(builder.build())
 
-            startActivity(Intent.createChooser(intent, "$filename ..."))
-        } catch (e: ActivityNotFoundException) {
-            val snackBar = Snackbar.make(
+                startActivity(Intent.createChooser(intent, "$filename ..."))
+            } catch (e: ActivityNotFoundException) {
+                val snackBar = Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
                     R.string.log_send_no_app,
                     Snackbar.LENGTH_LONG
-            )
-            snackBar.show()
+                )
+                CoroutineScope(Dispatchers.Main).launch {
+                    snackBar.show()
+                }
+            }
         }
     }
 
