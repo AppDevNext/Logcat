@@ -3,6 +3,7 @@ package info.hannes.logcat.sample
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Looper
+import android.os.StrictMode
 import android.provider.Settings
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import info.hannes.crashlytic.CrashlyticsTree
@@ -16,6 +17,16 @@ class CrashlyticApplication : LoggingApplication() {
     @SuppressLint("HardwareIds")
     override fun onCreate() {
         super.onCreate()
+
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectDiskReads()
+                .detectDiskWrites()
+                .detectNetwork()
+                .penaltyDialog()
+                .penaltyLog()
+                .build()
+        )
 
         externalCacheDir?.let {
             Timber.plant(FileLoggingTree(it, this))

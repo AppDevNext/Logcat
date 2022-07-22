@@ -84,7 +84,8 @@ tasks.whenTaskAdded { task ->
             clearScreenshotsTask
         }
         task.finalizedBy {
-            fetchScreenshotsTask
+            def resultTask = fetchScreenshotsTask
+            println "resultTask=${resultTask.toString()}"
         }
     }
 }
