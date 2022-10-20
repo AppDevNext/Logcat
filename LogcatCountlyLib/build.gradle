@@ -14,6 +14,7 @@ android {
         minSdkVersion 17
         project.archivesBaseName = "LogcatCountly"
     }
+    namespace 'info.hannes.logcat.countly'
 
 }
 

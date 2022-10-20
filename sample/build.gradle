@@ -31,6 +31,9 @@ android {
         pickFirst("META-INF/atomicfu.kotlin_module")
     }
 
+    namespace 'info.hannes.logcat.sample'
+    testNamespace 'info.hannes.logcat.sampletest'
+
 }
 
 dependencies {
