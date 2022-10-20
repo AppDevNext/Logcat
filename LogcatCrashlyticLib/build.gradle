@@ -12,6 +12,7 @@ android {
         minSdkVersion 19
         project.archivesBaseName = "LogcatCrashlytic"
     }
+    namespace 'info.hannes.logcat.crashlytic'
 
 }
 

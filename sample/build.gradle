@@ -32,6 +32,9 @@ android {
         }
     }
 
+    namespace 'info.hannes.logcat.sample'
+    testNamespace 'info.hannes.logcat.sampletest'
+
 }
 
 dependencies {
