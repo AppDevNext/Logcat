@@ -57,7 +57,7 @@ abstract class LogBaseFragment : Fragment() {
             it.minimumWidth = (it.parent as ViewGroup).width
         }
 
-        // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layou..."
+        // empty adapter to avoid "E/RecyclerView﹕ No adapter attached; skipping layout..."
         logListAdapter = LogListAdapter(mutableListOf(), currentFilter).also {
             it.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
