@@ -135,9 +135,9 @@ abstract class LogBaseFragment : Fragment() {
 
         searchView?.let {
             it.setIconifiedByDefault(true)
-            it.setMaxWidth(Int.MAX_VALUE)
+            it.maxWidth = Int.MAX_VALUE
             it.setOnQueryTextListener(queryTextListener)
-            it.setQueryHint(searchHint)
+            it.queryHint = searchHint
             it.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
             if (currentFilter != "") {
                 searchItem?.expandActionView()

@@ -26,7 +26,7 @@ class LogfileFragment : LogBaseFragment(), Observer<Event<String>> {
             sourceFileName = fileLoggingTree()?.getFileName()?.also { filename ->
                 array = File(filename).useLines { it.toMutableList() }
             }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
         }
         return array
     }
