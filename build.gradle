@@ -31,15 +31,6 @@ allprojects {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
-
-    gradle.projectsEvaluated {
-        tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-            kotlinOptions {
-                apiVersion = '1.4'
-                languageVersion = '1.4'
-            }
-        }
-    }
 }
 
 ext {
