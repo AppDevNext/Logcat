@@ -35,6 +35,8 @@ jobs:
         run: ./gradlew assembleDebug
       - name: Run tests
         run: ./gradlew test
+      - name: Print logcat errors
+        run:  adb logcat "*.e" &
       - name: Run instrumentation tests
         uses: malinskiy/action-android/emulator-run-cmd@release/0.1.4
         with:
