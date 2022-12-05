@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'maven-publish'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -18,8 +19,13 @@ android {
 
 dependencies {
     api project(':LogcatCoreLib')
-    api 'com.google.firebase:firebase-analytics:21.2.0'
-    api 'com.google.firebase:firebase-crashlytics:18.3.1'
+    // Import the BoM for the Firebase platform
+    api platform('com.google.firebase:firebase-bom:31.1.0')
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    api 'com.google.firebase:firebase-crashlytics'
+    api 'com.google.firebase:firebase-analytics-ktx'
 }
 
 project.afterEvaluate {
