@@ -16,8 +16,8 @@ class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
         super.log(priority, tag, message, t)
 
         FirebaseCrashlytics.getInstance().setCustomKey("PRIORITY", when (priority) {
-            2 -> "Verbose"
-            3 -> "Debug"
+            // 2 -> "Verbose"
+            // 3 -> "Debug"
             4 -> "Info"
             5 -> "Warn"
             6 -> "Error"
