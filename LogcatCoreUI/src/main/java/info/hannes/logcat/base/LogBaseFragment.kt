@@ -41,7 +41,8 @@ abstract class LogBaseFragment : Fragment() {
             field = value
             requireActivity().invalidateOptionsMenu()
         }
-    private var live: Boolean = false
+    @Suppress("MemberVisibilityCanBePrivate")
+    protected var live: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
