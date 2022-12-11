@@ -13,6 +13,9 @@ android {
         minSdkVersion 16
         project.archivesBaseName = "LogcatCore"
     }
+    buildFeatures {
+        viewBinding = true
+    }
     namespace 'info.hannes.logcat.ui'
 
 }

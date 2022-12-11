@@ -1,9 +1,8 @@
 package info.hannes.logcat.sample
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
-import android.os.StrictMode
+import android.app.Activity
+import android.os.*
 import android.provider.Settings
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import info.hannes.crashlytic.CrashlyticsTree
@@ -55,5 +54,35 @@ class CrashlyticApplication : LoggingApplication() {
         }
 
         Handler(Looper.getMainLooper()).postDelayed(runner, 3000)
+
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                Timber.v("${activity.javaClass.simpleName} onCreate(Bundle) starting")
+            }
+
+            override fun onActivityStarted(activity: Activity) {
+                Timber.v("${activity.javaClass.simpleName} onStart() starting")
+            }
+
+            override fun onActivityResumed(activity: Activity) {
+                Timber.v("${activity.javaClass.simpleName} onResume() starting")
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+                Timber.v("${activity.javaClass.simpleName} onPause() ending")
+            }
+
+            override fun onActivityStopped(activity: Activity) {
+                Timber.v("${activity.javaClass.simpleName} onStop() ending")
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+                Timber.v("${activity.javaClass.simpleName} onSaveInstanceState(Bundle) starting")
+            }
+
+            override fun onActivityDestroyed(activity: Activity) {
+                Timber.v("${activity.javaClass.simpleName} onDestroy() ending")
+            }
+        })
     }
 }
