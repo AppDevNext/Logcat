@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_drawer_logfile -> startActivity(Intent(this, LogfileActivity::class.java))
             R.id.nav_drawer_both_logfiles -> startActivity(Intent(this, BothLogActivity::class.java))
             R.id.nav_drawer_other_github -> {
-                val url = "https://github.com/hannesa2/Logcat"
+                val url = "https://github.com/AppDevNext/Logcat"
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
                 startActivity(i)
@@ -61,20 +61,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> {
-                binding.drawerLayout.openDrawer(GravityCompat.START)
-            }
-            R.id.nav_drawer_logcat -> {
-                startActivity(Intent(this, LogcatActivity::class.java))
-            }
-            R.id.nav_drawer_logfile -> {
-                startActivity(Intent(this, LogfileActivity::class.java))
-            }
-            R.id.nav_drawer_both_logfiles -> {
-                startActivity(Intent(this, BothLogActivity::class.java))
-            }
+            android.R.id.home -> binding.drawerLayout.openDrawer(GravityCompat.START)
+            R.id.nav_drawer_logcat -> startActivity(Intent(this, LogcatActivity::class.java))
+            R.id.nav_drawer_logfile -> startActivity(Intent(this, LogfileActivity::class.java))
+            R.id.nav_drawer_both_logfiles -> startActivity(Intent(this, BothLogActivity::class.java))
         }
-
         return true
     }
 
