@@ -6,7 +6,7 @@ import timber.log.Timber
 import timber.log.Timber.Forest.tag
 
 // If you use old logcat, e.g Android Studio Electric Eel, you should use for newLogcat a false
-open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.DebugTree() {
+open class DebugFormatTree(delegator: Class<*>? = null, private val newLogcat: Boolean = true) : Timber.DebugTree(delegator) {
 
     private var codeIdentifier = ""
     private var method = ""
@@ -47,6 +47,6 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
             } catch (_: JSONException) {
             }
         }
-        super.logMessage(priority, tag, "$method: $localMessage", t, args)
+        super.logMessage(priority, tag, "$method: $localMessage", t, *args)
     }
 }
