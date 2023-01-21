@@ -51,7 +51,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
-    androidTestImplementation 'com.github.AppDevNext:Moka:1.6'
+    androidTestImplementation 'com.github.AppDevNext:Moka:2.0'
     androidTestImplementation "androidx.test.ext:junit-ktx:1.1.5"
     androidTestUtil "androidx.test.services:test-services:1.4.2"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
