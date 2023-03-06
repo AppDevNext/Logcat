@@ -21,7 +21,8 @@ class BothLogsFragment : Fragment() {
     private var emailAddress = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        @SuppressLint("InflateParams") val view = inflater.inflate(R.layout.fragment_both_logs, null)
+        @SuppressLint("InflateParams")
+        val view = inflater.inflate(R.layout.fragment_both_logs, null)
 
         val mTabHost = view.findViewById<TabHost>(android.R.id.tabhost)
         mTabHost.setup()
