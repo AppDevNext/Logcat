@@ -84,7 +84,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
             }
         }
         // Don't call super, otherwise it logs twice
-        //super.log(priority, tag, message, t)
+        // super.log(priority, tag, message, t)
     }
 
     fun getFileName(): String = file.absolutePath
