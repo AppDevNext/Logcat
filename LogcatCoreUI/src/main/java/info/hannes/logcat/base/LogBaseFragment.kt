@@ -41,6 +41,7 @@ abstract class LogBaseFragment : Fragment() {
             field = value
             requireActivity().invalidateOptionsMenu()
         }
+
     @Suppress("MemberVisibilityCanBePrivate")
     protected var live: Boolean = false
 
