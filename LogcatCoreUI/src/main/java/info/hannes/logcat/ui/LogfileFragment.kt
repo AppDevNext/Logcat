@@ -42,8 +42,8 @@ class LogfileFragment : LogBaseFragment(), Observer<Event<String>> {
         }
     }
 
-    override fun onChanged(line: Event<String>?) {
-        line?.getContentIfNotHandled()?.let {
+    override fun onChanged(line: Event<String>) {
+        line.getContentIfNotHandled()?.let {
             if (sourceFileName != null) {
                 logListAdapter?.addLine(it)
             }
