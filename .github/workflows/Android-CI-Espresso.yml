@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java_version: [ 11 ]
+        java_version: [ 17 ]
         api: [ 28 ]
         abi: [ x86_64 ]
         tag: [ 'default' ]
@@ -28,7 +28,7 @@ jobs:
 #          - api: 30
 #            abi: x86_64
 #            tag: 'google_apis'
-#            java_version: 11
+#            java_version: 17
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -82,7 +82,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
-          java-version: 11
+          java-version: 17
       - name: gradle check
         run: ./gradlew check
       - name: Archive Lint report
