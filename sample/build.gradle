@@ -1,8 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
+//    id 'com.google.gms.google-services'
+//    id 'com.google.firebase.crashlytics'
+}
+
+if (useFirebase() == "true") {
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -15,6 +20,8 @@ android {
 
         minSdkVersion 16
         targetSdkVersion 33
+
+        buildConfigField "boolean", 'WITH_FIREBASE', useFirebase()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments useTestStorageService: 'true'
