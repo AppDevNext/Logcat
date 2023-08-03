@@ -34,10 +34,10 @@ dependencies {
     api 'com.google.android.material:material:1.9.0'
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
                 from components.release
             }
         }

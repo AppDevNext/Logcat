@@ -32,10 +32,10 @@ dependencies {
     api 'com.google.firebase:firebase-analytics-ktx'
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
                 from components.release
             }
         }
