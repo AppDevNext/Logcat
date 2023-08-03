@@ -25,10 +25,10 @@ dependencies {
     api "ly.count.android:sdk:22.09.3"
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
                 from components.release
             }
         }

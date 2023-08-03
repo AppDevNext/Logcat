@@ -29,10 +29,10 @@ dependencies {
     api 'com.jakewharton.timber:timber:5.0.1'
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
                 from components.release
             }
         }
