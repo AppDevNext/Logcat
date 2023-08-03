@@ -48,7 +48,21 @@ static def getTag() {
 }
 
 @SuppressWarnings('unused')
+static def useFirebase() {
+    def process = "grep DUMMYKEY sample/google-services.json -R | wc -c".execute()
+    def grepResult = process.text.toString().split(":")[1].toInteger()
+    if (grepResult == 1) {
+        println("Firebase=false $grepResult")
+        return "false"
+    }
+    else {
+        println("Firebase=true $grepResult")
+        return "true"
+    }
+}
+
+@SuppressWarnings('unused')
 static def getGitCommitCount() {
-    def process = "git rev-list HEAD --count".execute()
-    return process.text.toInteger()
+    def process = "git describe --tags --abbrev=0".execute()
+    return process.text.toString().trim()
 }
