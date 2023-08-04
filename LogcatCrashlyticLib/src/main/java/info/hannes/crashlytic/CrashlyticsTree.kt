@@ -8,22 +8,24 @@ import java.util.concurrent.atomic.AtomicBoolean
 @Suppress("unused")
 class CrashlyticsTree(private val identifier: String? = null) : Timber.Tree() {
 
-    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
         if (priority < Log.INFO) {
             return
         }
 
-        super.log(priority, tag, message, t)
+        super.log(priority, tag, message, t, args)
 
-        FirebaseCrashlytics.getInstance().setCustomKey("PRIORITY", when (priority) {
-            // 2 -> "Verbose"
-            // 3 -> "Debug"
-            4 -> "Info"
-            5 -> "Warn"
-            6 -> "Error"
-            7 -> "Assert"
-            else -> priority.toString()
-        })
+        FirebaseCrashlytics.getInstance().setCustomKey(
+            "PRIORITY", when (priority) {
+                // 2 -> "Verbose"
+                // 3 -> "Debug"
+                4 -> "Info"
+                5 -> "Warn"
+                6 -> "Error"
+                7 -> "Assert"
+                else -> priority.toString()
+            }
+        )
         tag?.let { FirebaseCrashlytics.getInstance().setCustomKey(KEY_TAG, it) }
         FirebaseCrashlytics.getInstance().setCustomKey(KEY_MESSAGE, message)
         FirebaseCrashlytics.getInstance().setCustomKey(KEY_UNIT_TEST, isRunningUnitTests.toString())
