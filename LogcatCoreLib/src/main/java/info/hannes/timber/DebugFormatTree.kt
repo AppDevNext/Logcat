@@ -47,8 +47,6 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
             } catch (_: JSONException) {
             }
         }
-        if (newLogcat)
-            localMessage = codeIdentifier + localMessage
         super.log(priority, tag, "$method: $localMessage", t)
     }
 }
