@@ -5,10 +5,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion propCompileSdkVersion
-
     defaultConfig {
-
+        compileSdk propCompileSdkVersion
         minSdkVersion 17
         project.archivesBaseName = "LogcatCountly"
     }

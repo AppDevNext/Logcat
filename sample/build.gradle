@@ -11,14 +11,13 @@ if (useFirebase() == "true") {
 }
 
 android {
-    compileSdkVersion propCompileSdkVersion
-
     defaultConfig {
         applicationId 'info.hannes.logcat.sample'
         versionCode 1
         versionName "1.0"
 
         minSdkVersion 16
+        compileSdk propCompileSdkVersion
         targetSdkVersion 33
 
         buildConfigField "boolean", 'WITH_FIREBASE', useFirebase()

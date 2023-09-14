@@ -5,9 +5,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion propCompileSdkVersion
-
     defaultConfig {
+        compileSdk propCompileSdkVersion
         buildConfigField "String", "VERSIONNAME", "\"" + getTag() + "\""
 
         minSdkVersion 16
@@ -18,7 +17,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-
 }
 
 dependencies {
