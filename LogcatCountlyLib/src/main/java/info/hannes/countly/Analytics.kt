@@ -8,10 +8,8 @@ import android.provider.Settings
 import info.hannes.logcat.BuildConfig
 import ly.count.android.sdk.Countly
 import ly.count.android.sdk.CountlyConfig
-import ly.count.android.sdk.DeviceId
 
 
-@Suppress("PrivatePropertyName")
 class Analytics : IAnalytics {
 
     var countlyInstance: Countly = Countly.sharedInstance()
@@ -75,10 +73,9 @@ class Analytics : IAnalytics {
                     .setAppKey(countlyKey)
                     .setContext(context)
                     .setDeviceId(Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID))
-                    .setIdMode(DeviceId.Type.DEVELOPER_SUPPLIED)
                     .setServerURL(countlyHost)
                     .setLoggingEnabled(loggingEnabled)
-                    .setViewTracking(true)
+                    .enableAutomaticViewTracking()
                     .setHttpPostForced(true)
                     .enableCrashReporting()
             Countly.sharedInstance().init(config)
