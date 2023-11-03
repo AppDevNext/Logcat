@@ -18,7 +18,7 @@ android {
 
         minSdkVersion 16
         compileSdk propCompileSdkVersion
-        targetSdkVersion 33
+        targetSdkVersion 34
 
         buildConfigField "boolean", 'WITH_FIREBASE', useFirebase()
 
