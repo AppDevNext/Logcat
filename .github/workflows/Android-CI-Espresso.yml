@@ -55,14 +55,14 @@ jobs:
           cmdOptions: -noaudio -no-boot-anim -no-window
           bootTimeout: 720 # seconds = 12 minutes
       - name: Archive Espresso results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: Logcat-Espresso-report
           path: sample/build/reports/androidTests/connected
       - name: Archive screenshots
         if: ${{ always() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Logcat-Screenshots
           path: |
@@ -84,7 +84,7 @@ jobs:
       - name: gradle check
         run: ./gradlew check
       - name: Archive Lint report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: Logcat-Lint-report
