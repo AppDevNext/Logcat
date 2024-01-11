@@ -7,7 +7,7 @@ plugins {
 android {
     defaultConfig {
         compileSdk propCompileSdkVersion
-        minSdkVersion 17
+        minSdkVersion 19
         project.archivesBaseName = "LogcatCountly"
     }
     namespace 'info.hannes.logcat.countly'

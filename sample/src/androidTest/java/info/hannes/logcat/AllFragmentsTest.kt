@@ -7,7 +7,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.screenshot.captureToBitmap
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SdkSuppress
 import info.hannes.logcat.ui.BothLogActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
@@ -16,7 +15,6 @@ import org.junit.rules.TestName
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-@SdkSuppress(minSdkVersion = 18)
 class AllFragmentsTest {
 
     @get:Rule
