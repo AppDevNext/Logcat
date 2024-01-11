@@ -9,7 +9,7 @@ android {
         compileSdk propCompileSdkVersion
         buildConfigField "String", "VERSIONNAME", "\"" + getTag() + "\""
 
-        minSdkVersion 16
+        minSdkVersion 19
         project.archivesBaseName = "LogcatCore"
     }
     buildFeatures {

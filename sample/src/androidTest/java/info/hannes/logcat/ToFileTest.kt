@@ -7,7 +7,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.screenshot.captureToBitmap
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SdkSuppress
 import com.moka.lib.assertions.MatchOperator
 import com.moka.lib.assertions.RecyclerViewItemCountAssertion
 import info.hannes.logcat.ui.LogfileActivity
@@ -18,7 +17,6 @@ import org.junit.rules.TestName
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-@SdkSuppress(minSdkVersion = 18)
 class ToFileTest {
 
     @get:Rule
