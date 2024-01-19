@@ -126,12 +126,12 @@ abstract class LogBaseFragment : Fragment() {
         searchItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 setFilter2LogAdapter("")
-                return true  // Return true to collapse action view
+                return true // Return true to collapse action view
             }
 
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 // Do something when expanded
-                return true  // Return true to expand action view
+                return true // Return true to expand action view
             }
         })
 
@@ -182,35 +182,42 @@ abstract class LogBaseFragment : Fragment() {
                     sendLogContent(it.filterLogs, fileName)
                 }
             }
+
             R.id.menu_clear -> {
                 clearLog()
                 showLogContent(null)
             }
+
             R.id.menu_show_verbose -> {
                 item.isChecked = true
                 stopSearchView()
                 setFilter2LogAdapter("")
             }
+
             R.id.menu_show_debug -> {
                 item.isChecked = true
                 stopSearchView()
                 setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE, DEBUG_LINE)
             }
+
             R.id.menu_show_info -> {
                 item.isChecked = true
                 stopSearchView()
                 setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE)
             }
+
             R.id.menu_show_warning -> {
                 item.isChecked = true
                 stopSearchView()
                 setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE)
             }
+
             R.id.menu_show_error -> {
                 item.isChecked = true
                 stopSearchView()
                 setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE)
             }
+
             else -> returnValue = super.onOptionsItemSelected(item)
         }
         return returnValue
