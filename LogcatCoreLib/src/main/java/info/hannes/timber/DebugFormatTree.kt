@@ -5,7 +5,7 @@ import org.json.JSONObject
 import timber.log.Timber
 import timber.log.Timber.Forest.tag
 
-/* If you use old logcat, e.g Android Studio Electric Eel, you should use for newLogcat a false */
+// If you use old logcat, e.g Android Studio Electric Eel, you should use for newLogcat a false
 open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.DebugTree() {
 
     private var codeIdentifier = ""
