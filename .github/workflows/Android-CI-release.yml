@@ -44,7 +44,7 @@ jobs:
         env:
           VERSION: ${{steps.tagger.outputs.tag}}
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{steps.tagger.outputs.tag}}
           prerelease: ${{ env.PRE_RELEASE }}
