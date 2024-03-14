@@ -33,8 +33,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     init {
         externalCacheDir.let {
             if (!it.exists()) {
-                if (!it.mkdirs())
-                    Log.e(LOG_TAG, "couldn't create ${it.absoluteFile}")
+                if (!it.mkdirs()) Log.e(LOG_TAG, "couldn't create ${it.absoluteFile}")
             }
             val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             file = if (context != null) {
@@ -46,7 +45,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     }
 
     @SuppressLint("LogNotTimber")
-    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
         try {
             val logTimeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS", Locale.getDefault()).format(Date())
 
@@ -70,10 +69,8 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
                 }
             }
 
-            if (Thread.currentThread().name == "main")
-                _lastLogEntry.value = Event(textLine)
-            else
-                Handler(Looper.getMainLooper()).post { _lastLogEntry.value = Event(textLine) }
+            if (Thread.currentThread().name == "main") _lastLogEntry.value = Event(textLine)
+            else Handler(Looper.getMainLooper()).post { _lastLogEntry.value = Event(textLine) }
 
         } catch (e: Exception) {
             // Log to prevent an endless loop
@@ -84,7 +81,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
             }
         }
         // Don't call super, otherwise it logs twice
-        // super.log(priority, tag, message, t)
+        // super.logMessage(priority, tag, message, t, args)
     }
 
     fun getFileName(): String = file.absolutePath

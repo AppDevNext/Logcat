@@ -6,7 +6,7 @@ import timber.log.Timber
 import timber.log.Timber.Forest.tag
 
 // If you use old logcat, e.g Android Studio Electric Eel, you should use for newLogcat a false
-open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.DebugTree() {
+open class DebugFormatTree(delegator: Class<*>? = null, private val newLogcat: Boolean = true) : Timber.DebugTree(delegator) {
 
     private var codeIdentifier = ""
     private var method = ""
@@ -38,7 +38,7 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
     }
 
     // if there is an JSON string, try to print out pretty
-    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
         var localMessage = message.trim()
         if (localMessage.startsWith("{") && localMessage.endsWith("}")) {
             try {
@@ -47,6 +47,6 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
             } catch (_: JSONException) {
             }
         }
-        super.log(priority, tag, "$method: $localMessage", t)
+        super.logMessage(priority, tag, "$method: $localMessage", t, *args)
     }
 }
