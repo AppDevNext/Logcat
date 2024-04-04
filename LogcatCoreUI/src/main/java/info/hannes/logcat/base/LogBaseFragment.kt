@@ -1,5 +1,6 @@
 package info.hannes.logcat.base
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -100,6 +101,7 @@ abstract class LogBaseFragment : Fragment() {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_log, menu)
         verboseItem = menu.findItem(R.id.menu_show_verbose)
@@ -225,6 +227,7 @@ abstract class LogBaseFragment : Fragment() {
 
     abstract fun clearLog()
 
+    @SuppressLint("RestrictedApi")
     private fun stopSearchView() {
         val searchAutoComplete = searchView?.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
 
