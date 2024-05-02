@@ -10,24 +10,25 @@ on:
 
 jobs:
   BuildTest:
-    name: Build and test JDK ${{ matrix.java_version }} ${{ matrix.api }} ${{ matrix.tag }} ${{ matrix.abi }}
-    runs-on: macOS-13
+    name: Test ${{ matrix.os }} ${{ matrix.abi }} ${{ matrix.api }} ${{ matrix.tag }} java ${{ matrix.java_version }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         java_version: [ 17 ]
+        os:  [ macOS-13 ]
         api: [ 28 ]
         abi: [ x86_64 ]
         tag: [ 'default' ]
 #        include:
-#          #          - api: 31
-#          #            abi: x86_64
-#          #            tag: 'google_apis'
-#          - api: 30
-#            abi: x86_64
+#          - java_version: 17
+#            os: macOS-14
+#            api: 31
+#            abi: arm64-v8a
 #            tag: 'google_apis'
-#            java_version: 17
     steps:
+      - name: Show architecture
+        run: uname -a
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install JDK ${{ matrix.java_version }}
@@ -37,7 +38,7 @@ jobs:
           java-version: ${{ matrix.java_version }}
       - uses: gradle/wrapper-validation-action@v3
       - name: Install Android SDK
-        uses: malinskiy/action-android/install-sdk@release/0.1.4
+        uses: hannesa2/action-android/install-sdk@0.1.4.10
       - name: Decrypt keystore
         run: ./signing/decrypt.sh
         env:
@@ -47,7 +48,7 @@ jobs:
       - name: Run tests
         run: ./gradlew test
       - name: Run instrumentation tests
-        uses: malinskiy/action-android/emulator-run-cmd@release/0.1.4
+        uses: hannesa2/action-android/emulator-run-cmd@0.1.4.10
         with:
           cmd: ./gradlew cAT --continue
           api: ${{ matrix.api }}
