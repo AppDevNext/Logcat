@@ -10,16 +10,16 @@ on:
 
 jobs:
   BuildTest:
-    name: Test ${{ matrix.os }} ${{ matrix.abi }} ${{ matrix.api }} ${{ matrix.tag }} java ${{ matrix.java_version }}
+    name: Test
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        java_version: [ 17 ]
         os:  [ macOS-13 ]
         api: [ 28 ]
         abi: [ x86_64 ]
         tag: [ 'default' ]
+        java_version: [ 17 ]
 #        include:
 #          - java_version: 17
 #            os: macOS-14
@@ -74,7 +74,12 @@ jobs:
         run: ./signing/cleanup.sh
   Check:
     name: Check
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+        java_version: [ 17 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -82,7 +87,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
-          java-version: 17
+          java-version: ${{ matrix.java_version }}
       - name: gradle check
         run: ./gradlew check
       - name: Archive Lint report
