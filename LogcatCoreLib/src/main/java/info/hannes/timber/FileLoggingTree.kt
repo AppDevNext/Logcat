@@ -45,7 +45,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     }
 
     @SuppressLint("LogNotTimber")
-    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         try {
             val logTimeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS", Locale.getDefault()).format(Date())
 

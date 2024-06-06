@@ -38,7 +38,7 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
     }
 
     // if there is an JSON string, try to print out pretty
-    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         var localMessage = message.trim()
         if (localMessage.startsWith("{") && localMessage.endsWith("}")) {
             try {
@@ -47,6 +47,19 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
             } catch (_: JSONException) {
             }
         }
-        super.logMessage(priority, tag, "$method: $localMessage", t, args)
+        super.log(priority, tag, "$method: $localMessage", t)
     }
+
+    // if there is an JSON string, try to print out pretty
+//    override fun logMessage(priority: Int, tag: String?, message: String, t: Throwable?, vararg args: Any?) {
+//        var localMessage = message.trim()
+//        if (localMessage.startsWith("{") && localMessage.endsWith("}")) {
+//            try {
+//                val json = JSONObject(message)
+//                localMessage = json.toString(3)
+//            } catch (_: JSONException) {
+//            }
+//        }
+//        super.logMessage(priority, tag, "$method: $localMessage", t, args)
+//    }
 }
