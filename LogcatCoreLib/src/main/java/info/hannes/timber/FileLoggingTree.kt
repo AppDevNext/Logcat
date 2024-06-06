@@ -33,8 +33,7 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
     init {
         externalCacheDir.let {
             if (!it.exists()) {
-                if (!it.mkdirs())
-                    Log.e(LOG_TAG, "couldn't create ${it.absoluteFile}")
+                if (!it.mkdirs()) Log.e(LOG_TAG, "couldn't create ${it.absoluteFile}")
             }
             val fileNameTimeStamp = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             file = if (context != null) {
@@ -70,10 +69,8 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
                 }
             }
 
-            if (Thread.currentThread().name == "main")
-                _lastLogEntry.value = Event(textLine)
-            else
-                Handler(Looper.getMainLooper()).post { _lastLogEntry.value = Event(textLine) }
+            if (Thread.currentThread().name == "main") _lastLogEntry.value = Event(textLine)
+            else Handler(Looper.getMainLooper()).post { _lastLogEntry.value = Event(textLine) }
 
         } catch (e: Exception) {
             // Log to prevent an endless loop

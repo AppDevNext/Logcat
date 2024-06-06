@@ -24,7 +24,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.1"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.1'
-    api 'com.jakewharton.timber:timber:5.0.1'
+    api 'com.github.hannesa2:timber:5.0.1-delegator'
 }
 
 publishing {
