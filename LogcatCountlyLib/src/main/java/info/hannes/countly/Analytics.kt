@@ -19,13 +19,15 @@ class Analytics : IAnalytics {
         return countlyInstance.isInitialized
     }
 
-    override fun recordEvent(event: String) {
+    private fun toPair(vararg args: Any?) = args.map { param -> Pair(param.toString(), param.toString()) }
+
+    override fun recordEvent(event: String, vararg args: Any?) {
         if (isInitialized()) {
-            countlyInstance.events().recordEvent(event, segmentation, 1)
+            countlyInstance.events().recordEvent(event, segmentation.plus(toPair(args)), 1)
         }
     }
 
-    override fun recordError(message: String) {
+    override fun recordError(message: String, vararg args: Any?) {
         if (isInitialized()) {
             countlyInstance.crashes().recordHandledException(RuntimeException(message))
         }
@@ -37,7 +39,7 @@ class Analytics : IAnalytics {
         }
     }
 
-    override fun recordWarning(message: String) {
+    override fun recordWarning(message: String, vararg args: Any?) {
         if (isInitialized()) {
             countlyInstance.crashes().recordHandledException(RuntimeException(message))
         }
