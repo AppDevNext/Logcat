@@ -63,7 +63,7 @@ class Analytics : IAnalytics {
             var version = ""
             try {
                 val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-                version = pInfo.versionName
+                version = pInfo.versionName.toString()
             } catch (ignore: PackageManager.NameNotFoundException) {
             }
             segmentation["app_version"] = version
