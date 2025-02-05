@@ -51,14 +51,9 @@ static def getTag() {
 static def useFirebase() {
     def process = "grep DUMMYKEY app/google-services.json -R | wc -c".execute()
     def grepResult = process.text.toString().split(":")[1].toInteger()
-    if (grepResult == 1) {
-        println("Firebase=false $grepResult")
-        return "false"
-    }
-    else {
-        println("Firebase=true $grepResult")
-        return "true"
-    }
+    def result = !(grepResult == 1)
+    println("Firebase=$result")
+    return result.toString()
 }
 
 @SuppressWarnings('unused')
