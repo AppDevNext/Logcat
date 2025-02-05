@@ -15,8 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:  [ macOS-13 ]
-        api: [ 28 ]
+        os: [ ubuntu-22.04 ]
+        api: [ 34 ]
         abi: [ x86_64 ]
         tag: [ 'default' ]
         java_version: [ 17 ]
@@ -36,6 +36,17 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java_version }}
+      - name: kvm support
+        run: |
+          egrep -c '(vmx|svm)' /proc/cpuinfo
+          id
+          sudo adduser $USER kvm
+          sudo chown -R $USER /dev/kvm
+          id
+      - name: prepare
+        run: |
+          sudo apt-get update && sudo apt-get install -y exiftool imagemagick xdg-utils libimage-exiftool-perl zsh jq xorg
+      #          brew install exiftool imagemagick
       - uses: gradle/wrapper-validation-action@v3
       - name: Install Android SDK
         uses: hannesa2/action-android/install-sdk@0.1.16.7
@@ -45,8 +56,8 @@ jobs:
           CRYPT_PASS: ${{ secrets.CRYPT_PASS }}
       - name: Build project
         run: ./gradlew assembleDebug
-      - name: Run tests
-        run: ./gradlew test
+      - name: Test publish to jitpack.io
+        run: ./gradlew :LogcatCoreLib:assembleRelease :LogcatCoreLib:publishToMavenLocal :LogcatCoreUI:assembleRelease :LogcatCoreUI:publishToMavenLocal :LogcatCrashlyticLib:assembleRelease :LogcatCrashlyticLib:publishToMavenLocal :LogcatCountlyLib:assembleRelease :LogcatCountlyLib:publishToMavenLocal
       - name: Run instrumentation tests
         uses: hannesa2/action-android/emulator-run-cmd@0.1.16.7
         with:
