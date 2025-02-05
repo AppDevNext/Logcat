@@ -1,4 +1,4 @@
-package info.hannes.logcat.sample
+package info.hannes.logcat.app
 
 import android.annotation.SuppressLint
 import android.app.Activity

@@ -1,4 +1,4 @@
-package info.hannes.logcat.sample
+package info.hannes.logcat.app
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
-import info.hannes.logcat.sample.databinding.ActivityMainBinding
+import info.hannes.logcat.app.databinding.ActivityMainBinding
 import info.hannes.logcat.ui.BothLogActivity
 import info.hannes.logcat.ui.LogcatActivity
 import info.hannes.logcat.ui.LogfileActivity
