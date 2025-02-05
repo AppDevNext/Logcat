@@ -11,7 +11,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity
-            android:name="info.hannes.logcat.sample.MainActivity"
+            android:name="info.hannes.logcat.app.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

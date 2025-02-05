@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.screenshot.captureToBitmap
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import info.hannes.logcat.sample.MainActivity
+import info.hannes.logcat.app.MainActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
 import org.junit.Rule
@@ -58,7 +58,7 @@ class MainActivityTest {
 
     @Test
     fun navigationBothTest() {
-        val menu = onView(withText(info.hannes.logcat.sample.R.string.all_logfile))
+        val menu = onView(withText(info.hannes.logcat.app.R.string.all_logfile))
         menu.check(matches(isDisplayed()))
         menu.perform(click())
         Thread.sleep(1000)
