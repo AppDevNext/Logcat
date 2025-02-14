@@ -94,7 +94,7 @@ To avoid build failure due to higher version of kotlinx-coroutines-android (you 
 
 ## License
 
-    Copyright (C) 2012-2021 AppDevNext
+    Copyright (C) 2025 AppDevNext
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
