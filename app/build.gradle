@@ -1,21 +1,21 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-//    id 'com.google.gms.google-services'
-//    id 'com.google.firebase.crashlytics'
+    id "com.android.application"
+    id "kotlin-android"
+//    id "com.google.gms.google-services"
+//    id "com.google.firebase.crashlytics"
 }
 
 if (useFirebase() == "true") {
-    apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'com.google.firebase.crashlytics'
+    apply plugin: "com.google.gms.google-services"
+    apply plugin: "com.google.firebase.crashlytics"
 }
 
 android {
-    namespace 'info.hannes.logcat.app'
-    testNamespace 'info.hannes.logcat.sampletest'
+    namespace "info.hannes.logcat.app"
+    testNamespace "info.hannes.logcat.sampletest"
 
     defaultConfig {
-        applicationId 'info.hannes.logcat.sample'
+        applicationId "info.hannes.logcat.sample"
         versionCode 1
         versionName "1.0"
 
@@ -23,10 +23,10 @@ android {
         compileSdk propCompileSdkVersion
         targetSdkVersion 35
 
-        buildConfigField "boolean", 'WITH_FIREBASE', useFirebase()
+        buildConfigField "boolean", "WITH_FIREBASE", useFirebase()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArguments useTestStorageService: 'true'
+        testInstrumentationRunnerArguments useTestStorageService: "true"
     }
 
     buildFeatures {
@@ -43,7 +43,7 @@ android {
     }
     packagingOptions {
         resources {
-            pickFirsts += ['META-INF/atomicfu.kotlin_module']
+            pickFirsts += ["META-INF/atomicfu.kotlin_module"]
         }
     }
 
@@ -54,16 +54,16 @@ android {
 }
 
 dependencies {
-    implementation project(':LogcatCoreLib')
-    implementation project(':LogcatCoreUI')
-    implementation project(':LogcatCrashlyticLib')
-    implementation project(':LogcatCountlyLib')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation project(":LogcatCoreLib")
+    implementation project(":LogcatCoreUI")
+    implementation project(":LogcatCrashlyticLib")
+    implementation project(":LogcatCountlyLib")
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1"
 
-    androidTestImplementation 'com.github.AppDevNext:Moka:1.6'
+    androidTestImplementation "com.github.AppDevNext:Moka:1.6"
     androidTestImplementation "androidx.test.ext:junit-ktx:1.1.5"
     androidTestUtil "androidx.test.services:test-services:1.5.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
