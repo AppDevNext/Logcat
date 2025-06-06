@@ -37,7 +37,6 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
             )
     }
 
-    // if there is an JSON string, try to print out pretty
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         var localMessage = message.trim()
         if (localMessage.startsWith("{") && localMessage.endsWith("}")) {
@@ -49,4 +48,5 @@ open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.Debug
         }
         super.log(priority, tag, "$method: $localMessage", t)
     }
+
 }
