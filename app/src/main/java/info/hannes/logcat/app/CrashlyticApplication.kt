@@ -6,6 +6,7 @@ import android.os.*
 import android.provider.Settings
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import info.hannes.crashlytic.CrashlyticsTree
+import info.hannes.logcat.CustomLogger
 import info.hannes.logcat.LoggingApplication
 import info.hannes.timber.FileLoggingTree
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
-class CrashlyticApplication : LoggingApplication() {
+class CrashlyticApplication : LoggingApplication(delegator = CustomLogger::class.java) {
+
+    private val logger = CustomLogger()
 
     @SuppressLint("HardwareIds")
     override fun onCreate() {
@@ -43,15 +46,15 @@ class CrashlyticApplication : LoggingApplication() {
         } else
             Timber.w("No valid Firebase key was given")
 
-        Timber.d("Debug test")
-        Timber.i("Info test")
-        Timber.w("Warning test")
-        Timber.e("Error test")
+        logger.d("Debug test")
+        logger.i("Info test")
+        logger.w("Warning test")
+        logger.e("Error test")
 
         var x = 0
         val runner: Runnable = object : Runnable {
             override fun run() {
-                Timber.d("live=$x")
+                logger.d("live=$x")
                 x++
                 Handler(Looper.getMainLooper()).postDelayed(this, 3000)
             }
