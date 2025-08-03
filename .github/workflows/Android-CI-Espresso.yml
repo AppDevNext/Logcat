@@ -15,17 +15,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-22.04 ]
+        os: [ macOS-14 ]
         api: [ 34 ]
-        abi: [ x86_64 ]
-        tag: [ 'default' ]
+        abi: [ arm64-v8a ]
+        tag: [ 'google_apis' ]
         java_version: [ 17 ]
-#        include:
-#          - java_version: 17
-#            os: macOS-14
-#            api: 31
-#            abi: arm64-v8a
-#            tag: 'google_apis'
+        include:
+          - os: macOS-13
+            api: 28
+            abi: x86_64
+            tag: 'default'
+            java_version: 17
     steps:
       - name: Show architecture
         run: uname -a
@@ -36,17 +36,6 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java_version }}
-      - name: kvm support
-        run: |
-          egrep -c '(vmx|svm)' /proc/cpuinfo
-          id
-          sudo adduser $USER kvm
-          sudo chown -R $USER /dev/kvm
-          id
-      - name: prepare
-        run: |
-          sudo apt-get update && sudo apt-get install -y exiftool imagemagick xdg-utils libimage-exiftool-perl zsh jq xorg
-      #          brew install exiftool imagemagick
       - uses: gradle/actions/wrapper-validation@v4
       - name: Install Android SDK
         uses: hannesa2/action-android/install-sdk@0.1.16.7
