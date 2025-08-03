@@ -22,8 +22,8 @@ class CrashlyticApplication : LoggingApplication() {
 
         StrictMode.setThreadPolicy(
             StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads()
-                .detectDiskWrites()
+//                .detectDiskReads()
+//                .detectDiskWrites()
                 .detectNetwork()
                 .penaltyDialog()
                 .penaltyLog()
