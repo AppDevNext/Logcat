@@ -30,7 +30,7 @@ jobs:
       - name: Show architecture
         run: uname -a
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v4
         with:
@@ -89,7 +89,7 @@ jobs:
         java_version: [ 17 ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v4
         with:
