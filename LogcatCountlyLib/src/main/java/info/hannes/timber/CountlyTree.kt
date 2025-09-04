@@ -31,8 +31,8 @@ class CountlyTree(private val analytics: Analytics, private val serverIgnoreToke
 
         when {
             t != null -> analytics.recordError(t)
-            priority == Log.WARN -> analytics.recordEvent(localMessage)
-            else -> analytics.recordError(localMessage)
+            priority == Log.WARN -> analytics.recordEvent(localMessage, args)
+            else -> analytics.recordError(localMessage, args)
         }
     }
 
