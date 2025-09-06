@@ -37,8 +37,7 @@ class LogcatActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                // Override home navigation button to call onBackPressed
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)
