@@ -77,7 +77,7 @@ class Analytics : IAnalytics {
                     .setLoggingEnabled(loggingEnabled)
                     .enableAutomaticViewTracking()
                     .setHttpPostForced(true)
-                    .enableCrashReporting()
+            config.crashes.enableCrashReporting()
             Countly.sharedInstance().init(config)
         }
     }
