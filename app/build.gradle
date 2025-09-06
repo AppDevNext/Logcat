@@ -19,7 +19,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        minSdkVersion 21
+        minSdkVersion 23
         compileSdk propCompileSdkVersion
         targetSdkVersion 36
 
@@ -38,7 +38,6 @@ android {
         release {
         }
         debug {
-            defaultConfig.minSdkVersion 21
         }
     }
     packagingOptions {
