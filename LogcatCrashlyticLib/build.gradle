@@ -8,7 +8,7 @@ plugins {
 android {
     defaultConfig {
         compileSdk propCompileSdkVersion
-        minSdkVersion 21
+        minSdkVersion 23
         project.archivesBaseName = "LogcatCrashlytic"
     }
     namespace "info.hannes.logcat.crashlytic"
@@ -24,12 +24,11 @@ android {
 dependencies {
     api project(":LogcatCoreLib")
     // Import the BoM for the Firebase platform
-    api platform("com.google.firebase:firebase-bom:33.5.0")
+    api platform("com.google.firebase:firebase-bom:34.2.0")
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don"t specify versions in Firebase library dependencies
     api "com.google.firebase:firebase-crashlytics"
-    api "com.google.firebase:firebase-analytics-ktx"
 }
 
 publishing {
