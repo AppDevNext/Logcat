@@ -47,7 +47,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y exiftool imagemagick xdg-utils libimage-exiftool-perl zsh jq xorg
       #          brew install exiftool imagemagick
-      - uses: gradle/actions/wrapper-validation@v4
+      - uses: gradle/actions/wrapper-validation@v5
       - name: Install Android SDK
         uses: hannesa2/action-android/install-sdk@0.1.16.7
       - name: Decrypt keystore
