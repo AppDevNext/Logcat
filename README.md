@@ -25,7 +25,7 @@ To tell Gradle where to find the library, make sure `build.gradle` also contains
 allprojects {
     repositories {
         ...
-        maven { url 'https://jitpack.io' }
+        maven { url "https://jitpack.io" }
     }
 }
 ```
