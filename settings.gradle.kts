@@ -1,0 +1,5 @@
+include(":LogcatCoreLib")
+include(":LogcatCoreUI")
+include(":LogcatCrashlyticLib")
+include(":LogcatCountlyLib")
+include(":app")
