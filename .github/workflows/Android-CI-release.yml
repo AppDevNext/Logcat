@@ -10,10 +10,10 @@ jobs:
     name: Publish release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          submodules: true
       - name: Get the version
         id: tagger
         uses: jimschubert/query-tag-action@v2

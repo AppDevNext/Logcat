@@ -20,17 +20,19 @@ jobs:
         abi: [ x86_64 ]
         tag: [ 'default' ]
         java_version: [ 17 ]
-#        include:
-#          - java_version: 17
-#            os: macOS-14
-#            api: 31
-#            abi: arm64-v8a
-#            tag: 'google_apis'
+    #        include:
+    #          - java_version: 17
+    #            os: macOS-14
+    #            api: 31
+    #            abi: arm64-v8a
+    #            tag: 'google_apis'
     steps:
       - name: Show architecture
         run: uname -a
-      - name: Checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: true
       - name: Install JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v5
         with:
@@ -88,8 +90,10 @@ jobs:
         os: [ ubuntu-latest ]
         java_version: [ 17 ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: true
       - name: Install JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v5
         with:

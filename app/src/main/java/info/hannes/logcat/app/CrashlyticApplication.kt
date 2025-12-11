@@ -38,7 +38,7 @@ class CrashlyticApplication : LoggingApplication() {
 
         if (BuildConfig.WITH_FIREBASE) {
             Timber.i("I use Firebase")
-            FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", info.hannes.logcat.ui.BuildConfig.VERSIONNAME)
+            FirebaseCrashlytics.getInstance().setCustomKey("VERSION_NAME", info.hannes.logcat.ui.BuildConfig.VERSION_NAME)
             Timber.plant(CrashlyticsTree(Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)))
         } else
             Timber.w("No valid Firebase key was given")
