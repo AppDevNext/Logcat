@@ -1,6 +1,6 @@
 # https://github.com/uber/AutoDispose/blob/master/.github/workflows/ci.yml
 
-name: CI
+name: Build and Test
 
 on:
   push:
