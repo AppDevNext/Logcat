@@ -13,9 +13,9 @@ The easiest way to add Logcat to your project is via Gradle. Just add the follow
 
 ```groovy
 dependencies {
-    implementation "com.github.AppDevNext.Logcat:LogcatCoreLib:$latest_version"
-    implementation "com.github.AppDevNext.Logcat:LogcatCoreUI:$latest_version" // UI related classes like Activity, Fragment
-    implementation 'com.github.AppDevNext.Logcat:LogcatCrashlyticLib:$latest_version'
+    implementation "com.github.AppDevNext.Logcat:core:$latest_version"
+    implementation "com.github.AppDevNext.Logcat:coreui:$latest_version" // UI related classes like Activity, Fragment
+    implementation 'com.github.AppDevNext.Logcat:crashlytic:$latest_version'
 }
 ```
 
@@ -85,7 +85,7 @@ or for file logging
 
 To avoid build failure due to higher version of kotlinx-coroutines-android (you are then responsible for loading the excluded required dependencies)
 
-        implementation('com.github.AppDevNext.Logcat:LogcatCore:$latest_version') {
+        implementation('com.github.AppDevNext.Logcat:core:$latest_version') {
             exclude group: 'androidx.lifecycle'
             exclude group: 'org.jetbrains.kotlin'
             exclude group: 'org.jetbrains.kotlinx'

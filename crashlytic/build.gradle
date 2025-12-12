@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    api project(':LogcatCoreLib')
+    api project(':core')
     // Import the BoM for the Firebase platform
     api platform('com.google.firebase:firebase-bom:33.5.0')
 

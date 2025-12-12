@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    api project(':LogcatCoreLib')
+    api project(':core')
     api "ly.count.android:sdk:24.4.1"
 }
 

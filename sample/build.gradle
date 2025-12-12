@@ -53,10 +53,10 @@ android {
 }
 
 dependencies {
-    implementation project(':LogcatCoreLib')
-    implementation project(':LogcatCoreUI')
-    implementation project(':LogcatCrashlyticLib')
-    implementation project(':LogcatCountlyLib')
+    implementation project(':core')
+    implementation project(':coreui')
+    implementation project(':crashlytic')
+    implementation project(':crashlytic')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

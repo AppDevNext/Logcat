@@ -57,7 +57,7 @@ jobs:
       - name: Build project
         run: ./gradlew assembleDebug
       - name: Test publish to jitpack.io
-        run: ./gradlew :LogcatCoreLib:assembleRelease :LogcatCoreLib:publishToMavenLocal :LogcatCoreUI:assembleRelease :LogcatCoreUI:publishToMavenLocal :LogcatCrashlyticLib:assembleRelease :LogcatCrashlyticLib:publishToMavenLocal :LogcatCountlyLib:assembleRelease :LogcatCountlyLib:publishToMavenLocal
+        run: ./gradlew :core:assembleRelease :core:publishToMavenLocal :coreui:assembleRelease :coreui:publishToMavenLocal :crashlytic:assembleRelease :crashlytic:publishToMavenLocal :countly:assembleRelease :countly:publishToMavenLocal
       - name: Run instrumentation tests
         uses: hannesa2/action-android/emulator-run-cmd@0.1.16.7
         with:
