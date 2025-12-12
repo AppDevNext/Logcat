@@ -1,4 +1,4 @@
 jdk:
   - openjdk17
 install:
-  - ./gradlew :LogcatCoreLib:assembleRelease :LogcatCoreLib:publishToMavenLocal :LogcatCoreUI:assembleRelease :LogcatCoreUI:publishToMavenLocal :LogcatCrashlyticLib:assembleRelease :LogcatCrashlyticLib:publishToMavenLocal :LogcatCountlyLib:assembleRelease :LogcatCountlyLib:publishToMavenLocal
+  - ./gradlew :core:assembleRelease :core:publishToMavenLocal :coreui:assembleRelease :coreui:publishToMavenLocal :crashlytic:assembleRelease :crashlytic:publishToMavenLocal :countly:assembleRelease :countly:publishToMavenLocal

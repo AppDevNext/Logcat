@@ -51,9 +51,9 @@ jobs:
           name: ${{steps.tagger.outputs.tag}}
           generate_release_notes: true
           files: |
-            LogcatCrashlyticLib/build/outputs/aar/crashlytic-release.aar
+            crashlytic/build/outputs/aar/crashlytic-release.aar
             LogcatCountlyLib/build/outputs/aar/countly-release.aar
-            LogcatCoreLib/build/outputs/aar/core-release.aar
-            LogcatCoreUi/build/outputs/aar/coreui-release.aar
+            core/build/outputs/aar/core-release.aar
+            coreui/build/outputs/aar/coreui-release.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
