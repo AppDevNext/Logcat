@@ -10,7 +10,7 @@ android {
         buildConfigField "String", "VERSIONNAME", "\"" + getTag() + "\""
 
         minSdkVersion 21
-        project.archivesBaseName = "LogcatCore"
+        project.archivesBaseName = "core"
         consumerProguardFiles "consumer.pro"
     }
     namespace 'info.hannes.logcat'
