@@ -9,7 +9,7 @@ android {
     defaultConfig {
         compileSdk propCompileSdkVersion
         minSdkVersion 21
-        project.archivesBaseName = "LogcatCrashlytic"
+        project.archivesBaseName = "crashlytic"
     }
     namespace 'info.hannes.logcat.crashlytic'
     compileOptions {

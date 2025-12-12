@@ -8,7 +8,7 @@ android {
     defaultConfig {
         compileSdk propCompileSdkVersion
         minSdkVersion 21
-        project.archivesBaseName = "LogcatCountly"
+        project.archivesBaseName = "countly"
     }
     namespace 'info.hannes.logcat.countly'
     compileOptions {
