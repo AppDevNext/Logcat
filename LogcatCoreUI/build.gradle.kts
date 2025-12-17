@@ -31,7 +31,7 @@ android {
 dependencies {
     api(project(":LogcatCoreLib"))
     implementation("androidx.core:core-ktx:1.17.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
