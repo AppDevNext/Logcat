@@ -1,4 +1,8 @@
 jdk:
   - openjdk17
 install:
-  - ./gradlew :LogcatCoreLib:assembleRelease :LogcatCoreLib:publishToMavenLocal :LogcatCoreUI:assembleRelease :LogcatCoreUI:publishToMavenLocal :LogcatCrashlyticLib:assembleRelease :LogcatCrashlyticLib:publishToMavenLocal :LogcatCountlyLib:assembleRelease :LogcatCountlyLib:publishToMavenLocal
+  - ./gradlew :LogcatCoreLib:assembleRelease :LogcatCoreLib:publishToMavenLocal
+  - ./gradlew :LogcatCoreUI:assembleRelease :LogcatCoreUI:publishToMavenLocal
+  - ./gradlew :LogcatCrashlyticLib:assembleRelease :LogcatCrashlyticLib:publishToMavenLocal
+  - ./gradlew :LogcatCountlyLib:assembleRelease :LogcatCountlyLib:publishToMavenLocal
+  - find . -name "*.aar"
