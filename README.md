@@ -24,7 +24,6 @@ To tell Gradle where to find the library, make sure `build.gradle` also contains
 ```groovy
 allprojects {
     repositories {
-        ...
         maven { url "https://jitpack.io" }
     }
 }
@@ -61,27 +60,27 @@ or for file logging
 
 1. Define theme in `styles.xml` or `themes.xml` something like
 
-```xml
-<style name="CustomDetailTheme" parent="DetailTheme">
-    <item name="colorAssertLine">#ff0000</item>
-    <item name="colorDebugLine">#00ff00</item>
-    <item name="colorErrorLine">#ff0000</item>
-    <item name="colorInfoLine">?android:attr/textColorPrimary</item>
-    <item name="colorVerboseLine">#0000ff</item>
-    <item name="colorWarningLine">#ffff00</item>
-</style>
-```
+    ```xml
+    <style name="CustomDetailTheme" parent="DetailTheme">
+        <item name="colorAssertLine">#ff0000</item>
+        <item name="colorDebugLine">#00ff00</item>
+        <item name="colorErrorLine">#ff0000</item>
+        <item name="colorInfoLine">?android:attr/textColorPrimary</item>
+        <item name="colorVerboseLine">#0000ff</item>
+        <item name="colorWarningLine">#ffff00</item>
+    </style>
+    ```
 
 2. Define activity with custom theme in `AndroidManifest.xml`
 
-```xml
-<activity
-    android:name="info.hannes.logcat.LogfileActivity"
-    android:label="Timber"
-    android:theme="@style/CustomDetailTheme" />
-```
+    ```xml
+    <activity
+        android:name="info.hannes.logcat.LogfileActivity"
+        android:label="Timber"
+        android:theme="@style/CustomDetailTheme" />
+    ```
 
-### Using newest version of the lib in a Kotlin 1.3.xx project
+### Using the newest version of the lib in a Kotlin 1.3.xx project
 
 To avoid build failure due to higher version of kotlinx-coroutines-android (you are then responsible for loading the excluded required dependencies)
 
@@ -90,7 +89,6 @@ To avoid build failure due to higher version of kotlinx-coroutines-android (you 
             exclude group: 'org.jetbrains.kotlin'
             exclude group: 'org.jetbrains.kotlinx'
         }
-
 
 ## License
 
