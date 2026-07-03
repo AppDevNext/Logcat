@@ -134,7 +134,7 @@ class LogListAdapter(private var completeLogs: MutableList<String>, filter: Stri
             val colorStateList = ta.getColorStateList(0)
             ta.recycle()
             colorStateList
-        } catch (e: Resources.NotFoundException) {
+        } catch (_: Resources.NotFoundException) {
             null
         }
     }
