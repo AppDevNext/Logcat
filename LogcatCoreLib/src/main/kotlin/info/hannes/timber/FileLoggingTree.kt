@@ -24,9 +24,9 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
         private set
 
     val lastLogEntry: LiveData<Event<String>>
-        get() = _lastLogEntry
+        get() = lastLogEntryLocal
 
-    protected val _lastLogEntry = MutableLiveData<Event<String>>()
+    protected val lastLogEntryLocal = MutableLiveData<Event<String>>()
 
     private var logImpossible = false
 
@@ -71,9 +71,9 @@ open class FileLoggingTree(externalCacheDir: File, context: Context? = null, fil
             }
 
             if (Thread.currentThread().name == "main")
-                _lastLogEntry.value = Event(textLine)
+                lastLogEntryLocal.value = Event(textLine)
             else
-                Handler(Looper.getMainLooper()).post { _lastLogEntry.value = Event(textLine) }
+                Handler(Looper.getMainLooper()).post { lastLogEntryLocal.value = Event(textLine) }
 
         } catch (e: Exception) {
             // Log to prevent an endless loop

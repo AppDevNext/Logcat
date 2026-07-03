@@ -1,7 +1,6 @@
 package info.hannes.logcat.app
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,6 +11,7 @@ import info.hannes.logcat.app.databinding.ActivityMainBinding
 import info.hannes.logcat.ui.BothLogActivity
 import info.hannes.logcat.ui.LogcatActivity
 import info.hannes.logcat.ui.LogfileActivity
+import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_drawer_other_github -> {
                 val url = "https://github.com/AppDevNext/Logcat"
                 val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
+                i.data = url.toUri()
                 startActivity(i)
             }
         }

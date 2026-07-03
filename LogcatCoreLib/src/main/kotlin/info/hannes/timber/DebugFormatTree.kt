@@ -1,16 +1,17 @@
 package info.hannes.timber
 
+import android.annotation.SuppressLint
 import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
-import timber.log.Timber.Forest.tag
 
-// If you use old logcat, e.g Android Studio Electric Eel, you should use for newLogcat a false
+// If you use old logcat, e.g. Android Studio Electric Eel, you should use for newLogcat a false
 open class DebugFormatTree(private val newLogcat: Boolean = true) : Timber.DebugTree() {
 
     private var codeIdentifier = ""
     private var method = ""
 
+    @SuppressLint("DefaultLocale")
     override fun createStackElementTag(element: StackTraceElement): String? {
         if (newLogcat) {
             method = String.format(
