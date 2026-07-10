@@ -5,12 +5,15 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
+base {
+    archivesName = "LogcatCrashlytic"
+}
+
 android {
     namespace = "info.hannes.logcat.crashlytic"
     defaultConfig {
         compileSdk = 36
         minSdk = 23
-        setProperty("archivesBaseName", "LogcatCrashlytic")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

@@ -6,6 +6,10 @@ plugins {
     id("maven-publish")
 }
 
+base {
+    archivesName = "LogcatCore"
+}
+
 android {
     namespace = "info.hannes.logcat"
     defaultConfig {
@@ -13,7 +17,6 @@ android {
         buildConfigField("String", "VERSION_NAME", "\"${getVersionText()}\"")
 
         minSdk = 23
-        setProperty("archivesBaseName", "LogcatCore")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

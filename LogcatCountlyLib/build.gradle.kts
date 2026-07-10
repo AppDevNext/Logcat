@@ -4,12 +4,15 @@ plugins {
     id("maven-publish")
 }
 
+base {
+    archivesName = "LogcatCountly"
+}
+
 android {
     namespace = "info.hannes.logcat.countly"
     defaultConfig {
         compileSdk = 36
         minSdk = 23
-        setProperty("archivesBaseName", "LogcatCountly")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
