@@ -13,6 +13,7 @@ import android.view.*
 import android.widget.CompoundButton
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.FileProvider
+import androidx.core.view.MenuProvider
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
@@ -71,8 +72,6 @@ abstract class LogBaseFragment : Fragment() {
 
         showLogContent(savedInstanceState)
 
-        setHasOptionsMenu(true)
-
         arguments?.let {
             filename = it.getString(FILE_NAME)
             searchHint = it.getString(SEARCH_HINT)
@@ -82,6 +81,121 @@ abstract class LogBaseFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().addMenuProvider(object : MenuProvider {
+            @SuppressLint("RestrictedApi")
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_log, menu)
+                verboseItem = menu.findItem(R.id.menu_show_verbose)
+                val searchItem: MenuItem? = menu.findItem(R.id.menu_search)
+                val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
+                if (searchItem != null) {
+                    searchView = searchItem.actionView as SearchView
+                }
+
+                val searchAutoComplete = searchView?.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
+
+                val queryTextListener = object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextChange(newText: String): Boolean {
+                        setFilter2LogAdapter(newText)
+                        return true
+                    }
+
+                    override fun onQueryTextSubmit(query: String): Boolean {
+                        setFilter2LogAdapter(query)
+                        return true
+                    }
+                }
+                searchItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+                    override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                        setFilter2LogAdapter("")
+                        return true
+                    }
+
+                    override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                        return true
+                    }
+                })
+
+                searchView?.let {
+                    it.setIconifiedByDefault(true)
+                    it.maxWidth = Int.MAX_VALUE
+                    it.setOnQueryTextListener(queryTextListener)
+                    it.queryHint = searchHint
+                    it.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+                    if (currentFilter != "") {
+                        searchItem?.expandActionView()
+                        searchAutoComplete?.setText(currentFilter)
+                        it.isIconified = false
+                    } else {
+                        searchAutoComplete?.setText("")
+                        it.isIconified = true
+                    }
+                }
+
+                val switch = menu.findItem(R.id.menu_live).actionView as CompoundButton
+                switch.setOnCheckedChangeListener { _, isChecked ->
+                    live = isChecked
+                    if (live)
+                        showLogContent(null)
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_share -> {
+                        filename?.let { fileName ->
+                            logListAdapter?.let { sendLogContent(it.filterLogs, fileName) }
+                        }
+                        true
+                    }
+                    R.id.menu_clear -> {
+                        clearLog()
+                        showLogContent(null)
+                        true
+                    }
+                    R.id.menu_show_verbose -> {
+                        menuItem.isChecked = true
+                        stopSearchView()
+                        setFilter2LogAdapter("")
+                        true
+                    }
+                    R.id.menu_show_debug -> {
+                        menuItem.isChecked = true
+                        stopSearchView()
+                        setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE, DEBUG_LINE)
+                        true
+                    }
+                    R.id.menu_show_info -> {
+                        menuItem.isChecked = true
+                        stopSearchView()
+                        setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE)
+                        true
+                    }
+                    R.id.menu_show_warning -> {
+                        menuItem.isChecked = true
+                        stopSearchView()
+                        setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE)
+                        true
+                    }
+                    R.id.menu_show_error -> {
+                        menuItem.isChecked = true
+                        stopSearchView()
+                        setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE)
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            override fun onPrepareMenu(menu: Menu) {
+                menu.findItem(R.id.menu_live)?.isVisible = showLive
+            }
+        }, viewLifecycleOwner)
     }
 
     private fun showLogContent(savedInstanceState: Bundle?) {
@@ -101,72 +215,6 @@ abstract class LogBaseFragment : Fragment() {
         }
     }
 
-    @SuppressLint("RestrictedApi")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_log, menu)
-        verboseItem = menu.findItem(R.id.menu_show_verbose)
-        val searchItem: MenuItem? = menu.findItem(R.id.menu_search)
-        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-
-        if (searchItem != null) {
-            searchView = searchItem.actionView as SearchView
-        }
-
-        val searchAutoComplete = searchView?.findViewById<SearchView.SearchAutoComplete>(R.id.search_src_text)
-
-        val queryTextListener = object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String): Boolean {
-                setFilter2LogAdapter(newText)
-                return true
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                setFilter2LogAdapter(query)
-                return true
-            }
-        }
-        searchItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                setFilter2LogAdapter("")
-                return true // Return true to collapse action view
-            }
-
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                // Do something when expanded
-                return true // Return true to expand action view
-            }
-        })
-
-        searchView?.let {
-            it.setIconifiedByDefault(true)
-            it.maxWidth = Int.MAX_VALUE
-            it.setOnQueryTextListener(queryTextListener)
-            it.queryHint = searchHint
-            it.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-            if (currentFilter != "") {
-                searchItem?.expandActionView()
-                searchAutoComplete?.setText(currentFilter)
-                it.isIconified = false
-            } else {
-                searchAutoComplete?.setText("")
-                it.isIconified = true
-            }
-        }
-
-        val switch = menu.findItem(R.id.menu_live).actionView as CompoundButton
-        switch.setOnCheckedChangeListener { _, isChecked ->
-            live = isChecked
-            if (live)
-                showLogContent(null)
-        }
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.menu_live)?.isVisible = showLive
-    }
-
     private fun setFilter2LogAdapter(vararg filters: String) {
         // reset to verbose
         verboseItem?.let {
@@ -174,55 +222,6 @@ abstract class LogBaseFragment : Fragment() {
                 it.isChecked = true
         }
         logListAdapter?.setFilter(*filters)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var returnValue = true
-        when (item.itemId) {
-            R.id.menu_share -> filename?.let { fileName ->
-                logListAdapter?.let {
-                    sendLogContent(it.filterLogs, fileName)
-                }
-            }
-
-            R.id.menu_clear -> {
-                clearLog()
-                showLogContent(null)
-            }
-
-            R.id.menu_show_verbose -> {
-                item.isChecked = true
-                stopSearchView()
-                setFilter2LogAdapter("")
-            }
-
-            R.id.menu_show_debug -> {
-                item.isChecked = true
-                stopSearchView()
-                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE, DEBUG_LINE)
-            }
-
-            R.id.menu_show_info -> {
-                item.isChecked = true
-                stopSearchView()
-                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE, INFO_LINE)
-            }
-
-            R.id.menu_show_warning -> {
-                item.isChecked = true
-                stopSearchView()
-                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE, WARNING_LINE)
-            }
-
-            R.id.menu_show_error -> {
-                item.isChecked = true
-                stopSearchView()
-                setFilter2LogAdapter(ASSERT_LINE, ERROR_LINE)
-            }
-
-            else -> returnValue = super.onOptionsItemSelected(item)
-        }
-        return returnValue
     }
 
     abstract fun clearLog()
