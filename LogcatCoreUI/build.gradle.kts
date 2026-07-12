@@ -34,6 +34,7 @@ android {
 
 dependencies {
     api(project(":LogcatCoreLib"))
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")

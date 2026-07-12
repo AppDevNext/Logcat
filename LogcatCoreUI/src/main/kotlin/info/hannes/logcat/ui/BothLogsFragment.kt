@@ -1,13 +1,13 @@
 package info.hannes.logcat.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TabHost
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import info.hannes.logcat.base.LogBaseFragment.Companion.MAIL_LOGGER
 
 /**
@@ -21,11 +21,7 @@ class BothLogsFragment : Fragment() {
     private var emailAddress = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        @SuppressLint("InflateParams")
-        val view = inflater.inflate(R.layout.fragment_both_logs, null)
-
-        val mTabHost = view.findViewById<TabHost>(android.R.id.tabhost)
-        mTabHost.setup()
+        val view = inflater.inflate(R.layout.fragment_both_logs, container, false)
 
         arguments?.let {
             targetFilename = it.getString(TARGET_FILE_NAME, "")
@@ -36,29 +32,30 @@ class BothLogsFragment : Fragment() {
             }
         }
 
-        val mViewPager = view.findViewById<ViewPager>(R.id.pager)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+        val viewPager = view.findViewById<ViewPager2>(R.id.pager)
 
-        // If non-null, this is the current filter the user has provided.
-        val mTabsAdapter = TabsAdapter(requireActivity(), mTabHost, mViewPager)
+        val adapter = TabsAdapter(requireActivity())
+        adapter.addTab("Logcat", LogcatFragment.newInstance(targetFilename, searchHintLogcat, emailAddress))
+        adapter.addTab("Logfile", LogfileFragment.newInstance(targetFilename, searchHintLogfile, emailAddress))
+        viewPager.adapter = adapter
 
-        val logcatFragment = LogcatFragment.newInstance(targetFilename, searchHintLogcat, emailAddress)
-
-        val logfileFragment = LogfileFragment.newInstance(
-            targetFilename,
-            searchHintLogfile,
-            emailAddress
-        )
-
-        mTabsAdapter.addTab(mTabHost.newTabSpec("nameC").setIndicator("Logcat"), logcatFragment)
-        mTabsAdapter.addTab(mTabHost.newTabSpec("nameF").setIndicator("Logfile"), logfileFragment)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = adapter.getTabTitle(position)
+        }.attach()
 
         if (savedInstanceState != null) {
-            try {
-                mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"))
-            } catch (ignored: Exception) {
-            }
+            viewPager.currentItem = savedInstanceState.getInt(KEY_CURRENT_TAB, 0)
         }
+
         return view
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        view?.findViewById<ViewPager2>(R.id.pager)?.let {
+            outState.putInt(KEY_CURRENT_TAB, it.currentItem)
+        }
     }
 
     companion object {
@@ -66,6 +63,7 @@ class BothLogsFragment : Fragment() {
         private const val TARGET_FILE_NAME = "file name"
         private const val SEARCH_HINT_LOGFILE = "searchHintfile"
         private const val SEARCH_HINT_LOGCAT = "searchHintlogcat"
+        private const val KEY_CURRENT_TAB = "current_tab"
 
         fun newInstance(targetFileName: String, searchHintLogfile: String, searchHintLogcat: String, logMail: String = ""): BothLogsFragment {
             val fragment = BothLogsFragment()
