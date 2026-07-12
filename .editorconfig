@@ -35,8 +35,8 @@ ktlint_standard_no-consecutive-comments = disabled
 ktlint_standard_block-comment-initial-star-alignment = disabled
 ktlint_standard_parameter-list-spacing = disabled
 ktlint_standard_comment-wrapping = disabled
-ktlint_experimental = enabled # Enable rules marked as experimental for all rule sets that are enabled
+ktlint_standard_when-entry-braces = disabled
+ktlint_standard_blank-line-between-when-conditions = disabled
 ktlint_standard_some-experimental-rule = disabled # Disables the (experimental) `some-experimental-rule` in the `standard` rule set provided by KtLint
 ktlint_custom-rule-set = enabled # Enable all rules in the `custom-rule-set` rule set (not provided by KtLint)
 ktlint_custom-rule-set_custom-rule = disabled # Disables the `custom-rule` rule in the `custom-rule-set` rule set (not provided by KtLint)
-
