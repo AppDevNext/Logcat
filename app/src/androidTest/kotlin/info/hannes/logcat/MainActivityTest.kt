@@ -6,11 +6,12 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.captureToBitmap
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.DrawerActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import info.hannes.logcat.app.MainActivity
-import org.hamcrest.CoreMatchers.allOf
+import info.hannes.logcat.app.R
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,8 +30,7 @@ class MainActivityTest {
 
     @Before
     fun openDrawer() {
-        val navMain = onView(allOf(withContentDescription("Navigate up"), isDisplayed()))
-        navMain.perform(click())
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
         onView(isRoot())
             .perform(captureToBitmap { bitmap: Bitmap -> bitmap.writeToTestStorage("${javaClass.simpleName}_${nameRule.methodName}") })
     }
