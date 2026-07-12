@@ -15,11 +15,11 @@ buildscript {
 }
 
 subprojects {
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
-
     // Optionally configure plugin
-    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-        debug.set(false)
+    pluginManager.withPlugin("org.jlleitschuh.gradle.ktlint") {
+        configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+            debug.set(false)
+        }
     }
 }
 
