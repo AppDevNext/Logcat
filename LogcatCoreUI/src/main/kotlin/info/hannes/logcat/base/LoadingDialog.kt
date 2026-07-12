@@ -12,7 +12,6 @@ class LoadingDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retainInstance = true
         isCancelable = false
     }
 
@@ -44,16 +43,6 @@ class LoadingDialog : DialogFragment() {
             dialog.setOnKeyListener(keyListener)
         }
         return dialog
-    }
-
-    override fun onDestroyView() {
-        dialog?.let {
-            if (retainInstance) {
-                it.setDismissMessage(null)
-            }
-        }
-
-        super.onDestroyView()
     }
 
     companion object {
