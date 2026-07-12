@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("maven-publish")
     id("com.google.firebase.crashlytics")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 base {

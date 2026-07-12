@@ -3,11 +3,12 @@ import info.shell.runCommand
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 if (useFirebase() == "true") {
-    apply(plugin = "com.google.gms.google-services")
-    apply(plugin = "com.google.firebase.crashlytics")
+    pluginManager.apply("com.google.gms.google-services")
+    pluginManager.apply("com.google.firebase.crashlytics")
 }
 
 android {
