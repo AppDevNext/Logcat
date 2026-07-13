@@ -1,8 +1,6 @@
 plugins {
     id("com.android.library")
-    id("kotlin-android")
     id("maven-publish")
-    id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint")
 }
 

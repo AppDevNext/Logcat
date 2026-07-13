@@ -2,7 +2,6 @@ import info.git.versionHelper.getVersionText
 
 plugins {
     id("com.android.library")
-    id("kotlin-android")
     id("maven-publish")
     id("org.jlleitschuh.gradle.ktlint")
 }
