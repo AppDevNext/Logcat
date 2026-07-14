@@ -26,7 +26,7 @@ android {
 dependencies {
     api(project(":LogcatCoreLib"))
     // Import the BoM for the Firebase platform
-    api(platform("com.google.firebase:firebase-bom:34.15.0"))
+    api(platform("com.google.firebase:firebase-bom:34.16.0"))
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
