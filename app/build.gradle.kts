@@ -68,7 +68,7 @@ dependencies {
     implementation("androidx.test.uiautomator:uiautomator:2.4.0")
 
     androidTestImplementation("androidx.test:rules:1.7.0") //    GrantPermissionRule
-    androidTestImplementation("com.github.AppDevNext:Moka:1.8")
+    androidTestImplementation("com.github.AppDevNext:Moka:1.9")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.3.0")
     androidTestUtil("androidx.test.services:test-services:1.6.0")
     androidTestImplementation("org.hamcrest:hamcrest:3.0")
