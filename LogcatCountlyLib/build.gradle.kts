@@ -25,7 +25,7 @@ android {
 
 dependencies {
     api(project(":LogcatCoreLib"))
-    api("ly.count.android:sdk:26.1.5")
+    api("ly.count.android:sdk:26.1.6")
 }
 
 afterEvaluate {
