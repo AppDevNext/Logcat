@@ -19,7 +19,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        minSdk = 23
+        minSdk = 24
         compileSdk = 36
         targetSdk { version = release(36) }
 
