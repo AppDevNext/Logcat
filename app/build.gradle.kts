@@ -65,7 +65,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.8.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
-    implementation("androidx.test.uiautomator:uiautomator:2.4.0")
+    implementation("androidx.test.uiautomator:uiautomator:2.4.1")
 
     androidTestImplementation("androidx.test:rules:1.7.0") //    GrantPermissionRule
     androidTestImplementation("com.github.AppDevNext:Moka:1.8")
