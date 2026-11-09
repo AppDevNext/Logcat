@@ -20,7 +20,7 @@ android {
         versionName = "1.0"
 
         minSdk = 24
-        compileSdk = 36
+        compileSdk = 37
         targetSdk { version = release(36) }
 
         buildConfigField("boolean", "WITH_FIREBASE", useFirebase())
